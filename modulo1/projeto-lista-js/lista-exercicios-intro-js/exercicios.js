@@ -85,7 +85,7 @@ function retornaPrimeiroElemento(array) {
 
 // EXERCÍCIO 10
 function retornaUltimoElemento(array) {
-  array[array.length - 1]  // ELE PEGA A QUANTIDADE DE ITENS DA ARRAY E COLOCA -1 COM ISSO PEGA O ULTIMO VALOR DA ARRAY
+  return array[array.length - 1]  // ELE PEGA A QUANTIDADE DE ITENS DA ARRAY E COLOCA -1 COM ISSO PEGA O ULTIMO VALOR DA ARRAY
   
 }
 
@@ -119,8 +119,6 @@ function checaRenovacaoRG() {
   const segundoCheck = idade > 20 && idade <= 50 && idadeRg >= 10
   const terceiroCheck = idade > 50 && idadeRg >= 15
 
-
-
   console.log(primeiroCheck || segundoCheck || terceiroCheck)
 }
 
@@ -144,6 +142,7 @@ function checaValidadeInscricaoLabenu() {
   disponibilidadeDeHorario = disponibilidadeDeHorario.toLowerCase() === "sim"
 
   const aprovado = maiorDeIdade && ensinoMedioCompleto && disponibilidadeDeHorario
+  
   console.log(aprovado)
 
 }
