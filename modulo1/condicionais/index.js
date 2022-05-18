@@ -122,42 +122,19 @@ const segundoDesafio = () => {
 
     let valorDoIngresso
     let moeda
-
-    // VERIFICA A ETAPA DO JOGO, A CATEGORIA E ATRIBUIR O VALOR DO INGRESSO A VARIAVEL
-    if (etapaDoJogo === "SF"){
-        if (categoria === 1) {
-            valorDoIngresso = 1320
-        } else if (categoria === 2) {
-            valorDoIngresso = 880
-        } else if (categoria === 3) {
-            valorDoIngresso = 550
-        } else {
-            valorDoIngresso = 220
-        }
+    //VALORES DOS INGRESSOS
+    const sf = [1320, 880, 550, 220]
+    const dt = [660, 440, 330, 170]
+    const fi = [1980, 1320, 880, 330]
+    // ATRIBUI O VALOR A VARIAVEL INGRESSO
+    if (etapaDoJogo === "SF") {
+        valorDoIngresso = fi[categoria - 1]
     } else if (etapaDoJogo === "DT") {
-        if (categoria === 1) {
-            valorDoIngresso = 660
-        } else if (categoria === 2) {
-            valorDoIngresso = 440
-        } else if (categoria === 3) {
-            valorDoIngresso = 330
-        } else {
-            valorDoIngresso = 170
-        }
+        valorDoIngresso = dt[categoria - 1]
     } else {
-        if (categoria === 1) {
-            valorDoIngresso = 1980
-        } else if (categoria === 2) {
-            valorDoIngresso = 1320
-        } else if (categoria === 3) {
-            valorDoIngresso = 880
-        } else {
-            valorDoIngresso = 330
-        }
+        valorDoIngresso = fi[categoria - 1]
     }
-
     // MODIFICA O NOME DA VARIAVEL TIPO DO JOGO; ADICIONAR O TIPO DA MOEDA E CONVERTE O VALOR
-
     if (tipoDoJogo === "IN") {
         valorDoIngresso = valorDoIngresso * 4.10
         tipoDoJogo = "Internacional"
@@ -166,9 +143,7 @@ const segundoDesafio = () => {
         tipoDoJogo = "Nacional"
         moeda = "R$"
     }
-
     // MODIFICA O NOME DA VARIAVEL ETAPA DO JOGO
-
     if (etapaDoJogo === "SF") {
         etapaDoJogo = "Semifinais"
     } else if (etapaDoJogo === "DT") {
@@ -176,7 +151,6 @@ const segundoDesafio = () => {
     } else {
         etapaDoJogo = "Final"
     }
-
     console.log(`
     ---Dados da compra---
     Nome do Cliente: ${nomeCompleto}
@@ -187,5 +161,4 @@ const segundoDesafio = () => {
     ---Valores---
     Valor do ingresso: ${moeda} ${valorDoIngresso}
     Valor total: ${moeda} ${valorDoIngresso * quantidadeDeIngresso}`)
-
 }
