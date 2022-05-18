@@ -128,7 +128,7 @@ const segundoDesafio = () => {
     const fi = [1980, 1320, 880, 330]
     // ATRIBUI O VALOR A VARIAVEL INGRESSO
     if (etapaDoJogo === "SF") {
-        valorDoIngresso = fi[categoria - 1]
+        valorDoIngresso = sf[categoria - 1]
     } else if (etapaDoJogo === "DT") {
         valorDoIngresso = dt[categoria - 1]
     } else {
