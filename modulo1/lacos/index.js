@@ -141,4 +141,6 @@ const segundoDesafio = () => {
             console.log(`O número de tentativas foi: ${i}`)
         }
     }
-}
+} 
+/// FOI MAIS SIMPLES DO QUE EU ESPERAVA, FOI PRECISO ADICIONAR APENAIS UMA LINHA
+///  ACHO QUE ADICINAR MAIS DICAS PARA O JOGADOR
