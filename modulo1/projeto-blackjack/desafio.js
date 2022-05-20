@@ -34,13 +34,15 @@ Quer iniciar uma nova rodada?`)) {
    let fraseCartasUsuario = `${cartasUsuario[0].texto}, ${cartasUsuario[1].texto}`
    let fraseCartasComputador = `${cartasComputador[0].texto}, ${cartasComputador[1].texto}`
 
-   // SE A CARTA RECEBIDA FOR 2 A's SORTEIA NOVAMENTE
+   // LAÇO - SE A CARTA RECEBIDA FOR 2 A's SORTEIA NOVAMENTE
    while (((cartasUsuario[0].texto[0] === "A") && (cartasUsuario[1].texto[0] === "A")) ||
       ((cartasComputador[0].texto[0] === "A") && (cartasComputador[1].texto[0] === "A"))) {
       cartasUsuario = [comprarCarta(), comprarCarta()]
       cartasComputador = [comprarCarta(), comprarCarta()]
       pontuacaoComputador = cartasComputador[0].valor + cartasComputador[1].valor
       pontuacaoUsuario = cartasUsuario[0].valor + cartasUsuario[1].valor
+      fraseCartasUsuario = `${cartasUsuario[0].texto}, ${cartasUsuario[1].texto}`
+      fraseCartasComputador = `${cartasComputador[0].texto}, ${cartasComputador[1].texto}`
    }
 
    // FUNÇÃO QUE MOSTRA A FRASE DE PEDIR MAIS CARTAS
@@ -75,7 +77,7 @@ Quer iniciar uma nova rodada?`)) {
    resultado(pontuacaoUsuario, pontuacaoComputador, fraseUsuario, fraseComputador)
 
 } else {
-   console.log("O jogo acabou");
+   alert("O jogo acabou");
 }
 
 
