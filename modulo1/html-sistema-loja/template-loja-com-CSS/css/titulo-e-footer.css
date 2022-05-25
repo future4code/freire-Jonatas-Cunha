@@ -1,0 +1,85 @@
+/* RESTES */
+
+* {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-sizing: border-box;
+}
+
+body, h1, h2, h3, p, img, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+img {
+    display: block;
+}
+
+ul {
+    list-style: none;
+}
+
+/* SITE */
+
+/* HEADER*/
+header {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 5px 0;
+    background-color: #ef7b00;
+    color: white;
+    border-color: #b57c37;
+    border-style: solid;
+    border-width: 0 0 2px 0;
+}
+
+header h1 {
+ text-align: center;
+}
+
+header nav a {
+    padding: 20px 4px;
+    margin: 0px 4px;
+    text-decoration: none;
+    color:  white;
+}
+
+header nav a:hover {
+background-color: #e79e4f;
+}
+
+/*FOOTER*/
+footer {
+    background-color: #ef7b00;
+}
+
+footer p{
+    text-align: center;
+    margin-bottom: 8px;
+    padding-top: 8px;
+}
+
+footer #sociais{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 12px;
+}
+
+footer #sociais a{
+    margin: 0 8px;
+}
+
+footer #copyright {
+    padding: 15px;
+    background-color: #e79e4f;
+    text-align: center;
+}
+
+/*TITULO PAGINAS*/
+
+#titulo-paginas h3 {
+    color: white;
+    text-align: center;
+    background-image: url("/img/back.png");
+    padding: 22px;
+}

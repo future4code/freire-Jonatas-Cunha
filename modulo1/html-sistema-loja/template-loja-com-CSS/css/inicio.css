@@ -1,0 +1,42 @@
+#intro {
+    height: 400px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    flex-direction: column;
+    justify-content: center;
+    background-repeat: no-repeat;
+    background-position: center 66%;
+    background-repeat: no-repeat;
+    background-image: url("/img/back.webp");
+}
+
+#intro h2 {
+    font-size: 40px;
+    color: white;
+    margin-bottom: 8px;
+}
+
+#intro p {
+    color: white;
+}
+
+#produtos {
+    text-align: center;
+}
+
+#itens {
+    display: flex;
+    justify-content: center;
+    justify-content: space-evenly;
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+#itens a {
+    color: #ef7b00;
+    font-weight: bold;
+    text-decoration: none;
+    margin: 20px;
+}
