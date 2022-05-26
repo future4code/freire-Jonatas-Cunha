@@ -88,6 +88,10 @@ div img {
 #apresentacao-emp{
     padding-top: 120px;
 }
+#apresentacao-emp ol, #apresentacao-emp h3{
+    margin-top: 10px;
+}
+
 
 #centralizar {
     display: block;
