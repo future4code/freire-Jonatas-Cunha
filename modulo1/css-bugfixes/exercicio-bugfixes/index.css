@@ -80,6 +80,14 @@ div img {
     padding: 15px 0px;
 }
 
+#lista-ordenada {
+    display: inline-block;
+}
+
+#lista-ordenada ol li p{
+    margin: 0 20px;
+}
+
 #container-para-comprar {
     background-color: #e7eb90;
 }
