@@ -128,6 +128,15 @@ td button {
     color: black;
 }
 
+td button:hover{
+    cursor: pointer;
+    background-color: #c4ae4b;
+}
+
+td button:focus{
+    color: white;
+}
+
 .container-do-search {
     margin-top: 20px;
     height: 100px;
