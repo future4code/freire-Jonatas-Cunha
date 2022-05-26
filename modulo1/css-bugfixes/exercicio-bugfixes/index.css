@@ -160,6 +160,14 @@ td button:focus{
     background: none;
 }
 
+.container-do-search input:hover {
+    opacity: 60%;
+}
+
+.container-do-search input:focus {
+    opacity: 100%;
+}
+
 #btn-back {
     text-align: center;
 }
