@@ -118,6 +118,7 @@ div:last-child {
 table {
     width: 60%;
     text-align: center;
+    margin: 0 auto 160px auto;
 }
 
 table img {
@@ -151,6 +152,9 @@ td button:focus{
     background: none;
 }
 
+#btn-back {
+    text-align: center;
+}
 
 #back-button {
     background-color: white;
