@@ -1,0 +1,119 @@
+/* TABELA DE CORES */
+/*
+LARANJA = #a6380d
+BRANCO = #FFFFF
+AZUL = 111025
+
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+/* RESTES */
+
+* {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+body, h1, h2, h3, p, img, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+img {
+    display: block;
+}
+
+ul {
+    list-style: none;
+}
+
+button:hover{
+    cursor: pointer;
+}
+
+/* FUNDO DO SITE*/
+
+body {
+    background: #111025;
+}
+
+/*header*/
+
+header {
+    display: flex;
+    justify-content: space-around;
+    padding: 28px;
+}
+
+header #menu{
+    display: flex;
+    align-items: center;
+}
+
+header #menu a {
+    padding: 12px;
+    color: white;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+header #menu a:hover {
+    color: #a6380d;
+}
+
+header #btn-contato {
+    display: flex;
+    align-items: center;
+}
+
+header #btn-contato button {
+    width: 115px;
+    height: 40px;
+    color: #111025;
+    font-weight: bold;
+    text-transform: uppercase;
+    background: white;
+    border-radius: 8px;
+}
+
+header #btn-contato button:hover {
+    cursor: pointer;
+    background: rgb(179, 179, 179);
+}
+
+/*FOOTER*/
+
+footer #redes{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+footer #redes p{
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    color: white;
+}
+
+footer #redes div{
+    display: flex;
+}
+
+footer #redes div a{
+    padding: 0px 8px;
+}
+
+footer #redes div a img{
+    width: 40px;
+}
+
+footer #copyright {
+    color: white;
+    background-color: #0c0c1c;
+    display: flex;
+    justify-content: center;
+    margin-top: 12px;
+    padding: 16px;
+}
