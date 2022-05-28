@@ -1,0 +1,61 @@
+#projetos .projeto {
+    flex-basis: 24%;
+    margin: 12px;
+}
+
+#projetos .projeto img {
+    width: 95%;
+    transition-duration: 0.9s;
+}
+
+#projetos .projeto img:hover {
+    transform: scale(1.9);
+    transition-duration: 0.9s;
+    transition-duration: 0.9s;
+}
+
+#projetos a:hover{
+    transform: none;
+}
+
+
+#Informacoes {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+
+}
+
+#Informacoes p {
+    margin-top: 10px;
+}
+
+#btn {
+    display: flex;
+    justify-content: center;
+}
+
+#btn a button, #Informacoes a button {
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+    background: #a6380d;
+    padding:12px 24px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+}
+
+
+#btn a button:hover, #Informacoes a button:hover{
+    background: #7e2b0a;
+}
+
+#Informacoes a button {
+    margin-top: 16px;
+    margin-bottom: 0;
+}
+footer {
+    position: relative;
+}

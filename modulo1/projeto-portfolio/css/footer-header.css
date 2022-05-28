@@ -33,10 +33,18 @@ button:hover{
     cursor: pointer;
 }
 
+
+h1 {
+    text-align: center;
+    color: white;
+    text-transform: uppercase;
+}
+
 /* FUNDO DO SITE*/
 
 body {
-    background: #111025;
+    /* background: #111025; */
+    background: url("../img/back.png") #111025;
 }
 
 /*header*/
@@ -61,6 +69,8 @@ header #menu a {
 
 header #menu a:hover {
     color: #a6380d;
+    border-bottom: 2px solid;
+    transition-duration: 0.5s;
 }
 
 header #btn-contato {

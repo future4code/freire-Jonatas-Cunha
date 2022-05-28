@@ -11,10 +11,12 @@ form {
     align-items: center;
 }
 
-form input{
+form input, form textarea{
     width: 40%;
-    height: 28px;
+    height: 45px;
     margin-bottom: 12px;
+    font-size: 16px;
+    border-radius: 8px;
 }
 
 form label{
@@ -22,8 +24,8 @@ form label{
     margin-bottom: 12px;
 }
 
-form #mensagem {
-    height: 80px;
+form textarea{
+    height: 100px;
 }
 
 form button {
@@ -32,7 +34,7 @@ form button {
     text-transform: uppercase;
     font-weight: bold;
     background: #a6380d;
-    padding: 12px 16px;
+    padding: 12px 36px;
     border-radius: 8px;
 }
 
