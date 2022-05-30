@@ -4,7 +4,7 @@
 - Sombra do card: `darkgray`
 */
 
-*{
+* {
     margin: 0;
     padding: 0;
 }
@@ -26,18 +26,18 @@ header {
     padding: 0 20px;
 }
 
-header > div {
+header>div {
     display: flex;
     align-items: center;
 }
 
-header > div > img {
+header>div>img {
     width: 20px;
     height: 20px;
     margin: 0 12px 0 0;
 }
 
-header > button {
+header>button {
     width: 50px;
     padding: 3px 0;
 }
@@ -50,16 +50,16 @@ header > button {
 
 /* NAV */
 
-.container > nav {
+.container>nav {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
     background-color: #f2d0e0;
-    min-width: 250px;
+    width: 36%;
 
 }
 
-.container > nav > a{
+.container>nav>a {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -68,26 +68,26 @@ header > button {
 
 }
 
-.container > nav > a:nth-child(1) {
+.container>nav>a:nth-child(1) {
     margin-top: 5px;
 }
 
-.container > nav > a > div {
+.container>nav>a>div {
     display: flex;
     margin-left: 8px;
 }
 
-.container > nav > a img{
+.container>nav>a img {
     margin-right: 16px;
     width: 20px;
     height: 20px;
-    
+
 }
 
 
 /* MAIN */
 
-.container > #main {
+.container>#main {
     display: flex;
     text-align: center;
     justify-content: center;
@@ -102,32 +102,39 @@ header > button {
     padding: 24px;
 }
 
-.container main > a {
+.container main>a {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding-bottom: 12px;
     box-shadow: 4px -1px 12px 0px #000000a6;
-    max-width: 273px;
+    max-width: 240px;
     transition-duration: 0.2s;
 
 }
 
-.container main > a:hover {
-transform: scale(1.1);
-transition-duration: 0.5s;
+.container main>a:hover {
+    transform: scale(1.1);
+    transition-duration: 0.5s;
 }
 
 
-.container main > a > img {
+.container main>a>img {
     width: 100%;
 }
 
-.container main > a > h3, .container main > a > p{
+.container main>a>h3,
+.container main>a>p {
     text-align: center;
     padding: 8px;
 }
+
+.container main>a>p {
+    font-size: 13px;
+    font-weight: normal;
+}
+
 
 
 
