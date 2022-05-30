@@ -1,0 +1,142 @@
+/* CORES
+- Rosa escuro: `mediumvioletred`
+- Rosa claro: `#f2d0e0`
+- Sombra do card: `darkgray`
+*/
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* HEADER */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: mediumvioletred;
+    height: 60px;
+    padding: 0 20px;
+}
+
+header > div {
+    display: flex;
+    align-items: center;
+}
+
+header > div > img {
+    width: 20px;
+    height: 20px;
+    margin: 0 12px 0 0;
+}
+
+header > button {
+    width: 50px;
+    padding: 3px 0;
+}
+
+/* CONTAINER */
+
+.container {
+    display: flex;
+}
+
+/* NAV */
+
+.container > nav {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #f2d0e0;
+    min-width: 250px;
+
+}
+
+.container > nav > a{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    height: 40px;
+
+}
+
+.container > nav > a:nth-child(1) {
+    margin-top: 5px;
+}
+
+.container > nav > a > div {
+    display: flex;
+    margin-left: 8px;
+}
+
+.container > nav > a img{
+    margin-right: 16px;
+    width: 20px;
+    height: 20px;
+    
+}
+
+
+/* MAIN */
+
+.container > #main {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+}
+
+.container main {
+    display: flex;
+    flex-wrap: wrap;
+    flex-grow: 10;
+    row-gap: 24px;
+    column-gap: 24px;
+    padding: 24px;
+}
+
+.container main > a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 12px;
+    box-shadow: 4px -1px 12px 0px #000000a6;
+    max-width: 273px;
+    transition-duration: 0.2s;
+
+}
+
+.container main > a:hover {
+transform: scale(1.1);
+transition-duration: 0.5s;
+}
+
+
+.container main > a > img {
+    width: 100%;
+}
+
+.container main > a > h3, .container main > a > p{
+    text-align: center;
+    padding: 8px;
+}
+
+
+
+/* FOOTER */
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 50px;
+    background-color: mediumvioletred;
+}
