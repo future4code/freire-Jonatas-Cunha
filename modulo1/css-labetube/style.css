@@ -100,3 +100,24 @@ footer {
 .video > video {
     width: 100%;
 }
+
+@media only screen and (max-width: 800px) {
+
+    header > input {
+        padding: 10px;
+        margin-right: 0;
+    }
+
+    main {
+    grid-template-columns: repeat(3, 1fr);
+    }
+    
+  }
+
+
+@media only screen and (max-width: 600px) {
+    main {
+        display: flex;
+        flex-direction: column;
+    }
+  }
