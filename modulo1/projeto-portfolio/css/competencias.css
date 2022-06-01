@@ -1,0 +1,30 @@
+#competencias {
+display: flex;
+flex-wrap: wrap;
+justify-content: space-evenly;
+margin: 36px 0;
+}
+
+.competencia {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color:  #a6380d;
+    width: 25%;
+    min-width: 250px;
+    padding: 16px 8px;
+    border-radius: 8px;
+    margin: 0 24px;
+}
+
+.competencia:hover {
+    box-shadow: 0 12px 24px 0 rgba(53, 36, 29, 0.2);
+    color: white;
+    transform: scale(1.1);
+    transition-duration: 0.9s;
+}
+
+.competencia img {
+    width: 50px;
+}
