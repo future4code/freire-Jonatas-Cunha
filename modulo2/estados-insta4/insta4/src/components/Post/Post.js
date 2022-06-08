@@ -80,12 +80,13 @@ class Post extends React.Component {
 
   aoEnviarComentario = () => {
     this.setState({
+      numeroComentarios: this.state.numeroComentarios + 1,
+      comentando: !this.state.comentando,
+
     })
   }
 
-  aoCompartilharImg = () => {
 
-  }
 
   onClickSalvo = () => {
     if (!this.state.salvo) {
