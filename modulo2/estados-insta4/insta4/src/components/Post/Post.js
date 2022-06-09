@@ -59,6 +59,7 @@ class Post extends React.Component {
     salvo: false,
     compartilhar: false,
     mensagem: "",
+
   }
 
   onClickCurtida = () => {
@@ -125,6 +126,7 @@ class Post extends React.Component {
 
     let componenteComentario
     let componenteCompartilhar
+    let componenteImprimirComentario
 
 
     if (this.state.compartilhar) {
@@ -168,6 +170,7 @@ class Post extends React.Component {
         />
 
       </PostFooter>
+      {componenteImprimirComentario}
       {componenteComentario}
       {componenteCompartilhar}
     </PostContainer>

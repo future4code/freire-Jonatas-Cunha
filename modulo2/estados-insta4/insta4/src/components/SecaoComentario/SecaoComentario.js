@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import styled from 'styled-components'
 
+
 const CommentContainer = styled.div`
     display: flex;
     justify-content: center;
@@ -24,6 +25,7 @@ export class SecaoComentario extends Component {
 
 	render() {
 		return <CommentContainer>
+
 			<InputComentario
 				placeholder={'Comentário'}
 				value={this.state.comentario}
