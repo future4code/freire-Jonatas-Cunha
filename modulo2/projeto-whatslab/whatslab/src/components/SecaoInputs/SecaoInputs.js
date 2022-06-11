@@ -3,56 +3,64 @@ import styled from "styled-components";
 import ImagemEnviar from "../../img/enviar-mensagem.svg"
 import ImagemCheck from "../../img/doublecheck.svg"
 
-
-
 const Container = styled.div`
     display: flex;
     flex-direction: column;
 `
 
-const PersonalizarBlocoMensagem = styled.div`
+const BlocoMensagem = styled.div`
     display: flex;
     position: relative;
     flex-direction: column;
     margin: 0 16px 12px;
-    background-color: white;
-    align-self: start;
     border-radius: 12px;
     padding: 0px 12px;
     min-width: 80px;
     max-width: 80%;
     word-break: break-all;
     box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.2);
-&:after {
-	content: '';
-	border: 15px solid transparent;
-    border-top-color: #ffffff;
-    position: absolute;
-    top: 0px;
-    left: -8px;
-}
-`
 
-const PersonalizarBlocoMensagemEu = styled.div`
-    display: flex;
-    position: relative;
-    flex-direction: column;
-    margin: 0 16px 12px;
-    align-self: flex-end;
-    background-color: #d9fdd3;
-    border-radius: 12px;
-    padding: 0px 12px;
-    min-width: 80px;
-    max-width: 80%;
-    word-break: break-all;
-    box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.2);
+    align-self: ${props => {
+        if (props.tipo === "eu") {
+            return "flex-end"
+        } else {
+            return "flex-start"
+        }
+    }};
+    background-color: ${props => {
+        if (props.tipo === "eu") {
+            return "#d9fdd3"
+        } else {
+            return "white"
+        }
+    }};
+
 &:after {
 	content: '';
 	border: 15px solid transparent;
-	border-top-color: #D8FDD2;
     position: absolute;
     top: 0px;
-    right: -8px;
+    border-top-color: ${props => {
+        if (props.tipo === "eu") {
+            return "#D8FDD2"
+        } else {
+            return "white"
+        }
+    }} ;
+
+right: ${props => {
+        if (props.tipo === "eu") {
+            return "-8px";
+        }
+    }
+    };
+    left: ${props => {
+        if (props.tipo === "outro") {
+            return "-8px";
+        }
+    }
+    };
+
 }
 `
 
@@ -85,8 +93,14 @@ const BoxIputs = styled.form`
     padding-top: 6px;
 `
 
-const InputNome = styled.input`
-    width: 25%;
+const Entrada = styled.input`
+    width: ${props => {
+        if (props.tipo === "nome") {
+            return "25%"
+        } else {
+            return "50%"
+        }
+    }};
     height: 30px;
     margin: 0 16px 8px 16px;
     border: none;
@@ -98,21 +112,6 @@ const InputNome = styled.input`
     outline: 0;
     }
 `
-
-const InputMensagem = styled.input`
-    width: 50%;
-    height: 30px;
-    margin: 0 16px 8px 16px;
-    border-radius: 8px;
-    border: 1px solid #fff;
-    word-wrap: break-word;
-
-&:focus{
-    box-shadow: 0 0 0 0;
-    outline: 0;
-}
-`
-
 
 const BotaoMensagem = styled.button`
     width: 48px;
@@ -175,20 +174,20 @@ export default class SecaoInputs extends Component {
         const imprimirMensagens = this.state.arrayMenssagens.map((mensagem) => {
             if (mensagem.nome.toLowerCase() === "eu") {
                 return (
-                    <PersonalizarBlocoMensagemEu key={mensagem.key} onDoubleClick={() => this.deletarMensagem(mensagem.key)}>
+                    <BlocoMensagem tipo="eu" key={mensagem.key} onDoubleClick={() => this.deletarMensagem(mensagem.key)}>
                         <ParagrafoMensagem>{mensagem.mensagem}</ParagrafoMensagem>
                         <ParagrafoHora>{mensagem.hora} <ImagemCheckPosition src={ImagemCheck} alt="" /></ParagrafoHora>
-                    </PersonalizarBlocoMensagemEu>
+                    </BlocoMensagem>
 
                 )
             } else {
 
                 return (
-                    <PersonalizarBlocoMensagem key={mensagem.key}>
+                    <BlocoMensagem tipo="outro" key={mensagem.key}>
                         <ParagrafoNome>{mensagem.nome}: </ParagrafoNome>
                         <ParagrafoMensagem>{mensagem.mensagem}</ParagrafoMensagem>
                         <ParagrafoHora>{mensagem.hora}</ParagrafoHora>
-                    </PersonalizarBlocoMensagem>
+                    </BlocoMensagem>
                 )
             }
 
@@ -199,8 +198,8 @@ export default class SecaoInputs extends Component {
             <Container>
                 {imprimirMensagens}
                 <BoxIputs onSubmit={this.postarMensagem}>
-                    <InputNome value={this.state.nome} onChange={this.pegarNome} type="text" placeholder="Digite Seu nome" />
-                    <InputMensagem value={this.state.mensagem} onChange={this.pegarMensagem} type="text" placeholder="Digite uma mensagem" />
+                    <Entrada tipo="nome" value={this.state.nome} onChange={this.pegarNome} type="text" placeholder="Digite Seu nome" />
+                    <Entrada value={this.state.mensagem} onChange={this.pegarMensagem} type="text" placeholder="Digite uma mensagem" />
                     <BotaoMensagem><ImagemBotaoMensagem src={ImagemEnviar} alt="Botão Enviar" /></BotaoMensagem>
                 </BoxIputs>
             </Container>
