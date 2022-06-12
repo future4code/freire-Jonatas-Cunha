@@ -91,6 +91,7 @@ const BoxIputs = styled.form`
     border-left: 1px solid #e9edef;
     background-color: #cececf;
     padding-top: 6px;
+    box-shadow: 1px 4px 14px 0px rgb(0 0 0 / 69%);
 `
 
 const Entrada = styled.input`
@@ -111,6 +112,11 @@ const Entrada = styled.input`
     box-shadow: 0 0 0 0;
     outline: 0;
     }
+
+    @media(max-width:580px) {
+        margin: 0 4px 8px 4px;
+    }
+
 `
 
 const BotaoMensagem = styled.button`
@@ -120,12 +126,16 @@ const BotaoMensagem = styled.button`
     border-radius: 50%;
     margin-bottom: 9px;
     cursor: pointer;
+
+&:hover{
+    box-shadow: 0px 0px 5px 0px  rgb(0 0 0 / 30%);
+}
 `
 
 const ImagemBotaoMensagem = styled.img`
     width: 28px;
     height: 28px;
-    transform: translate(3px, 1px);
+    transform: translate(-2px, 1px);
 `
 
 const ImagemCheckPosition = styled.img`
@@ -198,7 +208,7 @@ export default class SecaoInputs extends Component {
             <Container>
                 {imprimirMensagens}
                 <BoxIputs onSubmit={this.postarMensagem}>
-                    <Entrada tipo="nome" value={this.state.nome} onChange={this.pegarNome} type="text" placeholder="Digite Seu nome" />
+                    <Entrada tipo="nome" value={this.state.nome} onChange={this.pegarNome} type="text" placeholder="Nome" />
                     <Entrada value={this.state.mensagem} onChange={this.pegarMensagem} type="text" placeholder="Digite uma mensagem" />
                     <BotaoMensagem><ImagemBotaoMensagem src={ImagemEnviar} alt="Botão Enviar" /></BotaoMensagem>
                 </BoxIputs>

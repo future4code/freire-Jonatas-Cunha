@@ -5,6 +5,7 @@ import BackGround from "./img/backg.png"
 import LogoLabenu from "./img/labenulogo.jpg"
 
 
+
 const Header = styled.header`
   background-color: #cececf;
   height: 64px;
@@ -12,6 +13,7 @@ const Header = styled.header`
   align-items: center;
   justify-content: space-around;
   margin-bottom: 12px;
+  box-shadow: 0px -4px 14px 0px rgb(0 0 0 / 69%);
 `
 const BoxImgTitulo = styled.div`
   width: 100%;
@@ -37,6 +39,7 @@ const Box = styled.div`
   height: 100vh;
   border-radius: 12px;
   width: 40%;
+  max-width: 530px;
   border: 1px solid black;
   box-sizing: border-box;
 
@@ -46,6 +49,19 @@ const Box = styled.div`
   overflow: auto;
   background: url(${BackGround}) center repeat;
   background-size: contain;
+
+  @media(max-width:1160px) {
+    width: 60%;
+  }
+
+  @media(max-width:765px) {
+    width: 80%;
+  }
+
+  @media(max-width:580px) {
+    width: 100%;
+  }
+
   
 `
 
