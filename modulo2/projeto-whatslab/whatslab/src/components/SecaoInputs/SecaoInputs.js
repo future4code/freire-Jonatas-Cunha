@@ -208,8 +208,8 @@ export default class SecaoInputs extends Component {
             <Container>
                 {imprimirMensagens}
                 <BoxIputs onSubmit={this.postarMensagem}>
-                    <Entrada tipo="nome" value={this.state.nome} onChange={this.pegarNome} type="text" placeholder="Nome" />
-                    <Entrada value={this.state.mensagem} onChange={this.pegarMensagem} type="text" placeholder="Digite uma mensagem" />
+                    <Entrada tipo="nome" value={this.state.nome} onChange={this.pegarNome} type="text" placeholder="Nome" required/>
+                    <Entrada value={this.state.mensagem} onChange={this.pegarMensagem} type="text" placeholder="Digite uma mensagem" required/>
                     <BotaoMensagem><ImagemBotaoMensagem src={ImagemEnviar} alt="Botão Enviar" /></BotaoMensagem>
                 </BoxIputs>
             </Container>
