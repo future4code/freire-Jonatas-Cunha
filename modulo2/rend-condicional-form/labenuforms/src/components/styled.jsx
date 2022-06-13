@@ -7,6 +7,9 @@ align-items: center;
 `
 
 export const Formulario = styled.form`
+    border: 1px solid;
+    border-radius: 12px;
+    padding: 4px 30px 20px;
     display: flex;
     justify-content: center;
     align-items: center;
