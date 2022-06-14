@@ -26,7 +26,7 @@ export default class App extends Component {
     const RenderizarNaTela = () => {
       switch (this.state.tela) {
         case 1:
-          return <EtapaUm proximo={this.proximaEtapa} />;
+          return <EtapaUm proximo={this.proximaEtapa}/>;
         case 2:
           return <EtapaDois proximo={this.proximaEtapa} voltar={this.voltarEtapa} />;
         case 3:

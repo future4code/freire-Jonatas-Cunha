@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import EntradaDeTexto from "../SecaoEntradaDeDado/EntradaDeTexto";
+import EntradaDeTexto from "../SecaoEntradaDeDados/EntradaDeTexto";
 import { Bloco, Formulario, Botao } from "../styled";
 
 export default class EtapaDois extends Component {
