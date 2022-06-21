@@ -2,7 +2,16 @@ import React from "react";
 import GetUsuarios from "./Components/GetUsuarios/GetUsuarios";
 import PostUsuarios from "./Components/PostUsuaruios/PostUsuarios";
 import Botao from "./Components/Botao/Botao";
+import styled from "styled-components";
 
+const Conatiner = styled.div`
+  width: 200px;
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 8px;
+  padding: 15px;
+  margin: 0 auto;
+`
 
 class App extends React.Component {
   state = {
@@ -36,7 +45,9 @@ class App extends React.Component {
     return (
       <div className="App">
         <Botao nomeBotao={this.state.nomeBotao} alterarPagina={this.alterarPagina}/>
-        <RenderizarPagina/>
+        <Conatiner>
+          <RenderizarPagina/>
+        </Conatiner>
       </div>
     );
   }

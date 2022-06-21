@@ -1,6 +1,11 @@
 import React from "react";
 import axios from "axios";
 import {MdOutlineDeleteForever} from "react-icons/md"
+import styled from "styled-components"
+
+const Deleter = styled.div`
+    cursor: pointer;
+`
 
 export default class DelUsuario extends React.Component {
 
@@ -20,7 +25,9 @@ export default class DelUsuario extends React.Component {
 
   render() {
     return (
-        <MdOutlineDeleteForever onClick={() => this.deletUser(this.props.usuarioId)} title="Deletar" color="red" size="30px"/>
+        <Deleter onClick={() => this.deletUser(this.props.usuarioId)}>
+        <MdOutlineDeleteForever title="Deletar" color="red" size="30px"/>
+        </Deleter>
     );
   }
 }

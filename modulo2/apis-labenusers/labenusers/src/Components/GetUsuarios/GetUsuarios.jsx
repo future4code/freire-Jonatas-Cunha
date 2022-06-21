@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import DelUsuario from "../DelUsuario/DelUsuario";
+import { Container, ContainerUser } from "./style"
 
 export default class GetUsuarios extends React.Component {
 
@@ -38,20 +39,22 @@ export default class GetUsuarios extends React.Component {
     })
     .map(usuario => {
         return (
-            <div key={usuario.id}>
+            <ContainerUser key={usuario.id}>
                 <p>{usuario.name}</p>
                <DelUsuario usuarioId={usuario.id}/>
-            </div>
+            </ContainerUser>
         )
     })
     return (
-      <div className="App">
+      <Container className="App">
+        <label htmlFor="buscar">Procurar</label>
         <input type="text" 
+        id="buscar"
         value={this.state.pesquisa}
         onChange={this.pegarPesquisa}
         />
         {renderizarUsers.length === 0 ? <p>Nada Encontrado</p> :renderizarUsers}
-      </div>
+      </Container>
     );
   }
 }

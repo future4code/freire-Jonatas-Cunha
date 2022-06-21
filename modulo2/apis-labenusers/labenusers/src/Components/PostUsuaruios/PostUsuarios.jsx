@@ -1,5 +1,21 @@
 import React from "react";
 import axios from "axios";
+import styled from "styled-components";
+
+const Form = styled.form`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`
+
+const Button = styled.button`
+    padding: 8px 25px;
+    margin-top: 12px;
+`
+
+const Label = styled.label`
+    margin-bottom: 8px;
+`
 
 export default class PostUsuarios extends React.Component {
     state = {
@@ -34,8 +50,8 @@ export default class PostUsuarios extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.cadastrarUsuario}>
-        <label htmlFor="nome">Usuario:</label>
+      <Form onSubmit={this.cadastrarUsuario}>
+        <Label htmlFor="nome">Usuario:</Label>
         <input 
         type="text" 
         name="Nome" 
@@ -44,7 +60,7 @@ export default class PostUsuarios extends React.Component {
         onChange={this.pegarNome}
         value={this.state.name}
         />
-        <label htmlFor="email">Email:</label>
+        <Label htmlFor="email">Email:</Label>
         <input 
         type="email" 
         name="Email" 
@@ -53,8 +69,8 @@ export default class PostUsuarios extends React.Component {
         onChange={this.pegarEmail}
         value={this.state.email}
         />
-        <button>Cadastrar</button>
-      </form>
+        <Button>Cadastrar</Button>
+      </Form>
     );
   }
 }
