@@ -4,13 +4,17 @@ import PostUsuarios from "./Components/PostUsuaruios/PostUsuarios";
 import Botao from "./Components/Botao/Botao";
 import styled from "styled-components";
 
+  const ContainerGeral = styled.div`
+    background-color: #ecf0f1;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center ;
+    flex-direction: column;
+  `
+
 const Conatiner = styled.div`
-  width: 200px;
-  align-items: center;
-  border: 1px solid black;
-  border-radius: 8px;
-  padding: 15px;
-  margin: 0 auto;
+
 `
 
 class App extends React.Component {
@@ -25,7 +29,7 @@ class App extends React.Component {
       this.setState({nomeBotao: "Cadastrar Usuario"})
     } else {
       this.setState({pagina: 1})
-      this.setState({nomeBotao: "Lista de Usuarios"})
+      this.setState({nomeBotao: "Consultar Lista de Usuarios"})
     }
   }
 
@@ -43,12 +47,12 @@ class App extends React.Component {
     }
 
     return (
-      <div className="App">
+      <ContainerGeral className="App">
         <Botao nomeBotao={this.state.nomeBotao} alterarPagina={this.alterarPagina}/>
         <Conatiner>
           <RenderizarPagina/>
         </Conatiner>
-      </div>
+      </ContainerGeral>
     );
   }
 }
