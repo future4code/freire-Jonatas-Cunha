@@ -52,6 +52,7 @@ export const Conainer = styled.div`
         flex-wrap: wrap;
         align-items: center;
         justify-content: center;
+        min-height: 265px;
     }
 
 `

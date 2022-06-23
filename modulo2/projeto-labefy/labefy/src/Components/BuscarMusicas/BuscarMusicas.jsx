@@ -1,6 +1,8 @@
 import React from "react";
 import { BoxRecomendados, BlocoPlayer, NomePlayList, TituloBusca, Conainer } from "./style";
 import axios from "axios";
+import Loader from "../Loader/Loader";
+import PlaylistRecomendada from "../PlaylistRecomendada/PlaylistRecomendada";
 export default class BuscarMusicas extends React.Component {
 
     state = {
@@ -9,6 +11,7 @@ export default class BuscarMusicas extends React.Component {
         musicas: [],
         pesquisa: "Escolha",
         inputPesquisa: "",
+        loading: false,
     }
 
     componentDidMount = () => {
@@ -34,6 +37,7 @@ export default class BuscarMusicas extends React.Component {
             }).then(response => {
                 this.setState({ musicas: response.data.result.tracks })
                 console.log(response.data.result.tracks)
+                this.setState({loading: false})
             }).catch(error => {
                 console.log(error.data.message)
             })
@@ -48,11 +52,14 @@ export default class BuscarMusicas extends React.Component {
         this.setState({ pesquisa: e.target.value })
         this.getPlayListMusic(e.target.value)
         console.log(e.target.value)
+        this.setState({loading: true})
+
     }
 
     pegarValorInput = (e) => {
         this.setState({ inputPesquisa: e.target.value })
         this.getPlayListMusic(this.state.id)
+        this.setState({loading: false})
     }
 
     render() {
@@ -89,6 +96,7 @@ export default class BuscarMusicas extends React.Component {
             <Conainer>
                 <TituloBusca>Buscar</TituloBusca>
                 <form>
+
                     <input type="text"
                         value={this.state.inputPesquisa}
                         onChange={this.pegarValorInput}
@@ -100,9 +108,14 @@ export default class BuscarMusicas extends React.Component {
                     </select>
                 </form>
                 <div className="BoxMusicas">
-
-                    {renderizarMusicas.length === 0 && this.state.pesquisa !== "Escolha" ? <p>Não encontamos nada</p> : renderizarMusicas}
+                    {this.state.loading && <Loader/>}
+                    {renderizarMusicas.length === 0 && this.state.pesquisa !== "Escolha" && !this.state.loading
+                        ? <p>Não encontamos nada</p>
+                        : renderizarMusicas
+                    }
                 </div>
+                <TituloBusca>Playlists Recomendadas</TituloBusca>
+                <PlaylistRecomendada capturarID={this.props.capturarID}/>
             </Conainer>
         )
     }

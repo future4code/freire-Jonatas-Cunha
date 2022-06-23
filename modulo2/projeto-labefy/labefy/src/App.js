@@ -45,7 +45,7 @@ class App extends React.Component {
         case "Buscar":
           return (
             <Main>
-              <BuscarMusicas/>
+              <BuscarMusicas capturarID={this.pegarIdPlaylist}/>
             </Main>
           )
         case "Criar PlayList":

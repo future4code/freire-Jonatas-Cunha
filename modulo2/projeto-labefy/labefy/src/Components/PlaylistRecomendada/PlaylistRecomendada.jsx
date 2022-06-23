@@ -4,6 +4,7 @@ import { Container, BoxRecomendados, BlocoPlayer, NomePlayList, PlayImg } from "
 import IconPlay from "../../img/play-button.png"
 import Loader from "../Loader/Loader";
 
+
 export default class PlaylistRecomendada extends React.Component {
 
     state = {
