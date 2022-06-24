@@ -108,7 +108,7 @@ export default class BuscarMusicas extends React.Component {
                     </select>
                 </form>
                 <div className="BoxMusicas">
-                    {this.state.loading && <Loader/>}
+                    {this.state.loading &&  this.state.pesquisa !== "Escolha" && <Loader/>}
                     {renderizarMusicas.length === 0 && this.state.pesquisa !== "Escolha" && !this.state.loading
                         ? <p>Não encontamos nada</p>
                         : renderizarMusicas

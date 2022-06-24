@@ -81,7 +81,7 @@ export const BoxRecomendados = styled.div`
 export const TituloBusca = styled.div`
     color: white;
     font-weight: bold;
-    font-size: 2.0rem;
+    font-size: 1.6rem;
     margin: 30px 12px;
 `
 

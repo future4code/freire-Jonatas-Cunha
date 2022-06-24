@@ -30,6 +30,7 @@ class App extends React.Component {
     this.setState({ nomePlaylist: nome })
   }
 
+
   render() {
 
     const RenderizarMain = () => {
@@ -39,7 +40,8 @@ class App extends React.Component {
             <Main>
               <BoasVindas />
               <PlaylistRecomendada capturarID={this.pegarIdPlaylist} />
-              <Carrosel />
+              <Carrosel id={"0e99b05c-0960-4190-90cb-b2825abb4fd9"} nome={"Rock"}/>
+              <Carrosel id={"161c210a-1814-4983-b8ce-d52bb2499602"} nome={"MPB"}/>
             </Main>
           )
         case "Buscar":

@@ -4,6 +4,7 @@ import { Container, BoxRecomendados, BlocoPlayer, NomePlayList, ContainerVideos,
 import Loader from "../Loader/Loader";
 import ImgVazio from "../../img/empty.png"
 import { BsPlusSquareFill } from "react-icons/bs"
+import AdicionarMusicas from "../AdicionarMusicas/AdicionarMusicas";
 
 
 export default class PaginaDaPlaylist extends React.Component {
@@ -11,9 +12,7 @@ export default class PaginaDaPlaylist extends React.Component {
     state = {
         playlists: [],
         loading: true,
-        inputName: "",
-        inputArtista: "",
-        inputUrl: "",
+        boxMusic: false,
     }
 
     componentDidMount() {
@@ -31,32 +30,8 @@ export default class PaginaDaPlaylist extends React.Component {
         })
     }
 
-    postMusicPlaylist = () => {
-        const body = {
-            name: this.state.inputName,
-            artist: this.state.inputArtista,
-            url: this.state.inputUrl,
-        }
-
-        axios.post(`https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists/${this.props.idPlaylist}/tracks`, body, {
-            headers: {
-                Authorization: "jonatas.felix-freire"
-            }
-        }).then(response => {
-
-        })
-    }
-
-    pegarNome = (e) => {
-        this.setState({ inputName: e.target.value })
-    }
-
-    pegarArtita = (e) => {
-        this.setState({ inputArtista: e.target.value })
-    }
-
-    pegarUrl = (e) => {
-        this.setState({ inputUrl: e.target.value })
+    abrirBoxAdiconarMusica = () => {
+        this.setState({ boxMusic: !this.state.boxMusic })
     }
 
     render() {
@@ -78,8 +53,9 @@ export default class PaginaDaPlaylist extends React.Component {
             <Container>
                 <BoxInfos>
                     <NomePlayP>Playlist: {this.props.nomePlaylist}</NomePlayP>
-                    <div className="btnAdicionarLista"><BsPlusSquareFill /><p>Adicionar Musica</p></div>
+                    <div onClick={this.abrirBoxAdiconarMusica} className="btnAdicionarLista"><BsPlusSquareFill /><p>Adicionar Musica</p></div>
                 </BoxInfos>
+                {this.state.boxMusic && <AdicionarMusicas id={this.props.idPlaylist} />}
                 <ContainerVideos>
                     {this.state.loading ? <Loader /> : ""}
                     {renderizarRecomendadas.length === 0 && !this.state.loading ?
