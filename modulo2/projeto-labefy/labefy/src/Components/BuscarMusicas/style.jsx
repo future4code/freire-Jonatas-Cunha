@@ -55,6 +55,38 @@ export const Conainer = styled.div`
         min-height: 265px;
     }
 
+    @media(max-width: 1024px){
+        form input {
+            font-size: 1.3rem;
+    }
+
+        form select{
+            padding: 0 8px;
+            font-size: 1.1rem;
+        }
+
+    }
+
+    
+    @media(max-width: 550px){
+        form{
+            flex-direction: column;
+            height: 100px;
+        }
+
+        form input {
+            font-size: 1.3rem;
+            border-bottom: 1px solid white;
+            border-radius: 8px;
+            width: 100%;
+        }
+        
+        form select{
+            height: 70%;
+            width: 100%;
+        }
+    }
+
 `
 
 

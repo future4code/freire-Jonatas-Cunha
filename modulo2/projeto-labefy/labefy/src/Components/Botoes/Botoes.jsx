@@ -4,6 +4,7 @@ export default class Botoes extends React.Component {
 
     setarPagina = pagina => {
         this.props.pagina(pagina)
+        window.scrollTo(0, 0)
     }
 
     render(){

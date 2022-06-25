@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
     display: flex;
     flex-wrap: wrap;
+    justify-content: ${props => props.inicio && "center"};
 `
 
 export const PlayImg = styled.img`
@@ -30,6 +31,10 @@ export const BoxRecomendados = styled.div`
             transition-duration: 1s;
             opacity: 60%;
         }
+    }
+
+    @media(max-width: 600px){
+        width: 48%;
     }
 `
 

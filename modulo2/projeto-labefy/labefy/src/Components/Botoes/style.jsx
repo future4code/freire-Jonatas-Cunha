@@ -11,6 +11,14 @@ export const Container = styled.div`
     &:hover{
         opacity: 1;
     }
+
+    @media(max-width: 771px){
+        flex-direction:column;
+        align-items: center;
+        padding: 0;
+        margin: 0;
+    }
+
 `
 
 export const IconeBotao = styled.img`
@@ -21,5 +29,9 @@ export const TituloBotao = styled.p`
 
     padding-left: 10px;
     margin: 0;
+
+    @media(max-width: 771px){
+        padding: 0;
+    }
 
 `

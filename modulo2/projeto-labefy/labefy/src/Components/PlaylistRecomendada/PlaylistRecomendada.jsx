@@ -57,7 +57,7 @@ export default class PlaylistRecomendada extends React.Component {
         })
         return (
 
-            <Container>
+            <Container inicio={this.props.inicio}>
                 {this.state.loading ? <Loader/> : ""}
                 {renderizarRecomendadas}
             </Container>

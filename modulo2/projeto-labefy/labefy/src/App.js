@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import logoTitulo from "../src/img/logo.png"
-import { Aplicacao, IconeLogo, Header, TituloLogo, ContainerLateral, Main } from "./style.jsx"
+import { Aplicacao, IconeLogo, Header, TituloLogo, ContainerLateral, Main, MenuMobile } from "./style.jsx"
 import Botoes from './Components/Botoes/Botoes';
 import Carrosel from './Components/Slider/Slider';
 import BoasVindas from './Components/BoasVindas/BoasVindas';
@@ -12,6 +12,7 @@ import PlaylistRecomendada from './Components/PlaylistRecomendada/PlaylistRecome
 import PaginaDaPlaylist from './Components/PaginaDaPlaylist/PaginaDaPlaylist';
 import PlaylistsNav from './Components/PlaylistsNav/PlaylistsNav';
 import BuscarMusicas from './Components/BuscarMusicas/BuscarMusicas';
+import CriarPlaylist from './Components/CriarPlaylist/CriarPlaylist';
 
 
 
@@ -19,6 +20,7 @@ class App extends React.Component {
   state = {
     pagina: "Inicio",
     nomePlaylist: "",
+    atualizarNav: false,
   }
 
   alterarPagina = (pagina) => {
@@ -30,6 +32,10 @@ class App extends React.Component {
     this.setState({ nomePlaylist: nome })
   }
 
+  atualizarListas = () => {
+    this.setState({ atualizarNav: !this.state.atualizarNav })
+  }
+
 
   render() {
 
@@ -39,21 +45,21 @@ class App extends React.Component {
           return (
             <Main>
               <BoasVindas />
-              <PlaylistRecomendada capturarID={this.pegarIdPlaylist} />
-              <Carrosel id={"0e99b05c-0960-4190-90cb-b2825abb4fd9"} nome={"Rock"}/>
-              <Carrosel id={"161c210a-1814-4983-b8ce-d52bb2499602"} nome={"MPB"}/>
+              <PlaylistRecomendada capturarID={this.pegarIdPlaylist} inicio={this.state.pagina === "Inicio"} />
+              <Carrosel id={"0e99b05c-0960-4190-90cb-b2825abb4fd9"} nome={"Rock"} />
+              <Carrosel id={"161c210a-1814-4983-b8ce-d52bb2499602"} nome={"MPB"} className="carrosel-marg-btn" />
             </Main>
           )
         case "Buscar":
           return (
             <Main>
-              <BuscarMusicas capturarID={this.pegarIdPlaylist}/>
+              <BuscarMusicas capturarID={this.pegarIdPlaylist} />
             </Main>
           )
-        case "Criar PlayList":
+        case "Criar":
           return (
             <Main>
-
+              <CriarPlaylist atualizarListas={this.atualizarListas} />
             </Main>
           )
         default:
@@ -86,13 +92,38 @@ class App extends React.Component {
           />
           <Botoes
             icone={IconeAdicionarBranco}
-            nome="Criar PlayList"
+            nome="Criar"
             pagina={this.alterarPagina}
             corTitulo={this.state.pagina === "Criar PlayList"}
           />
-          <PlaylistsNav capturarID={this.pegarIdPlaylist} idPlaylist={this.state.pagina}/>
+          <PlaylistsNav
+            capturarID={this.pegarIdPlaylist}
+            idPlaylist={this.state.pagina}
+            atualizarNav={this.state.atualizarNav}
+            atualizarListas={this.atualizarListas} />
         </ContainerLateral>
         <RenderizarMain />
+
+          <MenuMobile>
+            <Botoes
+              icone={IconeHomeBranco}
+              nome="Inicio"
+              pagina={this.alterarPagina}
+              corTitulo={this.state.pagina === "Inicio"}
+            />
+            <Botoes
+              icone={IconeBuscarBranco}
+              nome="Buscar"
+              pagina={this.alterarPagina}
+              corTitulo={this.state.pagina === "Buscar"}
+            />
+            <Botoes
+              icone={IconeAdicionarBranco}
+              nome="Criar"
+              pagina={this.alterarPagina}
+              corTitulo={this.state.pagina === "Criar PlayList"}
+            />
+          </MenuMobile>
 
       </Aplicacao>
     );

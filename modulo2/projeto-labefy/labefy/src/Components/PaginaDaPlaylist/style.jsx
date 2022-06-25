@@ -48,6 +48,15 @@ export const BoxRecomendados = styled.div`
             opacity: 60%;
         }
     }
+
+    @media(max-width: 450px){
+        min-width: 150px;
+    }
+
+    @media(max-width: 355px){
+        width: 90%;
+    }
+
 `
 
 export const BlocoPlayer = styled.div`

@@ -15,9 +15,14 @@ export default class PlaylistsNav extends React.Component {
         this.getPlayLists()
     }
 
-    // componentDidUpdate() {
-    //     this.getPlayLists()
-    // }
+    componentDidUpdate() {
+        if(this.props.atualizarNav){
+            this.getPlayLists()
+            this.getPlayLists()
+            this.getPlayLists()
+            this.props.atualizarListas()
+        }
+    }
 
     getPlayLists = () => {
         axios.get("https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists", {
