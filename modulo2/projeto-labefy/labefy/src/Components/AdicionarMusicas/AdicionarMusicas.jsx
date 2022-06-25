@@ -26,7 +26,6 @@ export default class AdicionarMusicas extends React.Component {
             }
         }).then(response => {
             alert("Musica Adicionada Com sucesso!")
-            this.getPlayLists()
         }).catch(error => {
             alert(error.message)
             console.log(this.props.idPlaylist)
@@ -49,6 +48,9 @@ export default class AdicionarMusicas extends React.Component {
     adicionarMusica = (e) => {
         e.preventDefault()
         this.postMusicPlaylist()
+        this.setState({ inputUrl:"" })
+        this.setState({ inputArtista: "" })
+        this.setState({ inputName: "" })
     }
 
     render() {

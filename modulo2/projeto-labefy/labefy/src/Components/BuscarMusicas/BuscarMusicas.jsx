@@ -1,8 +1,11 @@
 import React from "react";
-import { BoxRecomendados, BlocoPlayer, NomePlayList, TituloBusca, Conainer } from "./style";
+import { BoxRecomendados, BlocoPlayer, NomePlayList, TituloBusca, Conainer, BoxNadaEncontrado } from "./style";
 import axios from "axios";
 import Loader from "../Loader/Loader";
 import PlaylistRecomendada from "../PlaylistRecomendada/PlaylistRecomendada";
+import Alert from "../../img/information.png"
+import IconBusca from"../../img/icone-buscar-preto.svg"
+
 export default class BuscarMusicas extends React.Component {
 
     state = {
@@ -37,7 +40,7 @@ export default class BuscarMusicas extends React.Component {
             }).then(response => {
                 this.setState({ musicas: response.data.result.tracks })
                 console.log(response.data.result.tracks)
-                this.setState({loading: false})
+                this.setState({ loading: false })
             }).catch(error => {
                 console.log(error.data.message)
             })
@@ -52,14 +55,14 @@ export default class BuscarMusicas extends React.Component {
         this.setState({ pesquisa: e.target.value })
         this.getPlayListMusic(e.target.value)
         console.log(e.target.value)
-        this.setState({loading: true})
+        this.setState({ loading: true })
 
     }
 
     pegarValorInput = (e) => {
         this.setState({ inputPesquisa: e.target.value })
         this.getPlayListMusic(this.state.id)
-        this.setState({loading: false})
+        this.setState({ loading: false })
     }
 
     render() {
@@ -94,28 +97,31 @@ export default class BuscarMusicas extends React.Component {
 
         return (
             <Conainer>
-                <TituloBusca>Buscar</TituloBusca>
+                <TituloBusca>Buscar Musica</TituloBusca>
                 <form>
-
+                    <img src={IconBusca} alt="" />
                     <input type="text"
                         value={this.state.inputPesquisa}
                         onChange={this.pegarValorInput}
-                        placeholder="Comece a escrever..."
+                        placeholder="Escreva..."
                     />
                     <select onChange={this.pegarIdLista} name="select">
-                        <option value="Escolha">Escolha uma Playlist</option>
+                        <option value="Escolha">Playlist</option>
                         {renderizarPlaylists}
                     </select>
                 </form>
                 <div className="BoxMusicas">
-                    {this.state.loading &&  this.state.pesquisa !== "Escolha" && <Loader/>}
+                    {this.state.loading && this.state.pesquisa !== "Escolha" && <Loader />}
                     {renderizarMusicas.length === 0 && this.state.pesquisa !== "Escolha" && !this.state.loading
-                        ? <p>Não encontamos nada</p>
+                        ? <BoxNadaEncontrado>
+                            <img src={Alert} alt="" />
+                            <p>Não encontramos nada</p>
+                        </BoxNadaEncontrado>
                         : renderizarMusicas
                     }
                 </div>
                 <TituloBusca>Playlists Recomendadas</TituloBusca>
-                <PlaylistRecomendada capturarID={this.props.capturarID}/>
+                <PlaylistRecomendada capturarID={this.props.capturarID} />
             </Conainer>
         )
     }

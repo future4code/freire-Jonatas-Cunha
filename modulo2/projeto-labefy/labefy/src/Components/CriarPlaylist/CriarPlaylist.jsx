@@ -1,16 +1,19 @@
 import axios from "axios";
 import React from "react";
+import { Container, ParagrafoReco } from "./style";
+import Playlist from "../../img/add-list.png"
+import PlaylistRecomendada from "../PlaylistRecomendada/PlaylistRecomendada";
 
 
 
-export default class CriarPlaylist extends React.Component{
+export default class CriarPlaylist extends React.Component {
 
-    state={
-        inputNome:"",
+    state = {
+        inputNome: "",
     }
 
     pegarNome = (e) => {
-        this.setState({inputNome: e.target.value})
+        this.setState({ inputNome: e.target.value })
     }
 
     createPlaylist = (e) => {
@@ -23,10 +26,10 @@ export default class CriarPlaylist extends React.Component{
         }
 
         axios.post("https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists", body, {
-            headers:{
+            headers: {
                 Authorization: "jonatas-felix-freire"
             }
-        }).then(reponse => {
+        }).then(response => {
             alert("Playlist criada com sucesso!")
         }).catch(error => {
             alert(error.data.menssage)
@@ -34,20 +37,25 @@ export default class CriarPlaylist extends React.Component{
 
     }
 
-
-    render(){
-        return(
+    render() {
+        return (
             <div>
-                <p></p>
-                <div>
-                    <form onSubmit={this.createPlaylist}>
-                        <input type="text"
-                        value={this.state.inputNome}
-                        onChange={this.pegarNome}
-                        />
-                        <button>Adicionar</button>
-                    </form>
-                </div>
+                <Container>
+                    <p>Criar Playlist</p>
+                    <div>
+                        <img src={Playlist} alt="" />
+                        <form onSubmit={this.createPlaylist}>
+                            <input type="text"
+                                placeholder="Summer Eletro Hits...."
+                                value={this.state.inputNome}
+                                onChange={this.pegarNome}
+                            />
+                            <button>Criar</button>
+                        </form>
+                    </div>
+                </Container>
+                <ParagrafoReco>Playlists Recomendadas</ParagrafoReco>
+                <PlaylistRecomendada capturarID={this.props.capturarID}/>
             </div>
         )
     }

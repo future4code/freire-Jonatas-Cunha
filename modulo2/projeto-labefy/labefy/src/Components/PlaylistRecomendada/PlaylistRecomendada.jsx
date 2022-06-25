@@ -24,41 +24,41 @@ export default class PlaylistRecomendada extends React.Component {
             }
         }).then(response => {
             this.setState({ playlists: response.data.result.list })
-            this.setState({loading: false})
+            this.setState({ loading: false })
         })
     }
 
     generateColor = () => {
         const letters = '0123456789ABCDEF';
         let color = '#';
-        
-        for (let i = 0; i < 6; i++) {
-          color += letters[Math.floor(Math.random() * 16)];
-        }
-        
-        return color;
-        
-      }
 
-      paginaDaPlaylist = (id, nome) => {
+        for (let i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+
+        return color;
+
+    }
+
+    paginaDaPlaylist = (id, nome) => {
         this.props.capturarID(id, nome)
-      }
+    }
 
     render() {
         const renderizarRecomendadas = this.state.playlists
             .slice(0, 6)
             .map(o => {
                 return (
-                <BoxRecomendados key={o.id} onClick={() => this.paginaDaPlaylist(o.id, o.name)}>
-                    <BlocoPlayer cor={this.generateColor}><PlayImg src={IconPlay} alt="Play" /></BlocoPlayer>
-                    <NomePlayList>{o.name}</NomePlayList>
-                </BoxRecomendados>
+                        <BoxRecomendados key={o.id} onClick={() => this.paginaDaPlaylist(o.id, o.name)}>
+                            <BlocoPlayer cor={this.generateColor}><PlayImg src={IconPlay} alt="Play" /></BlocoPlayer>
+                            <NomePlayList>{o.name}</NomePlayList>
+                        </BoxRecomendados>
                 )
-        })
+            })
         return (
 
             <Container inicio={this.props.inicio}>
-                {this.state.loading ? <Loader/> : ""}
+                {this.state.loading ? <Loader /> : ""}
                 {renderizarRecomendadas}
             </Container>
         )

@@ -7,12 +7,14 @@ import BoasVindas from './Components/BoasVindas/BoasVindas';
 import React from 'react';
 import IconeHomeBranco from "../src/img/icone-home-brancos.svg"
 import IconeBuscarBranco from "../src/img/icone-buscar-branco.svg"
-import IconeAdicionarBranco from "../src/img/icone-adicionar-branco.svg"
+import Biblioteca from "../src/img/biblioteca.png"
+import Adicionar from "../src/img/adicionar.svg"
 import PlaylistRecomendada from './Components/PlaylistRecomendada/PlaylistRecomendada';
 import PaginaDaPlaylist from './Components/PaginaDaPlaylist/PaginaDaPlaylist';
 import PlaylistsNav from './Components/PlaylistsNav/PlaylistsNav';
 import BuscarMusicas from './Components/BuscarMusicas/BuscarMusicas';
 import CriarPlaylist from './Components/CriarPlaylist/CriarPlaylist';
+import PaginaBiblioteca from './Components/PaginaBiblioteca/PaginaBiblioteca';
 
 
 
@@ -37,6 +39,8 @@ class App extends React.Component {
   }
 
 
+
+
   render() {
 
     const RenderizarMain = () => {
@@ -47,7 +51,7 @@ class App extends React.Component {
               <BoasVindas />
               <PlaylistRecomendada capturarID={this.pegarIdPlaylist} inicio={this.state.pagina === "Inicio"} />
               <Carrosel id={"0e99b05c-0960-4190-90cb-b2825abb4fd9"} nome={"Rock"} />
-              <Carrosel id={"161c210a-1814-4983-b8ce-d52bb2499602"} nome={"MPB"} className="carrosel-marg-btn" />
+              <Carrosel id={"28635935-7ded-4c2d-8158-a714896d7e12"} nome={"MPB"} className="carrosel-marg-btn" />
             </Main>
           )
         case "Buscar":
@@ -59,9 +63,15 @@ class App extends React.Component {
         case "Criar":
           return (
             <Main>
-              <CriarPlaylist atualizarListas={this.atualizarListas} />
+              <CriarPlaylist atualizarListas={this.atualizarListas} capturarID={this.pegarIdPlaylist} />
             </Main>
           )
+          case "Biblioteca":
+            return (
+              <Main>
+                <PaginaBiblioteca pagina={this.alterarPagina} capturarID={this.pegarIdPlaylist} atualizarListas={this.atualizarListas}/>
+              </Main>
+            )
         default:
           return (
             <Main>
@@ -91,11 +101,18 @@ class App extends React.Component {
             corTitulo={this.state.pagina === "Buscar"}
           />
           <Botoes
-            icone={IconeAdicionarBranco}
+            icone={Biblioteca}
+            nome="Biblioteca"
+            pagina={this.alterarPagina}
+            corTitulo={this.state.pagina === "Biblioteca"}
+          />
+          <Botoes
+            icone={Adicionar}
             nome="Criar"
             pagina={this.alterarPagina}
-            corTitulo={this.state.pagina === "Criar PlayList"}
+            corTitulo={this.state.pagina === "Criar"}
           />
+
           <PlaylistsNav
             capturarID={this.pegarIdPlaylist}
             idPlaylist={this.state.pagina}
@@ -104,26 +121,26 @@ class App extends React.Component {
         </ContainerLateral>
         <RenderizarMain />
 
-          <MenuMobile>
-            <Botoes
-              icone={IconeHomeBranco}
-              nome="Inicio"
-              pagina={this.alterarPagina}
-              corTitulo={this.state.pagina === "Inicio"}
-            />
-            <Botoes
-              icone={IconeBuscarBranco}
-              nome="Buscar"
-              pagina={this.alterarPagina}
-              corTitulo={this.state.pagina === "Buscar"}
-            />
-            <Botoes
-              icone={IconeAdicionarBranco}
-              nome="Criar"
-              pagina={this.alterarPagina}
-              corTitulo={this.state.pagina === "Criar PlayList"}
-            />
-          </MenuMobile>
+        <MenuMobile>
+          <Botoes
+            icone={IconeHomeBranco}
+            nome="Inicio"
+            pagina={this.alterarPagina}
+            corTitulo={this.state.pagina === "Inicio"}
+          />
+          <Botoes
+            icone={IconeBuscarBranco}
+            nome="Buscar"
+            pagina={this.alterarPagina}
+            corTitulo={this.state.pagina === "Buscar"}
+          />
+          <Botoes
+            icone={Biblioteca}
+            nome="Biblioteca"
+            pagina={this.alterarPagina}
+            corTitulo={this.state.pagina === "Biblioteca"}
+          />
+        </MenuMobile>
 
       </Aplicacao>
     );

@@ -5,17 +5,24 @@ export const Conainer = styled.div`
     form{
         display: flex;
         justify-content: space-between;
-        width: 85%;
+        width: 95%;
         height: 50px;
         margin: 0 auto;
         border-bottom: 1px solid white;
         border-radius: 8px;
+        background: white;
+
+        img{
+            width: 30px;
+            padding: 5px;
+        }
+
     }
 
     form input{
         height: 100%;
         width: 65%;
-        font-size: 2rem;
+        font-size: 1.3rem;
         margin-left: 8px;
         background-color: transparent;
         border: none;
@@ -37,9 +44,10 @@ export const Conainer = styled.div`
         color: #808080bf;
         border-radius: 12px;
         padding: 0 25px;
-        border: 1px solid #808080bf;
-        font-size: 1.2rem;
+        border: 1px solid #000000;
+        font-size: 1.1rem;
         font-weight: bold;
+        margin: 5px;
     }
 
     form select:focus{
@@ -53,38 +61,6 @@ export const Conainer = styled.div`
         align-items: center;
         justify-content: center;
         min-height: 265px;
-    }
-
-    @media(max-width: 1024px){
-        form input {
-            font-size: 1.3rem;
-    }
-
-        form select{
-            padding: 0 8px;
-            font-size: 1.1rem;
-        }
-
-    }
-
-    
-    @media(max-width: 550px){
-        form{
-            flex-direction: column;
-            height: 100px;
-        }
-
-        form input {
-            font-size: 1.3rem;
-            border-bottom: 1px solid white;
-            border-radius: 8px;
-            width: 100%;
-        }
-        
-        form select{
-            height: 70%;
-            width: 100%;
-        }
     }
 
 `
@@ -133,3 +109,16 @@ export const NomePlayList = styled.p`
     text-align: center;
 
 `
+
+export const BoxNadaEncontrado = styled.p`
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    p{
+        color: white;
+        font-size: 1.3rem;
+        font-weight: 500;
+    }
+`
+
