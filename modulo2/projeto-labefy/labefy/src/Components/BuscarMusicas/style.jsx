@@ -71,7 +71,7 @@ export const BoxRecomendados = styled.div`
     align-items: center;
     flex-direction: column;
     width: 25%;
-    height: 220px;
+    height: 240px;
     margin: 1%;
     color: white;
     font-weight: bold;
@@ -79,7 +79,7 @@ export const BoxRecomendados = styled.div`
     border-radius: 5px;
     transition-duration: 1s;
     padding: 10px;
-    min-width: 175px;
+    min-width: 150px;
     &:hover {
         transition-duration: 1s;
         background: rgb(213 212 212 / 50%);

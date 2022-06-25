@@ -5,6 +5,30 @@ export const Container = styled.div`
     flex-direction: column;
 `
 
+export const ContainerMusicas = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    button{
+        padding: 10px 22px;
+        font-weight: bold;
+        margin: 8px 0px 12px;
+        cursor: pointer;
+        border-radius: 8px;
+        border: none;
+        text-transform: uppercase;
+        background: rgb(213 212 212 / 60%);
+    }
+
+    @media(max-width: 771px){
+        width: 50%;
+        height: 305px;
+    }
+
+`
+
 export const NomePlayP = styled.p`
     color: white;
     font-weight: bold;
@@ -30,7 +54,7 @@ export const BoxRecomendados = styled.div`
     display: flex;
     align-items: center;
     flex-direction: column;
-    width: 25%;
+    width: 88%;
     height: 220px;
     margin: 1%;
     color: white;

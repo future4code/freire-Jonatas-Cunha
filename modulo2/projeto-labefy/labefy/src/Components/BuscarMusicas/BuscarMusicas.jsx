@@ -39,10 +39,8 @@ export default class BuscarMusicas extends React.Component {
                 }
             }).then(response => {
                 this.setState({ musicas: response.data.result.tracks })
-                console.log(response.data.result.tracks)
                 this.setState({ loading: false })
             }).catch(error => {
-                console.log(error.data.message)
             })
         } else {
             alert("Selecione uma Playlist!")

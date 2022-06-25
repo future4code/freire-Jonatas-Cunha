@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { Container, BoxRecomendados, BlocoPlayer, NomePlayList, ContainerVideos, NomePlayP, ListaVazia, ListaVaziaImg, BoxListaVazia, BoxInfos } from "./style";
+import { Container, BoxRecomendados, BlocoPlayer, NomePlayList, ContainerVideos, NomePlayP, ListaVazia, ListaVaziaImg, BoxListaVazia, BoxInfos, ContainerMusicas } from "./style";
 import Loader from "../Loader/Loader";
 import ImgVazio from "../../img/empty.png"
 import { BsPlusSquareFill } from "react-icons/bs"
@@ -19,6 +19,10 @@ export default class PaginaDaPlaylist extends React.Component {
         this.getPlayLists()
     }
 
+    atualizarAoAdicionar = () => {
+        this.getPlayLists()
+    }
+
     getPlayLists = () => {
         axios.get(`https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists/${this.props.idPlaylist}/tracks`, {
             headers: {
@@ -30,6 +34,21 @@ export default class PaginaDaPlaylist extends React.Component {
         })
     }
 
+    deleteMusic = (id, nome) => {
+        if (window.confirm(`Deseja mesmo deletar ${nome}?`)) {
+            axios.delete(`https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists/${this.props.idPlaylist}/tracks/${id}`, {
+                headers: {
+                    Authorization: "jonatas-felix-freire"
+                }
+            }).then(response => {
+                alert("Deletado com sucesso!")
+                this.getPlayLists()
+            }).catch(error => {
+                alert(error.data.message)
+            })
+        }
+    }
+
     abrirBoxAdiconarMusica = () => {
         this.setState({ boxMusic: !this.state.boxMusic })
     }
@@ -38,7 +57,8 @@ export default class PaginaDaPlaylist extends React.Component {
         const renderizarRecomendadas = this.state.playlists.map(o => {
             const link = `${o.url.substring(32)}`
             return (
-                <BoxRecomendados key={o.id}>
+                <ContainerMusicas key={o.id}>
+                <BoxRecomendados>
                     <BlocoPlayer>
                         <iframe title={o.name} width="100%" height="100%"
                             src={`https://www.youtube.com/embed/${link}`}>
@@ -46,6 +66,8 @@ export default class PaginaDaPlaylist extends React.Component {
                     </BlocoPlayer>
                     <NomePlayList>{o.artist} - {o.name}</NomePlayList>
                 </BoxRecomendados>
+                <button onClick={() => this.deleteMusic(o.id, o.name)}>Deletar</button>
+                </ContainerMusicas>
             )
         })
         return (
@@ -55,7 +77,7 @@ export default class PaginaDaPlaylist extends React.Component {
                     <NomePlayP>Playlist: {this.props.nomePlaylist}</NomePlayP>
                     <div onClick={this.abrirBoxAdiconarMusica} className="btnAdicionarLista"><BsPlusSquareFill /><p>Adicionar Musica</p></div>
                 </BoxInfos>
-                {this.state.boxMusic && <AdicionarMusicas id={this.props.idPlaylist} />}
+                {this.state.boxMusic && <AdicionarMusicas id={this.props.idPlaylist} atualizarAoAdicionarM={this.atualizarAoAdicionar} />}
                 <ContainerVideos>
                     {this.state.loading ? <Loader /> : ""}
                     {renderizarRecomendadas.length === 0 && !this.state.loading ?

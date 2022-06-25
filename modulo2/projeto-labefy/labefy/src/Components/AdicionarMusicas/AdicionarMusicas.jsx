@@ -51,6 +51,9 @@ export default class AdicionarMusicas extends React.Component {
         this.setState({ inputUrl:"" })
         this.setState({ inputArtista: "" })
         this.setState({ inputName: "" })
+        this.props.atualizarAoAdicionarM()
+        this.props.atualizarAoAdicionarM()
+        this.props.atualizarAoAdicionarM()
     }
 
     render() {
