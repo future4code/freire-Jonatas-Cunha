@@ -28,8 +28,6 @@ export default class AdicionarMusicas extends React.Component {
             alert("Musica Adicionada Com sucesso!")
         }).catch(error => {
             alert(error.message)
-            console.log(this.props.idPlaylist)
-            console.log(body)
         })
     }
 

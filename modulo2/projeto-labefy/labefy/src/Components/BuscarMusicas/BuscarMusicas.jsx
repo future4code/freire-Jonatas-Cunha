@@ -52,7 +52,6 @@ export default class BuscarMusicas extends React.Component {
         this.setState({ id: e.target.value })
         this.setState({ pesquisa: e.target.value })
         this.getPlayListMusic(e.target.value)
-        console.log(e.target.value)
         this.setState({ loading: true })
 
     }

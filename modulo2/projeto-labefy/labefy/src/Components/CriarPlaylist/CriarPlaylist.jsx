@@ -32,7 +32,7 @@ export default class CriarPlaylist extends React.Component {
         }).then(response => {
             alert("Playlist criada com sucesso!")
         }).catch(error => {
-            alert(error.data.menssage)
+            alert(error.message)
         })
 
     }
