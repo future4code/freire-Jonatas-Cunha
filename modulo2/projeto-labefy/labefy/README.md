@@ -1,70 +1,57 @@
-# Getting Started with Create React App
+ # <img src="https://user-images.githubusercontent.com/20983673/175794630-7f2aeb9b-c974-41b3-9560-0d1c594cdfeb.png"  width="50" height="50"> Projeto Labefy
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+#### A ideia central deste projeto foi de realizar a integração com a API Labefy, que permite o gerenciamento básico de playlists de músicas.
 
-In the project directory, you can run:
 
-### `npm start`
+## Descrição
+* A página inicial aprensenta as 6 primeiras playlists cadastrada na API e 2 Carrosséis com musicas de playlists definidas pelo ID.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+* A página de busca mostra as musicas da playlist selecionada!
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* A página da biblioteca mostra todas as playlists, a opções de buscar playlits, criar uma nova e deletar.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+* A página da criar permite criar novas listas.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+* A página da playlist mostra todoas as musicas, botão para adicionar musica e botão para deletar.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## O que funciona:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- Criar Playlist - Adicionar Musica - Deletar Playlist - Deletar Musica
+- Buscar Musica da Playlist - Buscar Playlist
+- Responsividade
 
-## Learn More
+## O que não funciona:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Integração com a API do Spotify
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## LINK DO PROJETO
 
-### Code Splitting
+http://labefyy.surge.sh/
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Tecnologias Utilizadas
 
-### Analyzing the Bundle Size
+- React JS
+- Styled Components
+- React Slick
+- Slick Carousel
+- React Icons
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Imagens
+ <img src="https://user-images.githubusercontent.com/20983673/175795072-24d3da8b-94e9-426f-8d56-c5083cd32b0b.png"  width="500">  <img src="https://user-images.githubusercontent.com/20983673/175795074-c43c444f-13f6-42e7-858d-6b957b225fe7.png"  width="500"> 
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
+### Comandos para executar o projeto
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+##### `npm install`
+##### `npm start`
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
