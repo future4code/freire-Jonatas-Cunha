@@ -11,7 +11,7 @@
 * A página de busca mostra as musicas da playlist selecionada!
 
 
-* A página da biblioteca mostra todas as listas, as opções de buscar playlits, criar uma nova e deletar.
+* A página da biblioteca mostra todas as playlists, a opções de buscar playlits, criar uma nova e deletar.
 
 
 * A página da criar permite criar novas listas.
