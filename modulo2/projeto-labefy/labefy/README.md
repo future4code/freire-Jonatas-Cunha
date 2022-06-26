@@ -36,6 +36,13 @@
 
 http://labefyy.surge.sh/
 
+## Tecnologias Utilizadas
+
+- React JS
+- Styled Components
+- React Slick
+- Slick Carousel
+- React Icons
 
 ## Imagens
  <img src="https://user-images.githubusercontent.com/20983673/175795072-24d3da8b-94e9-426f-8d56-c5083cd32b0b.png"  width="500">  <img src="https://user-images.githubusercontent.com/20983673/175795074-c43c444f-13f6-42e7-858d-6b957b225fe7.png"  width="500"> 
