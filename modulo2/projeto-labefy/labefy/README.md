@@ -34,7 +34,8 @@
 
 ## LINK DO PROJETO
 
-http://labefyy.surge.sh/
+Recomendado: http://labefyy.surge.sh/
+Alternativo: https://62b9b555176312395698ec4b--magenta-praline-7a6329.netlify.app/ // Caso surge esteja off
 
 ## Tecnologias Utilizadas
 
