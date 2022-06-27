@@ -3,7 +3,7 @@ import React from "react";
 import { Container, ParagrafoReco } from "./style";
 import Playlist from "../../img/add-list.png"
 import PlaylistRecomendada from "../PlaylistRecomendada/PlaylistRecomendada";
-
+import Swal from "sweetalert2";
 
 
 export default class CriarPlaylist extends React.Component {
@@ -30,9 +30,23 @@ export default class CriarPlaylist extends React.Component {
                 Authorization: "jonatas-felix-freire"
             }
         }).then(response => {
-            alert("Playlist criada com sucesso!")
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Sua Playlist foi criada',
+                showConfirmButton: true,
+                timer: 2000,
+                confirmButtonColor: '#11e211',
+              })
         }).catch(error => {
-            alert(error.message)
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: error.message,
+                showConfirmButton: true,
+                timer: 2000,
+                confirmButtonColor: '#e21111',
+              })
         })
 
     }

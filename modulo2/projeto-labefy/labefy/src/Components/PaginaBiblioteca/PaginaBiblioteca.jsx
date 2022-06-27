@@ -4,7 +4,7 @@ import { Container, BoxLista, BoxRecomendados, BlocoPlayer, NomePlayList, PlayIm
 import Musica from "../../img/notas-musicais.png"
 import IconeBuscarBranco from "../../img/icone-buscar-branco.svg"
 import Adicionar from "../../img/adicionar.svg"
-
+import Swal from "sweetalert2";
 import Loader from "../Loader/Loader";
 
 
@@ -55,21 +55,61 @@ export default class PaginaBiblioteca extends React.Component {
 
     deletarPlaylist = (id, nome) => {
         if (nome === "Rock" || nome === "MPB" || nome === "Pop" || nome === "Eletronica" || nome === "Sertanejo" || nome === "Reggae") {
-            alert("Apague apenas Playlists Criadas Por Você!!!!")
+            Swal.fire({
+                title: 'Grrrrrrrrrr!',
+                text: 'Apague apenas playlists criadas por você.',
+                imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEd9PcLMSKndYQhREagqUY6z4WRS0vaYgNUA&usqp=CAU',
+                imageWidth: 200,
+                imageHeight: 200,
+                imageAlt: 'Custom image',
+                confirmButtonColor: '#d73737',
+            })
         } else {
-            if (window.confirm(`Você realmente deseja apagar ${nome}?`)) {
-                axios.delete(`https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists/${id}`, {
-                    headers: {
-                        Authorization: "jonatas-felix-freire"
-                    }
-                }).then(response => {
-                    alert("Apagado com sucesso!")
-                    this.getPlayLists()
-                    this.props.atualizarListas()
-                }).catch(error => {
-                    alert(error.data.menssage)
-                })
-            }
+
+            Swal.fire({
+                title: `Deseja mesmo deletar ${nome}?`,
+                text: "Você não será capaz de reverter isso!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Sim, exclua!',
+                cancelButtonText: 'Não, cancelar!',
+                cancelButtonColor: '#D73743',
+                confirmButtonColor: '#52d737',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    axios.delete(`https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists/${id}`, {
+                        headers: {
+                            Authorization: "jonatas-felix-freire"
+                        }
+                    }).then(response => {
+                        Swal.fire(
+                            'Deletado!',
+                            'Musica deletada com sucesso',
+                            'success'
+                        )
+                        this.getPlayLists()
+                        this.props.atualizarListas()
+                    }).catch(error => {
+                        Swal.fire(
+                        'Ooopps!',
+                        error.message,
+                        'Error'
+                        )
+                    })
+
+                } else if (
+                    result.dismiss === Swal.DismissReason.cancel
+                ) {
+                    Swal.fire(
+                        'Cancelado',
+                        'Sua Playlist esta segura :)',
+                        'error'
+                    )
+                }
+            })
+
         }
     }
 
@@ -103,9 +143,9 @@ export default class PaginaBiblioteca extends React.Component {
                         {this.state.buscar && <InputBusca
                             value={this.state.inputBusca}
                             onChange={this.pegarInputBusca}
-                            type="text" 
+                            type="text"
                             placeholder="Procurar Playlist..."
-                            />}
+                        />}
                         <img onClick={this.abrirBusca} src={IconeBuscarBranco} alt="Buscar" />
                         <img onClick={() => this.props.pagina("Criar")} src={Adicionar} alt="Adicionar" />
                     </BuscaEAdd>
