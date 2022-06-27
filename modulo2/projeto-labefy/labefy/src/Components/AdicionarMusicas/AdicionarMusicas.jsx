@@ -4,6 +4,7 @@ import { Container } from "./style";
 import VideoUrl from "../../img/video.png"
 import Artista from "../../img/artista.png"
 import Musica from "../../img/notas-musicais.png"
+import Swal from "sweetalert2";
 
 export default class AdicionarMusicas extends React.Component {
 
@@ -25,9 +26,17 @@ export default class AdicionarMusicas extends React.Component {
                 Authorization: "jonatas-felix-freire"
             }
         }).then(response => {
-            alert("Musica Adicionada Com sucesso!")
+            Swal.fire(
+                'Tudo Certo!',
+                'Sua musica foi adicionada.',
+                'success',
+            )
         }).catch(error => {
-            alert(error.message)
+            Swal.fire(
+                'Ooopps!',
+                error.message,
+                'Error'
+            )
         })
     }
 
@@ -46,7 +55,7 @@ export default class AdicionarMusicas extends React.Component {
     adicionarMusica = (e) => {
         e.preventDefault()
         this.postMusicPlaylist()
-        this.setState({ inputUrl:"" })
+        this.setState({ inputUrl: "" })
         this.setState({ inputArtista: "" })
         this.setState({ inputName: "" })
         this.props.atualizarAoAdicionarM()
@@ -61,31 +70,31 @@ export default class AdicionarMusicas extends React.Component {
                     <div className="BoxInput">
                         <label htmlFor="nome">Nome da Musica:</label>
                         <div id="InputNome">
-                        <img src={Musica} alt="Notas de Musica" />
-                        <input  name="nome"  type="text" id="name"
-                            value={this.state.inputName}
-                            onChange={this.pegarNome}
-                        />
+                            <img src={Musica} alt="Notas de Musica" />
+                            <input name="nome" type="text" id="name"
+                                value={this.state.inputName}
+                                onChange={this.pegarNome}
+                            />
                         </div>
                     </div>
-                    <div  className="BoxInput">
+                    <div className="BoxInput">
                         <label htmlFor="artista">Nome do Artista:</label>
                         <div id="InputArtista">
-                        <img src={Artista} alt="Artista" />
-                        <input name="artista" type="text" id="artista"
-                            value={this.state.inputArtista}
-                            onChange={this.pegarArtita}
-                        />
+                            <img src={Artista} alt="Artista" />
+                            <input name="artista" type="text" id="artista"
+                                value={this.state.inputArtista}
+                                onChange={this.pegarArtita}
+                            />
                         </div>
                     </div>
-                    <div  className="BoxInput">
+                    <div className="BoxInput">
                         <label htmlFor="url">Link do Youtube</label>
                         <div id="InputUrl">
-                        <img src={VideoUrl} alt="Video" />
-                        <input name="url"  type="text" id="url"
-                            value={this.state.inputUrl}
-                            onChange={this.pegarUrl}
-                        />
+                            <img src={VideoUrl} alt="Video" />
+                            <input name="url" type="text" id="url"
+                                value={this.state.inputUrl}
+                                onChange={this.pegarUrl}
+                            />
                         </div>
                     </div>
                     <button>Adicionar</button>
