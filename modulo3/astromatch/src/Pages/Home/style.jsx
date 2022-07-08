@@ -8,6 +8,7 @@ export const Container = styled.div`
 export const Img = styled.img`
     width: 100%;
     display: block;
+    z-index: 2;
 `
 
 export const BoxImagem = styled.div`
@@ -28,6 +29,7 @@ export const BoxImagem = styled.div`
         width: 100%;
         height: 100%;
         background: linear-gradient(0deg,rgb(0 0 0 / 85%) 5%,rgba(0,0,0,0) 50%);
+        z-index: 3;
     }
 
     ::after {
@@ -38,7 +40,7 @@ export const BoxImagem = styled.div`
         width: 100%;
         height: 100%;
         position: absolute;
-        z-index: -1;
+        z-index: 1;
     }
 `
 

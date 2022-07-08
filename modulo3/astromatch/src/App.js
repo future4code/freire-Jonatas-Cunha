@@ -9,6 +9,7 @@ const Tela = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  background: linear-gradient(8deg, #fa0037,#f8939c);
   `
 
 function App() {

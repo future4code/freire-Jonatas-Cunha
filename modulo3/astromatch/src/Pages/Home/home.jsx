@@ -5,6 +5,7 @@ import { AiOutlineClose, AiFillHeart } from "react-icons/ai";
 import { BiReset } from "react-icons/bi";
 import { Container, BoxImagem, Img, BoxBio, BoxBotoes } from "./style"
 import { ToastContainer, toast } from "react-toastify";
+import Swal from "sweetalert2";
 import 'react-toastify/dist/ReactToastify.css';
 
 
@@ -34,7 +35,7 @@ export default function Home() {
             setLoading(true);
             console.log(res.data.isMatch);
             if (res.data.isMatch) {
-                toast.info('Você tem um novo match!', {
+                toast.error('Você tem um novo match!', {
                     icon: "💖",
                     position: "top-center",
                     autoClose: 2000,
@@ -54,11 +55,33 @@ export default function Home() {
     }
 
     const clearMatchs = () => {
-        axios.put(`https://us-central1-missao-newton.cloudfunctions.net/astroMatch/freire-jonatas/clear`).then((res) => {
-            getProfile();
-            setLoading(true);
-        }).catch((err) => {
-            console.log(err);
+
+        Swal.fire({
+            title: 'Você tem certeza?',
+            text: "Todos os matches serão desfeitos!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Cancelar!',
+            confirmButtonText: 'Sim, resetar!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                axios.put(`https://us-central1-missao-newton.cloudfunctions.net/astroMatch/freire-jonatas/clear`)
+                .then((res) => {
+                    getProfile();
+                    setLoading(true);
+                }).catch((err) => {
+                    console.log(err);
+                })
+
+                Swal.fire(
+                    'Resetado!',
+                    'Todos os seus matches foram desfeitos!',
+                    'success'
+                )
+            }
         })
     }
 
@@ -77,9 +100,9 @@ export default function Home() {
                     <p>{perfil.bio}</p>
                 </BoxBio>
                 <BoxBotoes>
-                <button id="reject" onClick={() => choosePerson(false)}><AiOutlineClose /></button>
-                <button id="reset" onClick={clearMatchs}><BiReset /></button>
-                <button id="match" onClick={() => choosePerson(true)}><AiFillHeart /></button>
+                    <button id="reject" onClick={() => choosePerson(false)}><AiOutlineClose /></button>
+                    <button id="reset" onClick={clearMatchs}><BiReset /></button>
+                    <button id="match" onClick={() => choosePerson(true)}><AiFillHeart /></button>
                 </BoxBotoes>
             </Container>)
     }
@@ -91,7 +114,7 @@ export default function Home() {
 
     return (
         <>
-            <ToastContainer/>
+            <ToastContainer />
             {loading ? <Loader />
                 : (perfil.fim ?
                     <>
