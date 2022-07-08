@@ -3,7 +3,7 @@ import axios from "axios";
 import Loader from "../../Components/Loader/Loader";
 import { AiOutlineClose, AiFillHeart } from "react-icons/ai";
 import { BiReset } from "react-icons/bi";
-import { Container, BoxImagem, Img, BoxBio, BoxBotoes } from "./style"
+import { Container, BoxImagem, Img, BoxBio, BoxBotoes, Acabou } from "./style"
 import { ToastContainer, toast } from "react-toastify";
 import Swal from "sweetalert2";
 import 'react-toastify/dist/ReactToastify.css';
@@ -69,12 +69,12 @@ export default function Home() {
             if (result.isConfirmed) {
 
                 axios.put(`https://us-central1-missao-newton.cloudfunctions.net/astroMatch/freire-jonatas/clear`)
-                .then((res) => {
-                    getProfile();
-                    setLoading(true);
-                }).catch((err) => {
-                    console.log(err);
-                })
+                    .then((res) => {
+                        getProfile();
+                        setLoading(true);
+                    }).catch((err) => {
+                        console.log(err);
+                    })
 
                 Swal.fire(
                     'Resetado!',
@@ -95,7 +95,7 @@ export default function Home() {
                 </BoxImagem>
                 <BoxBio>
                     <div id="nameIdade">
-                        <h1>{perfil.name}, {perfil.age}</h1>
+                        <h2>{perfil.name}, {perfil.age}</h2>
                     </div>
                     <p>{perfil.bio}</p>
                 </BoxBio>
@@ -117,10 +117,10 @@ export default function Home() {
             <ToastContainer />
             {loading ? <Loader />
                 : (perfil.fim ?
-                    <>
-                        <p>Ninguem ta querendo você :/</p>
-                        <button onClick={clearMatchs}>teste</button>
-                    </>
+                    <Acabou>
+                        <p>Acabou :/ </p>
+                        <button onClick={clearMatchs}>Limpar Matches</button>
+                    </Acabou>
                     : <RenderizarPefil />)}
         </>
     )

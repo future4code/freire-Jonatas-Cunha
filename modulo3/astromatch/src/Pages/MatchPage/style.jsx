@@ -12,11 +12,12 @@ export const ContainerMatch = styled.div`
     display: flex;
     align-items: center;
     gap: 20px;
-    margin: 15px auto;
+    margin: 23px auto;
     border-radius: 40px 20px 20px 40px;
-    font-weight: bold;
-    background: #e0e0e0;
-    width: 95%;
+    font-weight: 500;
+    background: #ff7e8b;
+    height: 60px;
+    width: 90%;
 
     :hover{
         box-shadow: 0px 0px 4px 1px #0000005e;
@@ -33,7 +34,7 @@ export const BoxImg = styled.div`
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    border: 2px solid rgb(127, 127, 127);
+    border: 2px solid rgb(255 0 54);
 
 
    ::after {

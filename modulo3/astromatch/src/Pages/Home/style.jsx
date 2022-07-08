@@ -62,6 +62,10 @@ export const BoxBio = styled.div`
         align-items: center;
     }
 
+    #nameIdade h2 {
+        margin: 0;
+    }
+
 `
 
 export const BoxBotoes = styled.div`
@@ -110,5 +114,13 @@ export const BoxBotoes = styled.div`
         color: white;
         background-color: green;
     }
+
+`
+
+export const Acabou = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
 `

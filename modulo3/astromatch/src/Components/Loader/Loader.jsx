@@ -21,6 +21,16 @@ const beatingAnimation = keyframes`
   100% {
     transform: scale(0.9);
   }
+
+  /* 0% {
+    -webkit-transform: rotateY(0);
+            transform: rotateY(0);
+  }
+  100% {
+    -webkit-transform: rotateY(360deg);
+            transform: rotateY(360deg);
+  } */
+
 `
 
 const LoaderWrapper = styled.div`
@@ -37,6 +47,7 @@ const LoaderContent = styled.div`
   background: url(${Coracao});
   background-size: cover;
   animation: ${beatingAnimation} 1s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
+  /* animation: ${beatingAnimation} 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both; */
   
 `
 

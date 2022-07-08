@@ -5,12 +5,14 @@ export const ContainerCard = styled.div`
     position: relative;
     width: 400px;
     height: 645px;
-    border: 1px solid #000000;
     background-color: white;
+    border-radius: 15px;
+    box-shadow: 0px 0px 10px 2px #270f15;
+
 
     @media(max-width: 468px) {
-        width: 100%;
-        height: 99vh;
+        width: 95%;
+        height: 95vh;
     }
 
 `
