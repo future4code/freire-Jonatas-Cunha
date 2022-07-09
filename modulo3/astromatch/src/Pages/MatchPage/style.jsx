@@ -5,6 +5,10 @@ export const Container = styled.div`
     overflow: auto;
     margin: 0 auto;
     box-sizing: border-box;
+
+
+
+
 `
 
 
@@ -44,7 +48,7 @@ export const BoxImg = styled.div`
         position: absolute;
         background: url(${props => props.src}) no-repeat center;
         background-size: cover;
-        filter: blur(10px);
+        filter: blur(4px);
         z-index: 1;
    }
    
