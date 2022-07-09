@@ -5,10 +5,6 @@ export const Container = styled.div`
     overflow: auto;
     margin: 0 auto;
     box-sizing: border-box;
-
-
-
-
 `
 
 

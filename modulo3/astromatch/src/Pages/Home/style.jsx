@@ -42,6 +42,49 @@ export const BoxImagem = styled.div`
         position: absolute;
         z-index: 1;
     }
+
+
+    @keyframes rotate-out-2-br-cw {
+        0% {
+            -webkit-transform: rotate(0);
+                    transform: rotate(0);
+            -webkit-transform-origin: ${props => props.direction ? "100%" : "0"} 100%;
+                    transform-origin: ${props => props.direction ? "100%" : "0"} 100%;
+            opacity: 1;
+        }
+        100% {
+            -webkit-transform: rotate(${props => props.direction ? "45deg" : "-45deg"});
+                    transform: rotate(${props => props.direction ? "45deg" : "-45deg"});
+            -webkit-transform-origin: ${props => props.direction ? "100%" : "0"} 100%;
+                    transform-origin: ${props => props.direction ? "100%" : "0"} 100%;
+            opacity: 0;
+        }
+    }
+    
+    ${props => props.animacao && ({
+        animation: "rotate-out-2-br-cw 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;"
+    })}
+
+    #mensagem{
+        display: ${props => props.animacao ? "block" : "none"};
+        position: absolute;
+        z-index: 1000;
+        top: 11px;
+        ${props => props.direction ? "right: 25px;" : "left: 25px;"}
+        padding: 5px 20px;
+        color: ${props => props.direction ? "green" : "red"};
+        font-size: 30px;
+        font-weight: bolder;
+        text-transform: uppercase;
+        transform: ${props => props.direction ? "rotate(27deg)" : "rotate(-27deg)"};
+        border: 4px solid ${props => props.direction ? "green" : "red"};
+        border-radius: 5px;
+        background: ${props => props.direction 
+        ? "linear-gradient(to right, #274127, #274127)" 
+        : "linear-gradient(to left, #573434, #573434)"};
+        letter-spacing: 2px;
+    }
+
 `
 
 export const BoxBio = styled.div`

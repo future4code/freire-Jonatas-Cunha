@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
 import Coracao from "../../Img/heart.png";
 import { ContainerCard, BoxTelas, BoxHeader, EmptyBox, BoxLogo, Button } from "../Card/style";
 import { BsFillPeopleFill } from "react-icons/bs";
