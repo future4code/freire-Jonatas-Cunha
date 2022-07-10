@@ -53,8 +53,41 @@ export const BoxLogo = styled.div`
         width: 45px;
         height: 50px;
     }
+`
+
+export const ImgLogo = styled.img`
+
+    @keyframes coracaobatendo {
+        0% {
+            transform: scale(0.95);
+        }
+        5% {
+            transform: scale(1.1);
+        }
+        39% {
+            transform: scale(0.85);
+        }
+        45% {
+            transform: scale(1);
+        }
+        60% {
+            transform: scale(0.95);
+        }
+        100% {
+            transform: scale(0.9);
+        }
+    }
+
+    width: 45px;
+    height: 50px;
+
+    ${BoxLogo}:hover &{
+        animation: coracaobatendo 1s ease-in-out infinite;
+    }
 
 `
+
+
 
 export const BoxTelas = styled.main`
     margin: 20px;

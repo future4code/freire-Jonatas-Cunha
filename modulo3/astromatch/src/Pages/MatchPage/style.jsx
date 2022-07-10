@@ -5,6 +5,23 @@ export const Container = styled.div`
     overflow: auto;
     margin: 0 auto;
     box-sizing: border-box;
+    
+
+    #button {
+        display: flex;
+        margin: 0 auto;
+        text-transform: uppercase;
+        padding: 7px 15px;
+        border-radius: 5px;
+        border: 1px solid black;
+        cursor: pointer;
+    }
+
+    #button:hover {
+        letter-spacing: 2px;
+        transition-duration: 0.8s;
+    }
+
 `
 
 

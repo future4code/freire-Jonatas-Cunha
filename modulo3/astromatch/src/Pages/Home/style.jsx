@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 export const Container = styled.div`
     position: relative;
@@ -111,7 +111,37 @@ export const BoxBio = styled.div`
 
 `
 
+const animationBotao = keyframes`
+
+        0% {
+            background-size: 30% 30%;
+        }
+
+        30% {
+            background-size: 80% 80%;
+        }
+
+        50% {
+            background-size: 100% 100%;
+        }
+
+        80% {
+            background-size: 200% 200%;
+        }
+
+        90% {
+            background-size: 400% 400%;
+        }
+
+        100% {
+            background-size: 1000% 1000% ;
+        }
+
+`
+
+
 export const BoxBotoes = styled.div`
+
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -133,10 +163,12 @@ export const BoxBotoes = styled.div`
     #reject {
         color: red;
         border-color: red;
+
     }
     #reject:hover {
         color: white;
-        background-color: red;
+        background: radial-gradient(circle, rgba(255,0,0,1) 0%, rgba(255,255,255,1) 60%) no-repeat center;
+        animation: ${animationBotao}  0.3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
     }
 
 
@@ -146,8 +178,10 @@ export const BoxBotoes = styled.div`
     }
     #reset:hover {
         color: white;
-        background-color: CornflowerBlue;
+        background: radial-gradient(circle, CornflowerBlue 0%, rgba(255,255,255,1) 60%) no-repeat center;
+        animation: ${animationBotao}  0.3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
     }
+
 
     #match {
         color: green;
@@ -155,7 +189,8 @@ export const BoxBotoes = styled.div`
     }
     #match:hover {
         color: white;
-        background-color: green;
+        background: radial-gradient(circle, green 0%, rgba(255,255,255,1) 60%) no-repeat center;
+        animation: ${animationBotao}  0.3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
     }
 
 `
