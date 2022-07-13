@@ -1,4 +1,9 @@
+import { useProtectedPage } from "../hooks/useProtectedPage";
+
+
 function AdminHomePage() {
+    
+    useProtectedPage();
 
     return (
         <div>
