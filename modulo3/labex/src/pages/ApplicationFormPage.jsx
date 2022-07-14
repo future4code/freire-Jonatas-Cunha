@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import ListOfCountries from "../utils/ListOfCountries";
-import { useResquestList } from "../hooks/useRequestList";
+import { useRequestList } from "../hooks/useRequestList";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
@@ -21,7 +21,7 @@ function ApplicationFormPage() {
 
 
     const contriesList = ListOfCountries().countries;
-    const [trips, loading] = useResquestList();
+    const [trips, loading] = useRequestList();
 
 
 
@@ -151,7 +151,6 @@ function ApplicationFormPage() {
             <Autocomplete
                 required
                 onInputChange={(event, newInputValue) => {
-                    console.log(newInputValue);
                     setCountry(newInputValue);
                   }}
                 id="country-select-demo AutocompleteOffChromeCountry"
@@ -178,7 +177,8 @@ function ApplicationFormPage() {
                         label="Escolha um país"
                         inputProps={{
                             ...params.inputProps,
-                            autoComplete: 'new-password', // disable autocomplete and autofill
+                            autoComplete: 'new-input-no-auto-complete', // disable autocomplete and autofill
+                            required: country.length === 0,
                         }}
                     />
                 )}

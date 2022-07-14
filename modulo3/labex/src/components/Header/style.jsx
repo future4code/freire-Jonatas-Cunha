@@ -12,6 +12,7 @@ export const BoxTitle = styled.div`
     display: flex;
     align-items: center;
     margin: 5px;
+    cursor: pointer;
 `
 
 export const Title = styled.h1`

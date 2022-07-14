@@ -2,7 +2,7 @@ import axios from "axios"
 import { useState, useEffect } from "react"
 import BASE_URL from '../constants/BASE_URL'
 
-export const useResquestList = () => {
+export const useRequestList = () => {
 
     const [trips, setTrips] = useState([])
     const [loading, setLoading] = useState(true)

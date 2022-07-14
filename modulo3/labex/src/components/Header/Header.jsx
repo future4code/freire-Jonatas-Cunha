@@ -1,10 +1,12 @@
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { HeaderContainer, BoxTitle, Title, BoxNav } from "./style";
 import { ScreenHeaAndFoo, ContainerWidth } from "../../base/GlobalStyles";
 import Logo from "../Logo/Logo"
 
 function Header() {
     const currentPage = useLocation().pathname;
+    const navigate = useNavigate();
+    console.log(currentPage);
 
     const logout = () => {
         localStorage.removeItem("token");
@@ -26,11 +28,15 @@ function Header() {
         }
     }
 
+    const navigateToHome = () => {
+        currentPage !== "/" && navigate("/");
+    }
+
     return (
         <ScreenHeaAndFoo>
             <ContainerWidth>
                 <HeaderContainer>
-                    <BoxTitle>
+                    <BoxTitle onClick={navigateToHome}>
                         <Logo />
                         <Title>LabeX</Title>
                     </BoxTitle>

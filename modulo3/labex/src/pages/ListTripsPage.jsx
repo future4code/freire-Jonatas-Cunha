@@ -1,4 +1,4 @@
-import { useResquestList } from '../hooks/useRequestList';
+import { useRequestList } from '../hooks/useRequestList';
 import { Loader } from "../components/Loader/Loader"
 
 
@@ -6,7 +6,7 @@ import { Loader } from "../components/Loader/Loader"
 
 function ListTripsPage() {
 
-    const [trips, loading] = useResquestList();
+    const [trips, loading] = useRequestList();
 
     const RenderTrips = () => {
         return trips.map(trip => {
