@@ -1,4 +1,4 @@
-import { Container } from './style';
+import { Container, BoxMens, BoxButtons, Button } from './style';
 import { ContainerWidth } from '../../base/GlobalStyles';
 import { NavLink } from 'react-router-dom';
 
@@ -7,14 +7,16 @@ function HomePage() {
     return (
         <ContainerWidth>
             <Container>
-                <div>
-                    <h2>Boas-Vindas</h2>
-                    <p>As melhores viagens com passagens só de ida!</p>
-                </div>
-                <div>
-                    <NavLink to="/trips/list">Área do Viajante</NavLink>
-                    <NavLink to="/login">Área do Administrador</NavLink>
-                </div>
+                <BoxMens>
+                    <h1>Boas-Vindas</h1>
+                    <div>
+                        <p>As melhores viagens com passagens só de ida você encontra aqui!</p>
+                    </div>
+                </BoxMens>
+                <BoxButtons>
+                    <NavLink to="/trips/list"><Button>Área do Viajante</Button></NavLink>
+                    <NavLink to="/login"><Button>Área do Administrador</Button></NavLink>
+                </BoxButtons>
             </Container>
         </ContainerWidth>
     )

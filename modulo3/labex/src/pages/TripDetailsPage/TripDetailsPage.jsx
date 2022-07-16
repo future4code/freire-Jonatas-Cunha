@@ -1,9 +1,20 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import BASE_URL from "../constants/BASE_URL";
-import { Loader } from "../components/Loader/Loader";
+import BASE_URL from "../../constants/BASE_URL";
+import { Loader } from "../../components/Loader/Loader";
 import { useNavigate, useParams } from "react-router-dom";
-import { useProtectedPage } from "../hooks/useProtectedPage";
+import { useProtectedPage } from "../../hooks/useProtectedPage";
+
+import {
+    Screen,
+    TripDetails,
+    BoxDetails,
+    Details,
+    ContainerCandidates,
+    ContainerApproveds,
+    BoxCandidates,
+    BoxApproveds,
+} from "./style";
 
 
 function TripDetailsPage() {
@@ -45,9 +56,11 @@ function TripDetailsPage() {
         )
     }
 
-    const takeTripCandidates = candidates.map((candidate) => {
+    const takeTripCandidates = candidates.map((candidate, i) => {
         return (
-            <div key={candidate.id} styly={{ background: "white" }} >
+            <details>
+                <summary>Solicitação {i + 1} {candidate.name}</summary>
+            <BoxDetails key={candidate.id} styly={{ background: "white" }} >
                 <p><b>Nome:</b> {candidate.name}</p>
                 <p><b>Profissão:</b> {candidate.profession}</p>
                 <p><b>Idade:</b> {candidate.age}</p>
@@ -56,18 +69,19 @@ function TripDetailsPage() {
                     <button onClick={() => approveCandidate(candidate.id, true)}>APROVAR</button>
                     <button onClick={() => approveCandidate(candidate.id, false)}>REPROVAR</button>
                 </div>
-            </div>
+            </BoxDetails>
+            </details>
         )
     })
 
     const takeTripApproveds = approved.map((candidate) => {
         return (
-            <div key={candidate.id} >
+            <BoxDetails key={candidate.id} >
                 <p><b>Nome:</b> {candidate.name}</p>
                 <p><b>Profissão:</b> {candidate.profession}</p>
                 <p><b>Idade:</b> {candidate.age}</p>
-                <p><b>Texto da candidatura:</b> {candidate.applicationText}</p>
-            </div>
+                {/* <p><b>Texto da candidatura:</b> {candidate.applicationText}</p> */}
+            </BoxDetails>
         )
     })
 
@@ -88,6 +102,10 @@ function TripDetailsPage() {
         })
     }
 
+    const backPage = () => {
+        navigate(-1)
+    }
+
 
     useEffect(() => {
         getTripDetails();
@@ -95,19 +113,35 @@ function TripDetailsPage() {
 
 
     return (
-        <div>
+        <Screen>
             <h1>Trip Details Page</h1>
             {loading ? <Loader /> : (
                 error ? <p>Erro ao carregar viagem</p> : (
-                    <main>
+                    <TripDetails>
                         <TakeTripDetails />
-                        {takeTripCandidates}
-                        {takeTripApproveds}
-                    </main>
+                            <h3>Lista de Candidatos</h3>
+                            <ContainerCandidates>
+                                <BoxCandidates>
+                                    {candidates.length > 0 ? takeTripCandidates
+                                        : (
+                                            <p>Não há candidatos para essa viagem</p>
+                                        )}
+                                </BoxCandidates>
+                            </ContainerCandidates>
+                            <h3>Lista de Aprovados</h3>
+                            <ContainerApproveds>
+                                <BoxApproveds>
+                                    {approved.length > 0 ? takeTripApproveds
+                                        : (
+                                            <p>Não há candidatos aprovados para essa viagem</p>
+                                        )}
+                                </BoxApproveds>
+                            </ContainerApproveds>
+                    </TripDetails>
                 )
             )}
-
-        </div>
+            <button onClick={backPage} >Voltar</button>
+        </Screen>
     )
 }
 

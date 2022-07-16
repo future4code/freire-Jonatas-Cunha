@@ -1,7 +1,8 @@
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import { HeaderContainer, BoxTitle, Title, BoxNav } from "./style";
+import { HeaderContainer, BoxTitle, Title, BoxNavDesktop, ConainerButton, DivVazia } from "./style";
 import { ScreenHeaAndFoo, ContainerWidth } from "../../base/GlobalStyles";
 import Logo from "../Logo/Logo"
+import MenuMobile from "../MenuMobile/MenuMobile";
 
 function Header() {
     const currentPage = useLocation().pathname;
@@ -36,16 +37,20 @@ function Header() {
         <ScreenHeaAndFoo>
             <ContainerWidth>
                 <HeaderContainer>
+                <MenuMobile/>
                     <BoxTitle onClick={navigateToHome}>
                         <Logo />
                         <Title>LabeX</Title>
                     </BoxTitle>
-                    <BoxNav currentPage={currentPage}>
+                    <BoxNavDesktop currentPage={currentPage}>
                         <NavLink id={"inicio"} to="/">Ínicio</NavLink>
                         <NavLink id={"viagens"} to="/trips/list">Viagens</NavLink>
                         <NavLink id={"inscreva"} to="/trips/application">Inscreva-se</NavLink>
-                    </BoxNav>
-                    <RenderButton />
+                    </BoxNavDesktop>
+                    <ConainerButton>
+                        <RenderButton />
+                    </ConainerButton>
+                    <DivVazia />
                 </HeaderContainer>
             </ContainerWidth>
         </ScreenHeaAndFoo>
