@@ -7,7 +7,6 @@ import MenuMobile from "../MenuMobile/MenuMobile";
 function Header() {
     const currentPage = useLocation().pathname;
     const navigate = useNavigate();
-    console.log(currentPage);
 
     const logout = () => {
         localStorage.removeItem("token");

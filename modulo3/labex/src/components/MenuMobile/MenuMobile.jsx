@@ -8,6 +8,7 @@ import FormatAlignLeftIcon from '@mui/icons-material/FormatAlignLeft';
 function MenuMobile() {
 
     const [open, setOpen] = useState(false);
+    const currentPage = useLocation().pathname;
 
     const handleClick = () => {
         setOpen(!open);
@@ -17,12 +18,23 @@ function MenuMobile() {
         setOpen(!open);
     }
 
-    const Login = () => {
-        const currentPage = useLocation().pathname;
+    const logout = () => {
+        localStorage.removeItem("token");
+    }
+
+    const RenderButton = () => {
         if (currentPage.slice(0, 6) === "/admin") {
-            return "Logout";
+            return (
+                <NavLink to="/" onClick={() => setOpen(!open)}>
+                    <button onClick={logout} >Logout</button>
+                </NavLink>
+            )
         } else {
-            return "Area Admin";
+            return (
+                <NavLink to="/login" onClick={() => setOpen(!open)}>
+                    <button>Area Admin</button>
+                </NavLink>
+            )
         }
     }
 
@@ -43,7 +55,7 @@ function MenuMobile() {
                 <FormatAlignLeftIcon />
                 Inscreva-se
             </NavLink>
-            <NavLink className="ItenMenu" onClick={handleClick} to="/login">{Login}</NavLink>
+            <RenderButton/>
         </MenuContainer>
         <ExternalContainer open={open} onClick={handleClickOutside} />
       </Container>

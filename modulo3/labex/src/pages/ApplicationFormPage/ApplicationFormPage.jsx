@@ -10,7 +10,7 @@ import BASE_URL from "../../constants/BASE_URL";
 import AgeVerification from "../../utils/AgeVerification";
 
 
-import { Container, ContainerForm } from "./style";
+import { Container, ContainerForm, Button } from "./style";
 
 
 import Alert from '@mui/material/Alert';
@@ -60,7 +60,7 @@ function ApplicationFormPage() {
         backgroundColor: "white",
         border: "1px solid white",
         borderRadius: "4px",
-        margin: "10px 50px",
+        margin: "10px 0",
     }
 
     const nameChange = (event) => {
@@ -114,7 +114,7 @@ function ApplicationFormPage() {
     return (
         loading ? <Loader /> :
             <Container>
-                <h1>Application Form Page</h1>
+                <h1>Formulário de inscrição</h1>
                 <ContainerForm onSubmit={sendForm}>
                     <TextField
                         required
@@ -154,8 +154,8 @@ function ApplicationFormPage() {
                                     </IconButton>
                                 }
                             >
-                                <AlertTitle> <strong>Usuario Menor de Idade.</strong></AlertTitle>
-                                Apenas usuarios maiores de idade podem se cadidatar a uma trip.
+                                <AlertTitle> <strong>Usuário Menor de Idade.</strong></AlertTitle>
+                                Apenas usuários maiores de idade podem se cadidatar a uma trip.
                             </Alert>
                         </Collapse>
                     </Box>
@@ -185,7 +185,7 @@ function ApplicationFormPage() {
                     />
 
 
-                    <Box >
+                    <Box  sx={{ width: '90%' }} >
                         <Collapse in={opentripVerification}>
                             <Alert
                                 severity="error"
@@ -217,7 +217,7 @@ function ApplicationFormPage() {
                             setTrip(newInputValue.value);
                         }}
                         sx={myStyles}
-                        renderInput={(params) => <TextField {...params} label="Escolha uma Viagem" />}
+                        renderInput={(params) => <TextField {...params} label="Escolha uma Viagem *" />}
                     />
 
 
@@ -247,7 +247,7 @@ function ApplicationFormPage() {
                         renderInput={(params) => (
                             <TextField
                                 {...params}
-                                label="Escolha um país"
+                                label="Escolha um país *"
                                 inputProps={{
                                     ...params.inputProps,
                                     autoComplete: 'new-input-no-auto-complete', // disable autocomplete and autofill
@@ -257,7 +257,7 @@ function ApplicationFormPage() {
                             />
                         )}
                     />
-                    <button type="submit">Enviar</button>
+                    <Button type="submit">Enviar</Button>
 
                 </ContainerForm>
             </Container>

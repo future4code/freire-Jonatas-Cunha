@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.main`
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -11,9 +12,9 @@ export const Container = styled.main`
     color: white;
     height: 344px;
     border-radius: 14px;
-    padding: 0px 10px;
-
-    margin: 0 20px;
+    padding: 0px 20px;
+    max-width: 880px;
+    margin: 80px auto;
 `
 
 export const BoxMens = styled.div`

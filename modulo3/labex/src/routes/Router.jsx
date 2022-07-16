@@ -1,30 +1,19 @@
 import HomePage from "../pages/HomePage/HomePage";
 import ListTripsPage from "../pages/ListTripsPage/ListTripsPage";
 import ApplicationFormPage from "../pages/ApplicationFormPage/ApplicationFormPage";
-import LoginPage from "../pages/LoginPage";
+import LoginPage from "../pages/LoginPage/LoginPage";
 import AdminHomePage from "../pages/AdminHomePage/AdminHomePage";
 import CreateTripPage from "../pages/CreateTripPage";
 import TripDetailsPage from "../pages/TripDetailsPage/TripDetailsPage";
 
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Header from "../components/Header/Header";
-import Footer from "../components/Footer/Footer";
 
 function Router() {
-
-    const myStyle = {
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        alignItems: "center",
-        minHeight: "100vh"
-    }
-
-
     return (
         <BrowserRouter >
-            <div style={myStyle}>
                 <Header />
+            <div>
                 <Routes>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/trips/list" element={<ListTripsPage />} />
@@ -37,7 +26,6 @@ function Router() {
                     <Route path='/404' element={<p>Page Not Found</p>} />
                     <Route path='*' element={<Navigate replace to="/404" />} />
                 </Routes>
-                <Footer />
             </div>
         </BrowserRouter>
     );

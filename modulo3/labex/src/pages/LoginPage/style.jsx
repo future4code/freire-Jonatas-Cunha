@@ -6,7 +6,7 @@ export const Container = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 0 auto;
+    margin: 80px auto;
 
     h1{
         color: #fff;
@@ -21,6 +21,8 @@ export const ContainerForm = styled.form`
     align-items: center;
     justify-content: center;
     text-align: center;
+
+
 
 `
 

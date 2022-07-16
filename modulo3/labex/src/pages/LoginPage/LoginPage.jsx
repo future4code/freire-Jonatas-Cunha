@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import BASE_URL from "../constants/BASE_URL";
+import BASE_URL from "../../constants/BASE_URL";
 
 import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
@@ -18,6 +18,10 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
 import TextField from '@mui/material/TextField';
 
+import { Container, ContainerForm, Button } from "./style";
+
+
+
 function LoginPage() {
 
     const navigate = useNavigate();
@@ -26,6 +30,8 @@ function LoginPage() {
     const [password, setpassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [open, setOpen] = useState(false);
+    const [openErrorEmail, setOpenErrorEmail] = useState(false);
+    const [openErrorPassword, setOpenErrorPassword] = useState(false);
 
     const changeEmail = (e) => {
         setEmail(e.target.value);
@@ -49,8 +55,15 @@ function LoginPage() {
 
 
     const login = (e) => {
-
         e.preventDefault();
+
+
+        if (email === '') {
+            return setOpenErrorEmail(true);
+        }
+        if (password === '') {
+            return setOpenErrorPassword(true);
+        }
 
         const body = {
             email: email,
@@ -78,7 +91,7 @@ function LoginPage() {
 
 
     const myStyles = {
-        width: "100%",
+        width: "90%",
         backgroundColor: "white",
         border: "1px solid white",
         borderRadius: "4px",
@@ -86,8 +99,8 @@ function LoginPage() {
     }
 
     return (
-        <div>
-
+        <Container>
+            <h1>Login</h1>
             <Box sx={{ width: '100%' }}>
                 <Collapse in={open}>
                     <Alert
@@ -112,7 +125,31 @@ function LoginPage() {
                 </Collapse>
             </Box>
 
-            <form onSubmit={login}>
+            <ContainerForm onSubmit={login}>
+
+                <Box sx={{ width: '100%' }}>
+                    <Collapse in={openErrorEmail}>
+                        <Alert
+                            severity="error"
+                            action={
+                                <IconButton
+                                    aria-label="close"
+                                    color="inherit"
+                                    size="small"
+                                    onClick={() => {
+                                        setOpenErrorEmail(false);
+                                    }}
+                                >
+                                    <CloseIcon fontSize="inherit" />
+                                </IconButton>
+                            }
+                            sx={{ mb: 2 }}
+                        >
+                            <AlertTitle> <strong>Error</strong></AlertTitle>
+                            Email Invalido.
+                        </Alert>
+                    </Collapse>
+                </Box>
 
                 <TextField sx={myStyles}
                     id="outlined-basic"
@@ -123,8 +160,32 @@ function LoginPage() {
                     onChange={changeEmail}
                 />
 
+                <Box sx={{ width: '100%' }}>
+                    <Collapse in={openErrorPassword}>
+                        <Alert
+                            severity="error"
+                            action={
+                                <IconButton
+                                    aria-label="close"
+                                    color="inherit"
+                                    size="small"
+                                    onClick={() => {
+                                        setOpenErrorPassword(false);
+                                    }}
+                                >
+                                    <CloseIcon fontSize="inherit" />
+                                </IconButton>
+                            }
+                            sx={{ mb: 2 }}
+                        >
+                            <AlertTitle> <strong>Error</strong></AlertTitle>
+                            Senha Invalida.
+                        </Alert>
+                    </Collapse>
+                </Box>
+
                 <FormControl sx={myStyles} variant="outlined">
-                    <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                    <InputLabel htmlFor="outlined-adornment-password">Senha</InputLabel>
                     <OutlinedInput
                         id="outlined-adornment-password"
                         type={showPassword ? 'text' : 'password'}
@@ -143,18 +204,18 @@ function LoginPage() {
                                 </IconButton>
                             </InputAdornment>
                         }
-                        label="Password"
+                        label="Senha"
                     />
                 </FormControl>
-                <button onClick={backPage}>Voltar</button>
-
-                <button type='submit'>LOGAR</button>
-
-            </form>
 
 
+                <Button type='submit'>LOGAR</Button>
 
-        </div>
+            </ContainerForm>
+
+
+
+        </Container>
     )
 }
 

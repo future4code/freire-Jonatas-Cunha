@@ -4,7 +4,7 @@ export const ContainerTrips = styled.main`
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 25px;
+    row-gap: 25px;
 
     max-width: 1280px;
     margin: 20px auto;
@@ -18,6 +18,7 @@ export const BoxTrip = styled.div`
     padding: 20px;
     margin: 0 20px;
     width: 300px;
+    min-width: 300px;
 
     display: flex;
     flex-direction: column;
@@ -57,5 +58,35 @@ export const BoxPlanet = styled.div`
     img {
         width: 32px;
     }
+
+`
+
+export const ContainerSearchBar = styled.div`
+    width: 90%;
+    display: flex;
+    align-items: center;
+    padding: 2px 5px;
+    margin: 23px auto 10px auto;
+    border-radius: 12px;
+
+    background: #fff;
+
+    input{
+        width: 100%;
+        border: none;
+    }
+
+    input:focus {
+        box-shadow: 0 0 0 0;
+        border: 0 none;
+        outline: 0;
+    } 
+
+    button {
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
 
 `
