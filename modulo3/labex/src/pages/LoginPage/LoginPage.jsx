@@ -9,6 +9,8 @@ import IconButton from '@mui/material/IconButton';
 import Collapse from '@mui/material/Collapse';
 import AlertTitle from '@mui/material/AlertTitle';
 import CloseIcon from '@mui/icons-material/Close';
+import { TiArrowBack } from "react-icons/ti";
+
 
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
@@ -18,7 +20,7 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
 import TextField from '@mui/material/TextField';
 
-import { Container, ContainerForm, Button } from "./style";
+import { Container, ContainerForm, Button, ContainerTitlePage, EmptyDiv } from "./style";
 
 
 
@@ -48,11 +50,6 @@ function LoginPage() {
     const handleMouseDownPassword = (e) => {
         e.preventDefault();
     };
-
-    const backPage = () => {
-        navigate(-1);
-    }
-
 
     const login = (e) => {
         e.preventDefault();
@@ -100,7 +97,11 @@ function LoginPage() {
 
     return (
         <Container>
-            <h1>Login</h1>
+            <ContainerTitlePage>
+                <TiArrowBack style={{ cursor: "pointer" }} color="#fff" size={40} onClick={() => navigate(-1)} />
+                <h1>Login</h1>
+                <EmptyDiv></EmptyDiv>
+            </ContainerTitlePage>
             <Box sx={{ width: '100%' }}>
                 <Collapse in={open}>
                     <Alert

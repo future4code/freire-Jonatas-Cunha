@@ -6,11 +6,25 @@ export const ContainerTrips = styled.div`
     justify-content: center;
     align-items: center;
 
-    max-width: 1280px;
-    margin: 0 20px;
+    max-width: 880px;
+    margin: 0 auto 20px auto;
     display: flex;
     flex-direction: column;
     gap: 20px;
+
+
+    button#createTrip {
+        width: 200px;
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        font-weight: bold;
+        text-transform: uppercase;
+        cursor: pointer;
+
+    }
+
+
 `
 
 export const BoxTrip = styled.div`
@@ -25,8 +39,8 @@ export const BoxTrip = styled.div`
     background-color: #0000006f;
     border-radius: 14px;
     padding: 0px 10px;
-    margin: 0px 214px;
-    width: 100%;
+    margin: 0px auto;
+    width: 90%;
 
     @media(max-width: 660px) {
         margin: 0px 80px;
@@ -58,34 +72,6 @@ export const BoxTrip = styled.div`
     h3 {
         width: 75%;
     }
-
-    
-   /* ::after, ::before {
-    position: absolute;
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    top: 0;
-    left: 0;
-    width: 70%;
-    height: 100%;
-    background: #000000;
-    z-index: 9999999;
-    border-radius: 14px;
-
-}
-
-::after{
-    ${props => props.delet && "content: 'Deletar';"}
-}
-
-::before {
-    ${props => props.settings && "content: 'Editar';"}
-} */
-
-
-
 `
 export const BoxButtons = styled.div`
     position: relative;
@@ -95,6 +81,23 @@ export const BoxButtons = styled.div`
         background: none;
         border: none;
         cursor: pointer;
+    }
+
+`
+
+export const ContainerTitlePage = styled.div`
+    width: 90%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+
+    color: #fff;
+    text-align: center;
+
+    h1 {
+        margin-bottom: 5px;
     }
 
 `

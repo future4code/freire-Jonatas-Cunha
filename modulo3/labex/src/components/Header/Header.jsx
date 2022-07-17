@@ -32,6 +32,7 @@ function Header() {
         currentPage !== "/" && navigate("/");
     }
 
+    
     return (
         <ScreenHeaAndFoo>
             <ContainerWidth>

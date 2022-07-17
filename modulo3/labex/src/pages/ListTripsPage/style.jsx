@@ -71,6 +71,10 @@ export const ContainerSearchBar = styled.div`
 
     background: #fff;
 
+    form{
+        width: 100%;
+    }
+
     input{
         width: 100%;
         border: none;
@@ -85,7 +89,10 @@ export const ContainerSearchBar = styled.div`
     button {
         background: none;
         border: none;
-        cursor: pointer;
+        margin: 0;
+        padding: 0;
+        height: 31px;
+        width: 36px;
     }
 
 

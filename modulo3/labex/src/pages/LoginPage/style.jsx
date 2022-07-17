@@ -43,3 +43,16 @@ export const Button = styled.button`
     }
 
 `
+
+export const ContainerTitlePage = styled.div`
+    width: 90%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto;
+`
+
+export const EmptyDiv = styled.div`
+    width: 40px;
+`

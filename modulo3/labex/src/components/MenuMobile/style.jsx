@@ -42,15 +42,20 @@ export const MenuIcon = styled.div`
 
 `
 
+export const BoxMenuMobile = styled.div`
+    padding: 20px 0;
+    cursor: pointer;
+`
+
 
 export const MenuContainer = styled.div`
     display: ${props => props.open ? "flex" : "none"};
     position: absolute;
     top: 84px;
     left: 0;
-    height: 85%;
+    height: 100%;
     width: 260px;
-    background-color: #fff;
+    background-color: #3f3f3f;
     z-index: 100000;
 
     flex-direction: column;
@@ -64,8 +69,21 @@ export const MenuContainer = styled.div`
         gap: 5px;
         margin: 5px 0 0 0;
         padding: 5px;
+        color: white;
+        text-decoration: none;
     }
 
+    #inicio{
+        color: ${props => props.currentPage === "/" ? "#ff0000" : "#fff"};
+    }
+
+    #viagem{
+        color: ${props => props.currentPage === "/trips/list" ? "#ff0000" : "#fff"};
+    }
+
+    #inscreva{
+        color: ${props => props.currentPage.slice(0, 18) === "/trips/application" ? "#ff0000" : "#fff"};
+    }
 
 
 `
@@ -75,8 +93,27 @@ export const ExternalContainer = styled.div`
     position: absolute;
     top: 84px;
     left: 0;
-    height: 90vh;
+    height: 100%;
     width: 100%;
     background-color: rgb(0 0 0 / 51%);
     z-index: 999;
+`
+
+export const BoxButton = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    button {
+        width: 125px;
+        padding: 8px 0;
+        border-radius: 5px;
+        border: none;
+        text-transform: uppercase;
+        font-weight: bold;
+        margin-top: 25px;
+        cursor: pointer;
+    }
+
 `

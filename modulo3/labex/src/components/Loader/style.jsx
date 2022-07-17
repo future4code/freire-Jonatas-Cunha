@@ -5,7 +5,7 @@ export const LoaderContainer = styled.span`
     width: 32px;
     height: 90px;
     display: block;
-    margin: 20px auto;
+    margin: 100px auto;
     position: relative;
     border-radius: 50% 50% 0 0;
     border-bottom: 10px solid #FF3D00;
@@ -74,4 +74,11 @@ export const LoaderContainer = styled.span`
         }
     }
 
+`
+
+export const  P = styled.p`
+    color: #ff0000;
+    text-align: center;
+    font-weight: 500;
+    font-size: 2rem;
 `

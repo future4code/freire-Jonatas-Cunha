@@ -8,9 +8,12 @@ import { Loader } from "../../components/Loader/Loader"
 import axios from "axios";
 import BASE_URL from "../../constants/BASE_URL";
 import AgeVerification from "../../utils/AgeVerification";
+import { useParams } from "react-router-dom";
+import { TiArrowBack } from "react-icons/ti";
+import { useNavigate } from "react-router-dom";
 
 
-import { Container, ContainerForm, Button } from "./style";
+import { Container, ContainerForm, Button, ContainerTitlePage, EmptyDiv } from "./style";
 
 
 import Alert from '@mui/material/Alert';
@@ -32,16 +35,28 @@ function ApplicationFormPage() {
     const [trip, setTrip] = useState("");
     const [country, setCountry] = useState("");
 
+    const { id } = useParams();
+    const [validId, setValidId] = useState(false);
+
+
     const [openAgeVerification, setOpenAgeVerification] = useState(false);
     const [opentripVerification, setOpenTripVerification] = useState(false);
-
 
     const contriesList = ListOfCountries().countries;
     const [trips, loading] = useRequestList();
 
-
+    const navigate = useNavigate();
 
     useEffect(() => {
+
+        const realID = () => {
+            trips.filter(trip => {
+                return (trip.id === id) && (setValidId(true), setTrip(trip.id));
+            })
+        }
+
+        realID()
+
         const tripOptions = () => {
             const list = []
             trips.forEach((trip) => {
@@ -53,7 +68,7 @@ function ApplicationFormPage() {
             return list;
         }
         setTripsList(tripOptions());
-    }, [trips]);
+    }, [trips, id]);
 
     const myStyles = {
         width: "90%",
@@ -86,9 +101,12 @@ function ApplicationFormPage() {
             return setOpenAgeVerification(true);
         }
 
-        if (!trip) {
-            return setOpenTripVerification(true);
+        if (!id) {
+            if (!trip) {
+                return setOpenTripVerification(true);
+            }
         }
+
 
 
         const body = {
@@ -114,7 +132,11 @@ function ApplicationFormPage() {
     return (
         loading ? <Loader /> :
             <Container>
-                <h1>Formulário de inscrição</h1>
+                <ContainerTitlePage>
+                    <TiArrowBack style={{ cursor: "pointer" }} color="#fff" size={40} onClick={() => navigate(-1)} />
+                    <h1>Formulário de inscrição</h1>
+                    <EmptyDiv></EmptyDiv>
+                </ContainerTitlePage>
                 <ContainerForm onSubmit={sendForm}>
                     <TextField
                         required
@@ -184,43 +206,44 @@ function ApplicationFormPage() {
                         sx={myStyles}
                     />
 
-
-                    <Box  sx={{ width: '90%' }} >
-                        <Collapse in={opentripVerification}>
-                            <Alert
-                                severity="error"
-                                action={
-                                    <IconButton
-                                        aria-label="close"
-                                        color="inherit"
-                                        size="small"
-                                        onClick={() => {
-                                            setOpenTripVerification(false);
-                                        }}
+                    {!validId &&
+                        <>
+                            <Box sx={{ width: '90%' }} >
+                                <Collapse in={opentripVerification}>
+                                    <Alert
+                                        severity="error"
+                                        action={
+                                            <IconButton
+                                                aria-label="close"
+                                                color="inherit"
+                                                size="small"
+                                                onClick={() => {
+                                                    setOpenTripVerification(false);
+                                                }}
+                                            >
+                                                <CloseIcon fontSize="inherit" />
+                                            </IconButton>
+                                        }
                                     >
-                                        <CloseIcon fontSize="inherit" />
-                                    </IconButton>
-                                }
-                            >
-                                <AlertTitle> <strong>Selecione uma viagem.</strong></AlertTitle>
-                                É nescessario selecionar uma viagem para prosseguir.
-                            </Alert>
-                        </Collapse>
-                    </Box>
+                                        <AlertTitle> <strong>Selecione uma viagem.</strong></AlertTitle>
+                                        É nescessario selecionar uma viagem para prosseguir.
+                                    </Alert>
+                                </Collapse>
+                            </Box>
 
-                    <Autocomplete
-                        required
-                        id="combo-box-demo AutocompleteOffChromeTrip"
-                        variant="outlined"
-                        options={tripsList}
-                        onChange={(event, newInputValue) => {
-                            setTrip(newInputValue.value);
-                        }}
-                        sx={myStyles}
-                        renderInput={(params) => <TextField {...params} label="Escolha uma Viagem *" />}
-                    />
-
-
+                            <Autocomplete
+                                required
+                                id="combo-box-demo AutocompleteOffChromeTrip"
+                                variant="outlined"
+                                options={tripsList}
+                                onChange={(event, newInputValue) => {
+                                    setTrip(newInputValue.value);
+                                }}
+                                sx={myStyles}
+                                renderInput={(params) => <TextField {...params} label="Escolha uma Viagem *" />}
+                            />
+                        </>
+                    }
                     <Autocomplete
                         required
                         onInputChange={(event, newInputValue) => {

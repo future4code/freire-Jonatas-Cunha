@@ -1,23 +1,32 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import BASE_URL from "../../constants/BASE_URL";
 import { Loader } from "../../components/Loader/Loader";
 import { useNavigate, useParams } from "react-router-dom";
 import { useProtectedPage } from "../../hooks/useProtectedPage";
+import { TiArrowBack } from "react-icons/ti";
+import  ImgPlanets  from "../../utils/ImgPlanets";
+
 
 import {
     Screen,
     TripDetails,
     BoxDetails,
-    Details,
     ContainerCandidates,
     ContainerApproveds,
+    Details,
     BoxCandidates,
     BoxApproveds,
+    ContainerTitlePage,
+    EmptyDiv
 } from "./style";
 
 
 function TripDetailsPage() {
+
+    useProtectedPage();
+
+
     const [trip, setTrip] = useState({});
     const [candidates, setCandidates] = useState([]);
     const [approved, setApproved] = useState([]);
@@ -25,9 +34,8 @@ function TripDetailsPage() {
     const [error, setError] = useState(false);
     const navigate = useNavigate();
     const { id } = useParams();
-    useProtectedPage();
 
-    const getTripDetails = () => {
+    const getTripDetails = useCallback(() => {
         axios.get(`${BASE_URL}/trip/${id}`, {
             headers: {
                 auth: localStorage.getItem("token")
@@ -40,19 +48,23 @@ function TripDetailsPage() {
             setLoading(false);
         }).catch(err => {
             alert("Erro ao carregar viagem");
+            setError(true);
             setLoading(true);
         })
-    }
+    }, [id]);
 
     const TakeTripDetails = () => {
         return (
-            <div>
+            <Details>
                 <h2>{trip.name}</h2>
-                <p>{trip.description}</p>
                 <p>{trip.planet}</p>
-                <p>{trip.durationInDays}</p>
-                <p>{trip.date}</p>
-            </div>
+                <ImgPlanets planet={trip.planet} />
+                <p id="date">&#128197;{trip.date}</p>
+                <p>{trip.description}</p>
+                <p><strong>Duração:</strong> {trip.durationInDays} Dias</p>
+
+                
+            </Details>
         )
     }
 
@@ -60,28 +72,31 @@ function TripDetailsPage() {
         return (
             <details>
                 <summary>Solicitação {i + 1} {candidate.name}</summary>
-            <BoxDetails key={candidate.id} styly={{ background: "white" }} >
-                <p><b>Nome:</b> {candidate.name}</p>
-                <p><b>Profissão:</b> {candidate.profession}</p>
-                <p><b>Idade:</b> {candidate.age}</p>
-                <p><b>Texto da candidatura:</b> {candidate.applicationText}</p>
-                <div>
-                    <button onClick={() => approveCandidate(candidate.id, true)}>APROVAR</button>
-                    <button onClick={() => approveCandidate(candidate.id, false)}>REPROVAR</button>
-                </div>
-            </BoxDetails>
+                <BoxDetails key={candidate.id} styly={{ background: "white" }} >
+                    <p><b>Nome:</b> {candidate.name}</p>
+                    <p><b>Profissão:</b> {candidate.profession}</p>
+                    <p><b>Idade:</b> {candidate.age}</p>
+                    <p><b>Texto da candidatura:</b> {candidate.applicationText}</p>
+                    <div>
+                        <button onClick={() => approveCandidate(candidate.id, true)}>APROVAR</button>
+                        <button onClick={() => approveCandidate(candidate.id, false)}>REPROVAR</button>
+                    </div>
+                </BoxDetails>
             </details>
         )
     })
 
-    const takeTripApproveds = approved.map((candidate) => {
+    const takeTripApproveds = approved.map((candidate, i) => {
         return (
+            <details>
+                <summary>Aprovado {i + 1} {candidate.name}</summary>
             <BoxDetails key={candidate.id} >
                 <p><b>Nome:</b> {candidate.name}</p>
                 <p><b>Profissão:</b> {candidate.profession}</p>
                 <p><b>Idade:</b> {candidate.age}</p>
                 {/* <p><b>Texto da candidatura:</b> {candidate.applicationText}</p> */}
             </BoxDetails>
+            </details>
         )
     })
 
@@ -102,45 +117,50 @@ function TripDetailsPage() {
         })
     }
 
-    const backPage = () => {
-        navigate(-1)
-    }
-
 
     useEffect(() => {
         getTripDetails();
-    }, []);
+    }, [getTripDetails]);
 
 
     return (
         <Screen>
-            <h1>Trip Details Page</h1>
+            <ContainerTitlePage>
+                <TiArrowBack style={{ cursor: "pointer" }} color="#fff" size={40} onClick={() => navigate(-1)} />
+                <h1>Trip Details Page</h1>
+                <EmptyDiv></EmptyDiv>
+            </ContainerTitlePage>
             {loading ? <Loader /> : (
                 error ? <p>Erro ao carregar viagem</p> : (
                     <TripDetails>
+                        <BoxDetails>
+
                         <TakeTripDetails />
-                            <h3>Lista de Candidatos</h3>
-                            <ContainerCandidates>
-                                <BoxCandidates>
-                                    {candidates.length > 0 ? takeTripCandidates
-                                        : (
-                                            <p>Não há candidatos para essa viagem</p>
-                                        )}
-                                </BoxCandidates>
-                            </ContainerCandidates>
-                            <h3>Lista de Aprovados</h3>
-                            <ContainerApproveds>
-                                <BoxApproveds>
-                                    {approved.length > 0 ? takeTripApproveds
-                                        : (
-                                            <p>Não há candidatos aprovados para essa viagem</p>
-                                        )}
-                                </BoxApproveds>
-                            </ContainerApproveds>
+
+                        <h3>Lista de Candidatos</h3>
+                        <ContainerCandidates>
+                            <BoxCandidates>
+                                {candidates.length > 0 ? takeTripCandidates
+                                    : (
+                                        <p>Não há candidatos para essa viagem</p>
+                                    )}
+                            </BoxCandidates>
+                        </ContainerCandidates>
+                        </BoxDetails>
+                        <BoxDetails>
+                        <h3>Lista de Aprovados</h3>
+                        <ContainerApproveds>
+                            <BoxApproveds>
+                                {approved.length > 0 ? takeTripApproveds
+                                    : (
+                                        <p>Não há candidatos aprovados para essa viagem</p>
+                                    )}
+                            </BoxApproveds>
+                        </ContainerApproveds>
+                        </BoxDetails>
                     </TripDetails>
                 )
             )}
-            <button onClick={backPage} >Voltar</button>
         </Screen>
     )
 }

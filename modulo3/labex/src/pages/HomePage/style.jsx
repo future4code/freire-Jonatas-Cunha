@@ -13,7 +13,8 @@ export const Container = styled.main`
     height: 344px;
     border-radius: 14px;
     padding: 0px 20px;
-    max-width: 880px;
+    max-width: 812px;
+    box-sizing: border-box;
     margin: 80px auto;
 `
 

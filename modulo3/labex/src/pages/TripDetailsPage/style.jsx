@@ -1,11 +1,8 @@
 import styled from 'styled-components';
 
 export const Screen = styled.main`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 1280px;
-    margin: 0 20px;
+    max-width: 880px;
+    margin: 0 auto 20px auto;
 `
 
 
@@ -17,18 +14,30 @@ export const TripDetails = styled.div`
     padding: 0px 10px;
     display: flex;
     flex-direction: column;
-    width: 100%;
-    margin: 0 50px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 90%;
+    margin: 0 auto;
 `
 
 export const BoxDetails = styled.div`
-    /* max-width: 230px; */
+    width: 90%;
 
 `
 
-export const Details = styled.details`
-    width: 230px;
-    overflow: auto;
+export const Details = styled.div`
+    max-width: 480px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 0 auto;
+
+   #date{
+    font-size: 12px;
+    color: #868383;
+   }
 
 `
 
@@ -48,4 +57,20 @@ export const BoxCandidates = styled.div`
 
 export const BoxApproveds = styled.div`
 
+`
+
+export const ContainerTitlePage = styled.div`
+    width: 90%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto;
+
+    color: #fff ;
+
+`
+
+export const EmptyDiv = styled.div`
+    width: 40px;
 `

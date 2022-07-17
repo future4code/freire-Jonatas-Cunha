@@ -64,7 +64,7 @@ export const BoxNavDesktop = styled.nav`
     }
 
     #inscreva{
-        color: ${props => props.currentPage === "/trips/application" ? "#ff0000" : "#fff"};
+        color: ${props => props.currentPage.slice(0, 18) === "/trips/application" ? "#ff0000" : "#fff"};
     }
 
     @media (max-width: 611px) {

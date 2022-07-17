@@ -4,7 +4,7 @@ import { useProtectedPage } from "../../hooks/useProtectedPage";
 import { useNavigate, NavLink } from "react-router-dom";
 import BASE_URL from "../../constants/BASE_URL";
 import { Loader } from "../../components/Loader/Loader";
-import { ContainerTrips, BoxTrip, BoxButtons } from "./style";
+import { ContainerTrips, BoxTrip, BoxButtons, ContainerTitlePage } from "./style";
 import { IoMdSettings } from "react-icons/io";
 import { MdDelete } from "react-icons/md";
 
@@ -101,8 +101,10 @@ function AdminHomePage() {
 
     return (
         <ContainerTrips>
-            <h1>Admin Home Page</h1>
-            <NavLink to="/admin/trips/create"><button>Criar Nova Viagem</button></NavLink>
+            <ContainerTitlePage>
+                <h1>Admin Home Page</h1>
+            </ContainerTitlePage>
+            <NavLink to="/admin/trips/create"><button id="createTrip">Criar Nova Viagem</button></NavLink>
             {loading ? <Loader /> : (error ? <p>ERROR</p> : mapTrips)}
         </ContainerTrips>
     )
