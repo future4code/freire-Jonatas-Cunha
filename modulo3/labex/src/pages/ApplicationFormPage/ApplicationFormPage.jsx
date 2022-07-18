@@ -12,6 +12,8 @@ import { useParams } from "react-router-dom";
 import { TiArrowBack } from "react-icons/ti";
 import { useNavigate } from "react-router-dom";
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { Container, ContainerForm, Button, ContainerTitlePage, EmptyDiv } from "./style";
 
@@ -119,9 +121,26 @@ function ApplicationFormPage() {
 
         axios.post(`${BASE_URL}/trips/${trip}/apply`, body).then((res) => {
             setName(""); setProfession(""); setAge(""); setTextCandidacy(""); setCountry(""); setTrip("");
-            alert("Solicitação enviada com sucesso!")
+
+            toast.success('Solicitação enviada com sucesso!', {
+                position: "top-center",
+                autoClose: 2500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });
         }).catch((error) => {
-            alert("Solicitação não enviada, por gentileza, verificar todos os campos e tentar novamente", error.response)
+            toast.error('Solicitação não enviada, por gentileza, verificar todos os campos e tentar novamente!', {
+                position: "top-center",
+                autoClose: 2500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });
         })
     }
 
@@ -137,6 +156,7 @@ function ApplicationFormPage() {
                     <h1>Formulário de inscrição</h1>
                     <EmptyDiv></EmptyDiv>
                 </ContainerTitlePage>
+                <ToastContainer />
                 <ContainerForm onSubmit={sendForm}>
                     <TextField
                         required

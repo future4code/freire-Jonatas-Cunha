@@ -3,7 +3,7 @@ import ListTripsPage from "../pages/ListTripsPage/ListTripsPage";
 import ApplicationFormPage from "../pages/ApplicationFormPage/ApplicationFormPage";
 import LoginPage from "../pages/LoginPage/LoginPage";
 import AdminHomePage from "../pages/AdminHomePage/AdminHomePage";
-import CreateTripPage from "../pages/CreateTripPage";
+import CreateTripPage from "../pages/CreateTripPage/CreateTripPage";
 import TripDetailsPage from "../pages/TripDetailsPage/TripDetailsPage";
 
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";

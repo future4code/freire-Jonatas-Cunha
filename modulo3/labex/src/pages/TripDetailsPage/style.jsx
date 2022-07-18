@@ -6,12 +6,12 @@ export const Screen = styled.main`
 `
 
 
-export const TripDetails = styled.div`
+export const ContainerTripDetails = styled.div`
     box-shadow: 0px 0px 15px 0px rgb(255 255 255 / 30%);
     background: #0000006f;
     color: white;
     border-radius: 14px;
-    padding: 0px 10px;
+    padding: 8px 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -21,12 +21,7 @@ export const TripDetails = styled.div`
     margin: 0 auto;
 `
 
-export const BoxDetails = styled.div`
-    width: 90%;
-
-`
-
-export const Details = styled.div`
+export const TripDetails = styled.div`
     max-width: 480px;
     display: flex;
     flex-direction: column;
@@ -34,28 +29,87 @@ export const Details = styled.div`
     text-align: center;
     margin: 0 auto;
 
-   #date{
-    font-size: 12px;
-    color: #868383;
-   }
+    #date{
+        font-size: 12px;
+        color: #d2d2d2;
+    }
+
+    #name {
+        margin: 0px 0 10px 0;
+    }
+
+    #planet, #description, #duration {
+        margin: 4px 0;
+    }
 
 `
 
 export const ContainerCandidates = styled.div`
-    height: 240px;
-    overflow: auto;
+    background-color: #2b2929;
+    width: 90%;
+    padding: 10px 10px;
+    margin: 10px auto;
+    border-radius: 8px;
+
+    p{
+        margin: 0 0 5px 0;
+    }
+
+    button{
+        width: 125px;
+        padding: 8px 0;
+        border-radius: 5px;
+        border: none;
+        text-transform: uppercase;
+        font-weight: bold;
+        cursor: pointer;
+        margin: 5px;
+    }
+
+    #approve:hover{
+        background: #bbf7b7;
+    }
+
+    #recuse:hover{
+        background: #f7b7b7;
+    }
+
 `
 
 export const ContainerApproveds = styled.div`
-    height: 240px;
-    overflow: auto;
+    display: flex;
+    justify-content: space-between;
+    background-color: #2b2929;
+    width: 90%;
+    text-align: start;
+    padding: 0 10px;
+    margin: 10px auto;
+    border-radius: 8px;
+
+    :hover {
+        transform: scale(1.05)
+    }
+
 `
 
-export const BoxCandidates = styled.div`
-
+export const BoxCandidates = styled.details`
+    width: 90%;
+    background-color: #000;
+    border-radius: 14px;
+    padding: 20px 0;
+    margin: 10px auto;
+    border: 1px solid #ffffff4a;
+    cursor: pointer;
 `
 
-export const BoxApproveds = styled.div`
+export const BoxApproveds = styled.details`
+    width: 90%;
+    background-color: #000;
+    border-radius: 14px;
+    padding: 20px 0;
+    margin: 10px auto;
+    border: 1px solid #ffffff4a;
+    cursor: pointer;
 
 `
 

@@ -22,7 +22,7 @@ function Header() {
         } else {
             return (
                 <NavLink to="/login">
-                    <button>Area Admin</button>
+                    <button>Área Admin</button>
                 </NavLink>
             )
         }

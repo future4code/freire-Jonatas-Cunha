@@ -40,7 +40,7 @@ function MenuMobile() {
         } else {
             return (
                 <NavLink to="/login" onClick={handleClick}>
-                    <button>Area Admin</button>
+                    <button>Área Admin</button>
                 </NavLink>
             )
         }
@@ -51,6 +51,8 @@ function MenuMobile() {
             <BoxMenuMobile onClick={handleClick}>
             <MenuIcon open={open} />
             </BoxMenuMobile>
+
+        {open && (
             <MenuContainer open={open} currentPage={currentPage}>
                 <NavLink className="ItenMenu" id="inicio" onClick={handleClick} to="/">
                     <HomeIcon />
@@ -68,6 +70,9 @@ function MenuMobile() {
                     <RenderButton />
                 </BoxButton>
             </MenuContainer>
+        )}
+
+
             <ExternalContainer open={open} onClick={handleClick} />
         </Container>
     );

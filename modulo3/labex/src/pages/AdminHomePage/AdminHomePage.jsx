@@ -8,6 +8,8 @@ import { ContainerTrips, BoxTrip, BoxButtons, ContainerTitlePage } from "./style
 import { IoMdSettings } from "react-icons/io";
 import { MdDelete } from "react-icons/md";
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function AdminHomePage() {
 
@@ -19,11 +21,8 @@ function AdminHomePage() {
     const [settings, setSettings] = useState(0);
     const [delet, setDelet] = useState(0);
 
-
     const navigate = useNavigate();
 
-
-    // PEGAR LISTA DE TRIPS
     const getTrips = () => {
         axios.get(`${BASE_URL}/trips`).then(res => {
             setTrips(res.data.trips);
@@ -34,8 +33,6 @@ function AdminHomePage() {
         })
     }
 
-
-    // DELETA TRIP
     const deleteTrip = (id) => {
 
         const token = localStorage.getItem("token");
@@ -47,15 +44,29 @@ function AdminHomePage() {
                 }
             })
                 .then((res) => {
-                    alert("Viagem deletada com sucesso!");
+                    toast.success('Viagem deletada com sucesso!', {
+                        position: "top-center",
+                        autoClose: 2500,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
                     getTrips();
                 }).catch((error) => {
-                    alert("Erro ao deletar viagem", error.response);
+                    toast.error('Erro ao deletar viagem!', {
+                        position: "top-center",
+                        autoClose: 2500,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
                 })
         }
     }
-
-    // MAPEAR TRIPS
     const mapTrips = trips.map((trip) => {
         return (
             <BoxTrip idName={trip.id} settings={settings} delet={delet} key={trip.id} id="trip">
@@ -97,12 +108,13 @@ function AdminHomePage() {
     // CARREGAR TRIPS
     useEffect(() => {
         getTrips();
-    }, [trips]);
+    }, []);
 
     return (
         <ContainerTrips>
+             <ToastContainer />
             <ContainerTitlePage>
-                <h1>Admin Home Page</h1>
+                <h1>Painel Administrador</h1>
             </ContainerTitlePage>
             <NavLink to="/admin/trips/create"><button id="createTrip">Criar Nova Viagem</button></NavLink>
             {loading ? <Loader /> : (error ? <p>ERROR</p> : mapTrips)}
