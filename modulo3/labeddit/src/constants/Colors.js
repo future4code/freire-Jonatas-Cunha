@@ -9,4 +9,6 @@ export const SecondaryTextColor = "#323941";
 export const TertiaryTextColor = "#FE7E02";
 export const quarternaryTextColor = "#4088CB";
 
+export const backButtonColor = "#A3A3A3";
+
 export const PrimaryGradient = "linear-gradient(to right, #FF6489, #F9B24E)";

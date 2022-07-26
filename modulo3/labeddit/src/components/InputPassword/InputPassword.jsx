@@ -31,6 +31,7 @@ function InputPassword(props) {
       id="outlined-adornment-password"
       type={showPassword ? "text" : "password"}
       value={props.password}
+      minLength={7}
       required
       onChange={(e) => props.setPassword(e.target.value)}
       autoComplete="current-password"

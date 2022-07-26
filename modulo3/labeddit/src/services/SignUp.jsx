@@ -1,29 +1,31 @@
 import axios from "axios";
+
 import { BASE_URL } from "../constants/BASE_URL";
 import { EmailChecker } from "../utils/EmailChecker";
 import { PasswordChecker } from "../utils/PasswordChecker";
 
-function Login(
+function SignUp(
   email,
   password,
+  username,
   setError,
   setLogged,
   remember,
   setInvalidEmail,
   setInvalidPassword,
-  setLoading,
 ) {
-  const emailError = EmailChecker(email, setInvalidEmail, setLoading);
-  const passwordError = PasswordChecker(password, setInvalidPassword, setLoading);
+  const emailError = EmailChecker(email, setInvalidEmail);
+  const passwordError = PasswordChecker(password, setInvalidPassword);
 
   const body = {
+    username: username,
     email: email,
     password: password,
   };
 
-  if (!emailError && !passwordError) {
+  if (!emailError && !passwordError && !confirmPasswordError) {
     axios
-      .post(`${BASE_URL}/users/login`, body)
+      .post(`${BASE_URL}/users/signup`, body)
       .then((response) => {
         if (remember) {
           localStorage.setItem("token", response.data.token);
@@ -32,14 +34,10 @@ function Login(
         }
         setError(false);
         setLogged(true);
-        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
         setError(true);
-        setLoading(false);
       });
   }
 }
-
-export default Login;

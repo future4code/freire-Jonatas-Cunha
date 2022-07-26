@@ -5,6 +5,8 @@ function InputEmail(props) {
     <TextField
       fullWidth
       id="outlined-basic"
+      name="email"
+      autoComplete="email"
       type="email"
       label="Email"
       variant="outlined"

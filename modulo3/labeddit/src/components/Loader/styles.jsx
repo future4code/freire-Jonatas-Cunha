@@ -1,0 +1,36 @@
+import styled from "styled-components";
+import LoaderLogo from "../../assets/img/LoaderLogo.gif";
+import { SecondaryTextColor } from "../../constants/Colors";
+
+export const Grayout = styled.div`
+    display: ${props => props.display ? "flex" : "none"};
+    z-index: 99999;
+    position: fixed;
+    top: 0;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    background-color: #7979797e;
+    backdrop-filter: blur(0.5em);
+
+    h1 {
+        position: relative;
+        top: -5px;
+        color: ${SecondaryTextColor};
+    }
+
+`
+
+export const Box = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    height: 50%;
+    border-radius: 0.5em;
+    background: url(${LoaderLogo}) no-repeat center;
+    background-size: contain;
+`
