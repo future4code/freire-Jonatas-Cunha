@@ -4,7 +4,6 @@ export const UserNameChecker = (username, setInvalidUsername, setLoading) => {
         setInvalidUsername(true)
         return true;
     } else {
-        setLoading(0);
         setInvalidUsername(false)
         return false;
     }

@@ -9,21 +9,13 @@ import Checkbox from "@mui/material/Checkbox";
 import { ButtonSign, BoxErros } from "../../assets/style/GlobalStyles";
 import SignUp from "../../services/SignUp";
 
-import {
-  ContainerPrimary,
-  Main,
-  Container,
-  BoxInputs,
-  BoxContracts,
-  BoxButtons,
-} from "./styles";
-
-
 import ErrorEmail from "../../components/ErrorEmail/ErrorEmail";
-// import ErrorUsername from "../../components/ErrorUsername/ErrorUsername";
 import ErrorPassword from "../../components/ErrorPassword/ErrorPassword";
 import ErrorSignUp from "../../components/ErrorSignUp/ErrorSignUp";
 import Loader from "../../components/Loader/Loader";
+
+import { ContainerPrimary, Main, Container, BoxInputs, BoxContracts, BoxButtons } from "./styles";
+
 
 function SignUpPage() {
   const [email, setEmail] = useState("");
@@ -61,6 +53,7 @@ function SignUpPage() {
   return (
     <>
     <Loader display={loading}/>
+
     <ContainerPrimary>
       <Header />
       <Main>

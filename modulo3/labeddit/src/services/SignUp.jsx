@@ -17,11 +17,7 @@ function SignUp(
 ) {
   const userNameError = UserNameChecker(username, setInvalidUsername, setLoading);
   const emailError = EmailChecker(email, setInvalidEmail, setLoading);
-  const passwordError = PasswordChecker(
-    password,
-    setInvalidPassword,
-    setLoading
-  );
+  const passwordError = PasswordChecker(password, setInvalidPassword, setLoading);
 
   const body = {
     username: username,
