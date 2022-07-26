@@ -6,83 +6,100 @@ import InputUsername from "../../components/InputUsername/InputUsername";
 import InputEmail from "../../components/InputEmail/InputEmail";
 import InputPassword from "../../components/InputPassword/InputPassword";
 import Checkbox from "@mui/material/Checkbox";
-import { ButtonSign } from "../../assets/style/GlobalStyles";
+import { ButtonSign, BoxErros } from "../../assets/style/GlobalStyles";
+import SignUp from "../../services/SignUp";
 
-import {ContainerPrimary, Main, Container, BoxInputs, BoxContracts, BoxButtons } from "./styles";
+import {
+  ContainerPrimary,
+  Main,
+  Container,
+  BoxInputs,
+  BoxContracts,
+  BoxButtons,
+} from "./styles";
+
 
 import ErrorEmail from "../../components/ErrorEmail/ErrorEmail";
 // import ErrorUsername from "../../components/ErrorUsername/ErrorUsername";
 import ErrorPassword from "../../components/ErrorPassword/ErrorPassword";
 import ErrorSignUp from "../../components/ErrorSignUp/ErrorSignUp";
+import Loader from "../../components/Loader/Loader";
 
 function SignUpPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
   const [error, setError] = useState(false);
   const [invalidEmail, setInvalidEmail] = useState(false);
   const [invalidPassword, setInvalidPassword] = useState(false);
+  const [invalidUsername, setInvalidUsername] = useState(false);
   const [logged, setLogged] = useState(false);
-  const [remember, setRemember] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(0);
 
   const navigate = useNavigate();
 
-  const signUpP = (e) => {
+  const signUp = (e) => {
     e.preventDefault();
-    setLoading(true);
-    // Login(
-    //   email,
-    //   password,
-    //   setError,
-    //   setLogged,
-    //   remember,
-    //   setInvalidEmail,
-    //   setInvalidPassword,
-    //   setLoading
-    // );
+    setLoading(1);
+    SignUp(
+      email,
+      password,
+      username,
+      setError,
+      setLogged,
+      setInvalidEmail,
+      setInvalidPassword,
+      setInvalidUsername,
+      setLoading
+    );
   };
 
   useEffect(() => {
     logged && navigate("/", { replace: true });
   }, [logged, navigate]);
 
-
-
-
   return (
+    <>
+    <Loader display={loading}/>
     <ContainerPrimary>
       <Header />
       <Main>
         <Container>
+          <h1>Olá, boas vindas ao LabEddit ;) </h1>
 
-        <h1>Olá, boas vindas ao LabEddit ;) </h1>
+          <form onSubmit={signUp}>
+            <BoxErros>
+              <ErrorSignUp errorMessage={"Nome muito curto"} open={invalidUsername} setOpen={setInvalidUsername} />
+              <ErrorSignUp errorMessage={error} open={error} setOpen={setError} />
+              <ErrorEmail open={invalidEmail} setOpen={setInvalidEmail} />
+              <ErrorPassword open={invalidPassword} setOpen={setInvalidPassword} />
+            </BoxErros>
+            <BoxInputs>
+              <InputUsername username={username} setUsername={setUsername} />
+              <InputEmail email={email} setEmail={setEmail} />
+              <InputPassword password={password} setPassword={setPassword} />
+            </BoxInputs>
 
-        <form>
-          <BoxInputs>
-            <InputUsername />
-            <InputEmail />
-            <InputPassword />
-          </BoxInputs>
+            <BoxContracts>
+              <p>
+                Ao continuar, você concorda com o nosso
+                <span> Contrato de usuário</span> e nossa
+                <span> Política de Privacidade</span>
+              </p>
+              <div id="CheckboxFeed">
+                <Checkbox sx={{ padding: "0" }} id="remember" />
+                Eu concordo em receber emails sobre coisas legais no Labeddit
+              </div>
+            </BoxContracts>
 
-          <BoxContracts>
-            <p>
-              Ao continuar, você concorda com o nosso 
-              <span> Contrato de usuário</span> e nossa
-              <span> Política de Privacidade</span>
-            </p>
-            <div id="CheckboxFeed">
-              <Checkbox sx={{ padding: "0" }} id="remember" />
-              Eu concordo em receber emails sobre coisas legais no Labeddit
-            </div>
-          </BoxContracts>
-
-          <BoxButtons>
-            <ButtonSign>Cadastrar</ButtonSign>
-          </BoxButtons>
-        </form>
+            <BoxButtons>
+              <ButtonSign>Cadastrar</ButtonSign>
+            </BoxButtons>
+          </form>
         </Container>
       </Main>
     </ContainerPrimary>
+    </>
   );
 }
 

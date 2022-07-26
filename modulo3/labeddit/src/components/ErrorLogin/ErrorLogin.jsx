@@ -7,6 +7,7 @@ import CloseIcon from "@mui/icons-material/Close";
 
 function ErrorLogin(props) {
   return (
+    props.open && (
     <Box sx={{ width: "100%", overflow: "hidden"}} fullWidth>
       <Collapse sx={{ width: "100%" }} in={props.open}>
         <Alert
@@ -44,7 +45,7 @@ function ErrorLogin(props) {
         </Alert>
       </Collapse>
     </Box>
-  );
+  ));
 }
 
 export default ErrorLogin;

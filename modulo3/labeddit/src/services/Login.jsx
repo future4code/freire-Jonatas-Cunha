@@ -32,12 +32,12 @@ function Login(
         }
         setError(false);
         setLogged(true);
-        setLoading(false);
+        setLoading(0);
       })
       .catch((error) => {
         console.log(error);
         setError(true);
-        setLoading(false);
+        setLoading(0);
       });
   }
 }

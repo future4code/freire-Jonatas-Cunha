@@ -22,13 +22,13 @@ function LoginPage() {
   const [invalidPassword, setInvalidPassword] = useState(false);
   const [logged, setLogged] = useState(false);
   const [remember, setRemember] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(0);
 
   const navigate = useNavigate();
 
   const login = (e) => {
     e.preventDefault();
-    setLoading(true);
+    setLoading(1);
     Login(
       email,
       password,

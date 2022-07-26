@@ -1,8 +1,8 @@
 import axios from "axios";
-
 import { BASE_URL } from "../constants/BASE_URL";
 import { EmailChecker } from "../utils/EmailChecker";
 import { PasswordChecker } from "../utils/PasswordChecker";
+import { UserNameChecker } from "../utils/UserNameChecker";
 
 function SignUp(
   email,
@@ -10,12 +10,18 @@ function SignUp(
   username,
   setError,
   setLogged,
-  remember,
   setInvalidEmail,
   setInvalidPassword,
+  setInvalidUsername,
+  setLoading
 ) {
-  const emailError = EmailChecker(email, setInvalidEmail);
-  const passwordError = PasswordChecker(password, setInvalidPassword);
+  const userNameError = UserNameChecker(username, setInvalidUsername, setLoading);
+  const emailError = EmailChecker(email, setInvalidEmail, setLoading);
+  const passwordError = PasswordChecker(
+    password,
+    setInvalidPassword,
+    setLoading
+  );
 
   const body = {
     username: username,
@@ -23,21 +29,20 @@ function SignUp(
     password: password,
   };
 
-  if (!emailError && !passwordError && !confirmPasswordError) {
+  if (!emailError && !passwordError && !userNameError) {
     axios
       .post(`${BASE_URL}/users/signup`, body)
       .then((response) => {
-        if (remember) {
-          localStorage.setItem("token", response.data.token);
-        } else {
-          sessionStorage.setItem("token", response.data.token);
-        }
+        sessionStorage.setItem("token", response.data.token);
         setError(false);
         setLogged(true);
+        setLoading(0);
       })
       .catch((error) => {
-        console.log(error);
-        setError(true);
+        setError(error.response.data);
+        setLoading(0);
       });
   }
 }
+
+export default SignUp;
