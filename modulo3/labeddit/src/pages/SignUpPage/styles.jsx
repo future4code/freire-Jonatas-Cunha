@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { PrimaryColor, SecondaryColor, TertiaryColor, quarternaryTextColor } from "../../constants/Colors";
+import { PrimaryColor, SecondaryTextColor, TertiaryColor, quarternaryTextColor } from "../../constants/Colors";
 
 
 export const ContainerPrimary = styled.div`
@@ -7,7 +7,7 @@ export const ContainerPrimary = styled.div`
     @media(min-width: 768px) {
         display: flex;
         flex-direction: column;
-        gap: 25px;
+        gap: 30px;
         background-color: ${TertiaryColor};
     }
 `
@@ -20,7 +20,7 @@ export const Main = styled.main`
         align-items: center;
         justify-content: center;
         background-color: ${TertiaryColor};
-        margin-bottom: 25px;
+        margin-bottom: 30px;
     }
 `
 
@@ -33,7 +33,7 @@ export const Container = styled.div`
        max-width: 440px;
        margin: 0 auto;
        border-radius: 20px 100px;
-       box-shadow: 0px 0px 8px 2px ${SecondaryColor} ;
+       box-shadow: 0px 0px 15px 0.3px ${SecondaryTextColor};
      }
 
     @media(max-width: 768px) {

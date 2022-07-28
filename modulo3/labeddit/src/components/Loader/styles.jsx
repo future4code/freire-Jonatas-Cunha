@@ -24,6 +24,13 @@ export const Grayout = styled.div`
 `
 
 export const Box = styled.div`
+    @media(min-width: 768px) {
+        width: 25%;
+        height: 25%;
+        margin-bottom: 25px;
+    }
+
+
     display: flex;
     flex-direction: column;
     align-items: center;

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { PrimaryColor, SecondaryColor, TertiaryColor, PrimaryTitleColor } from "../../constants/Colors";
+import { PrimaryColor, SecondaryTextColor, TertiaryColor, PrimaryTitleColor } from "../../constants/Colors";
 
 export const BackGroundDeskTop = styled.div`
  @media(min-width: 768px) {
@@ -17,7 +17,7 @@ export const Container = styled.div`
        background-color: ${PrimaryColor};
        padding: 45px;
        border-radius: 20px 100px;
-       box-shadow: 0px 0px 8px 2px ${SecondaryColor} ;
+       box-shadow: 0px 0px 15px 0.3px ${SecondaryTextColor};
     }
     
     header {

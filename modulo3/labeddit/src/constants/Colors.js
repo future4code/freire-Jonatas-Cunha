@@ -1,6 +1,8 @@
 export const PrimaryColor = "#FFFFFF";
 export const SecondaryColor = "#EDEDED";
 export const TertiaryColor = "#E0E0E0";
+export const QuaternaryColor = "#FBFBFB";
+export const QuinaryColor = "#ECECEC";
 
 export const PrimaryTitleColor = "#373737";
 
