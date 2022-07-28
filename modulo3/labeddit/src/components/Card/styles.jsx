@@ -8,7 +8,7 @@ export const Container = styled.div`
     background: ${QuaternaryColor};
     border: 1px solid ${SecondaryColor};
     border-radius: 12px;
-    word-break: break-all;
+    height: 100%;
 
 `
 export const TitlePost = styled.h1`

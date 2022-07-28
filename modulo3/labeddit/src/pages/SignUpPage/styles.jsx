@@ -26,7 +26,6 @@ export const Main = styled.main`
 
 export const Container = styled.div`
     
-
      @media(min-width: 768px) {
        background-color: ${PrimaryColor};
        padding: 45px;
@@ -44,13 +43,18 @@ export const Container = styled.div`
         flex-direction: column;
         padding: 0 16px;
         margin: 0 auto;
-
-        h1 {
-            margin: 30px 0 25px;
-        }
     }
 
 `
+
+export const Title = styled.h1`
+
+    @media(min-width: 768px) {
+        margin: 30px 0 25px;
+    }
+
+`
+
 
 export const BoxInputs = styled.div`
     display: flex;
@@ -68,13 +72,13 @@ export const BoxContracts = styled.div`
         color: ${quarternaryTextColor};
     }
 
-    #CheckboxFeed {
+`
+export const BoxCheckbox = styled.div`
         display: flex;
         align-items: center;
         gap: 10px;
-    }
-
 `
+
 
 export const BoxButtons = styled.div`
     margin-top: 25px;

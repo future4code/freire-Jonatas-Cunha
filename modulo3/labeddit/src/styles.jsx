@@ -19,4 +19,9 @@ export const GlobalStyle = createGlobalStyle`
     button:hover {
         transform: scale(1.02);
     }
+
+    label {
+        cursor: pointer;
+    }
+
 `

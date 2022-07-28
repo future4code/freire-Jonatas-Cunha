@@ -6,7 +6,7 @@ import { ThemeMui } from "./constants/ThemeMui";
 function App() {
   return (
     <ThemeProvider theme={ThemeMui}>
-    <GlobalStyle/>
+      <GlobalStyle/>
       <Router />
     </ThemeProvider>
 

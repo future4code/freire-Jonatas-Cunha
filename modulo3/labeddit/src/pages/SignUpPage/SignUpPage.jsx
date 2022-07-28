@@ -14,7 +14,7 @@ import ErrorPassword from "../../components/ErrorPassword/ErrorPassword";
 import ErrorSignUp from "../../components/ErrorSignUp/ErrorSignUp";
 import Loader from "../../components/Loader/Loader";
 
-import { ContainerPrimary, Main, Container, BoxInputs, BoxContracts, BoxButtons } from "./styles";
+import { ContainerPrimary, Main, Container, BoxInputs, BoxContracts, BoxButtons, Title, BoxCheckbox } from "./styles";
 
 
 function SignUpPage() {
@@ -58,7 +58,7 @@ function SignUpPage() {
       <Header />
       <Main>
         <Container>
-          <h1>Olá, boas vindas ao LabEddit ;) </h1>
+          <Title>Olá, boas vindas ao LabEddit ;) </Title>
 
           <form onSubmit={signUp}>
             <BoxErros>
@@ -79,10 +79,10 @@ function SignUpPage() {
                 <span> Contrato de usuário</span> e nossa
                 <span> Política de Privacidade</span>
               </p>
-              <div id="CheckboxFeed">
+              <BoxCheckbox>
                 <Checkbox sx={{ padding: "0" }} id="remember" />
-                Eu concordo em receber emails sobre coisas legais no Labeddit
-              </div>
+                <label htmlFor="remember">Eu concordo em receber emails sobre coisas legais no Labeddit</label>
+              </BoxCheckbox>
             </BoxContracts>
 
             <BoxButtons>

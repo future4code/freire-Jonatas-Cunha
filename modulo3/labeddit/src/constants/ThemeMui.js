@@ -4,7 +4,7 @@ import { TertiaryTextColor } from "./Colors";
 export const ThemeMui = createTheme({
     palette: {
       primary: {
-        main: TertiaryTextColor,
+        main: TertiaryTextColor
       },
     },
   });
