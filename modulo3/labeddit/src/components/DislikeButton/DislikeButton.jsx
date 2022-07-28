@@ -23,7 +23,7 @@ function DislikeButton(props) {
     const Icon = disliked ? AiFillDislike : AiOutlineDislike;
     const color = disliked ? '#d00032' : '#000';
     return (
-        <Icon onClick={handleClick} color={color} />
+        <Icon onClick={handleClick} color={color} cursor="pointer"/>
     );
 }
 

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {PrimaryTitleColor, PrimaryTextColor, SecondaryColor, TertiaryColor, QuaternaryColor, QuinaryColor, SecondaryTextColor } from "../../constants/Colors";
+import {PrimaryTitleColor, PrimaryTextColor, SecondaryColor, QuaternaryColor, QuinaryColor, SecondaryTextColor } from "../../constants/Colors";
 
 export const Container = styled.div`
     display: flex;
@@ -32,6 +32,7 @@ export const AuthorPost = styled.span`
 
 export const BoxActions = styled.div`
     display: flex;
+    align-items: flex-end;
     gap: 25px;
 `
 
@@ -43,4 +44,5 @@ export const BoxLikesAndComments = styled.div`
     border: 1px solid ${QuinaryColor};
     border-radius: 28px;
     padding: 5px 15px;
+    max-height: 31px;
 `

@@ -10,7 +10,7 @@ export const usePostList = () => {
     useEffect(() => {
         const token = localStorage.getItem("token") || sessionStorage.getItem("token");
 
-        axios.get(`${BASE_URL}/posts`, {
+        axios.get(`${BASE_URL}/posts?page=1&size=20`, {
             headers: {
                 Authorization: token,
             }

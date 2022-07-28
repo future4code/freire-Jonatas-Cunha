@@ -22,7 +22,7 @@ function LikeButton(props) {
     const Icon = liked ? AiFillLike : AiOutlineLike;
     const color = liked ? '#00af27' : '#000';
     return (
-        <Icon onClick={handleClick} color={color} />
+        <Icon onClick={handleClick} color={color} cursor="pointer"/>
     );
 }
 
