@@ -13,7 +13,7 @@ export const Container = styled.div`
     margin: 25px auto;
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: stretch;
     justify-content: center;
     flex-wrap: wrap;
     gap: 20px;
@@ -33,13 +33,13 @@ export const BoxCard = styled.div`
     }
 
     @media (min-width: 768px) {
-        height: 100%;
         width: 330px;
     }
 `
 
 export const BoxNewPost = styled.form`
     width: 100%;
+    max-width: 1376px;
     display: flex;
     flex-direction: column;
     align-items: center;

@@ -29,19 +29,15 @@ function HomePage() {
     <ContainerPrimary>
       <Header />
       <Container>
-
-      
-
-      <BoxNewPost onSubmit={handleClick}>
-        <GenericToast severity="error" message="Erro ao enviar o poste, tente novamente." open={errorPost} close={setErrorPost} />
-        <GenericToast severity="success" message="Sucesso ao enviar o poste!" open={sucessPost} close={setSucessPost} />
-        <InputTitle value={title} change={setTitle} />
-        <InputBody label="Texto" value={body} change={setBody} />
-        <PageButton type="submit">Postar</PageButton>
-        <Separator />
-      </BoxNewPost>
-
-        {error ? <ErrorLoading updatePosts={updatePosts} setError={setError}/> : (loading ? <ContentLoader name="Posts"/> : (
+        <BoxNewPost onSubmit={handleClick}>
+          <GenericToast severity="error" message="Erro ao enviar o poste, tente novamente." open={errorPost} close={setErrorPost} />
+          <GenericToast severity="success" message="Sucesso ao enviar o poste!" open={sucessPost} close={setSucessPost} />
+          <InputTitle value={title} change={setTitle} />
+          <InputBody label="Texto" value={body} change={setBody} />
+          <PageButton type="submit">Postar</PageButton>
+          <Separator />
+        </BoxNewPost>
+      {error ? <ErrorLoading updatePosts={updatePosts} setError={setError}/> : (loading ? <ContentLoader name="Posts"/> : (
           posts.map(post => {
             return (
               <BoxCard key={post.id}>
@@ -54,12 +50,13 @@ function HomePage() {
                   userVote={post.userVote}
                   username={post.username}
                   showComments={true}
+                  page="post"
                 />
               </BoxCard>
             )})
             ))}
-
     </Container>
+    
     </ContainerPrimary>
   );
 }

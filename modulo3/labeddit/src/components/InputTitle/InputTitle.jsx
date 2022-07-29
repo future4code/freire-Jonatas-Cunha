@@ -8,7 +8,7 @@ function InputTitle(props) {
       required
       fullWidth
       id="outlined-basic"
-      label="Title"
+      label="Título"
       variant="outlined"
       value={props.value}
       onChange={(e) => props.change(e.target.value)}

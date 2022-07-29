@@ -9,7 +9,7 @@ export const Container = styled.div`
     border: 1px solid ${SecondaryColor};
     border-radius: 12px;
     height: 100%;
-
+    word-break: break-word;
 `
 export const TitlePost = styled.h1`
     color: ${PrimaryTitleColor};
@@ -33,6 +33,7 @@ export const AuthorPost = styled.span`
 export const BoxActions = styled.div`
     display: flex;
     align-items: flex-end;
+    height: 100%;
     gap: 25px;
 `
 

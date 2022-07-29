@@ -2,6 +2,8 @@ import { useState } from "react";
 import { BiComment } from "react-icons/bi";
 import LikeButton from "../../components/LikeButton/LikeButton";
 import DislikeButton from "../DislikeButton/DislikeButton";
+import { useNavigate } from "react-router-dom";
+import { goToPost } from "../../router/Coordinatis";
 
 import {
   Container,
@@ -23,12 +25,13 @@ function Card(props) {
     userVote,
     username,
     showComments,
+    page,
   } = props;
   const [likes, setLikes] = useState(voteSum === null ? 0 : parseInt(voteSum));
-  const [comments, setComments] = useState(commentCount === null ? 0 : parseInt(commentCount));
+  const comments = commentCount === null ? 0 : parseInt(commentCount)
   const [liked, setLiked] = useState(userVote === 1);
   const [disliked, setDisliked] = useState(userVote === -1);
-
+  const navigate = useNavigate();
 
   return (
     <Container>
@@ -45,6 +48,7 @@ function Card(props) {
             liked={liked}
             setLiked={setLiked}
             setDisliked={setDisliked}
+            service={page}
           />
           <span>{likes}</span>
           <DislikeButton
@@ -54,11 +58,12 @@ function Card(props) {
             disliked={disliked}
             setDisliked={setDisliked}
             setLiked={setLiked}
+            service={page}
           />
         </BoxLikesAndComments>
 
         {showComments && (
-          <BoxLikesAndComments>
+          <BoxLikesAndComments style={{cursor: "pointer"}} onClick={() => goToPost(navigate, id, page)}>
             <BiComment style={{ cursor: "pointer" }} />
             <span>{comments}</span>
           </BoxLikesAndComments>

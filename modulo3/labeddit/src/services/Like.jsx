@@ -1,13 +1,15 @@
 import axios from "axios";
 import { BASE_URL } from "../constants/BASE_URL";
 
-function Like(id, vote) {
+function Like(id, vote, service) {
   const body = {
     direction: vote,
   };
 
+  const link = service === "post" ? `/posts/${id}/votes` : `/comments/${id}/votes`;
+
   axios
-    .post(`${BASE_URL}/posts/${id}/votes`, body, {
+    .post(`${BASE_URL}${link}`, body, {
         headers: {
           Authorization: localStorage.getItem("token") || sessionStorage.getItem("token"),
         }
@@ -18,6 +20,7 @@ function Like(id, vote) {
     .catch((error) => {
       console.log(error);
     });
+
 }
 
 export default Like;

@@ -8,11 +8,11 @@ export const usePostList = () => {
     const [error, setError] = useState(null);
 
 
-    const getPosts = () => {
+    const getPosts = (page = 1, size = 20) => {
         const token = localStorage.getItem("token") || sessionStorage.getItem("token");
         setLoading(true);
     
-        axios.get(`${BASE_URL}/posts?page=1&size=20`, {
+        axios.get(`${BASE_URL}/posts?page=${page}&size=${size}`, {
             headers: {
                 Authorization: token,
             }
@@ -28,8 +28,8 @@ export const usePostList = () => {
             );
     }
 
-    const updatePosts = () => {
-        setTimeout(getPosts, 1000);
+    const updatePosts = (page, size) => {
+        setTimeout(() => getPosts(page, size), 200);
     }
 
     useEffect(() => {

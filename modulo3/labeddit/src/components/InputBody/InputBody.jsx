@@ -10,6 +10,7 @@ function InputBody(props) {
       id="outlined-multiline-static"
       label={props.label}
       multiline
+      maxLength="240"
       rows={6}
       value={props.value}
       onChange={(e) => props.change(e.target.value)}

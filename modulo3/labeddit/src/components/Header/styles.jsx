@@ -8,10 +8,10 @@ export const HeaderContainer = styled.header`
     align-items: center;
     justify-items: center;
     background-color: ${SecondaryColor};
+`
 
-    img {
-        width: 45px;
-        height: 45px;
-    }
-
+export const LogoImg = styled.img`
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
 `

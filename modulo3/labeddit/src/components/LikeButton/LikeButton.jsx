@@ -1,19 +1,20 @@
 import { AiFillLike, AiOutlineLike } from 'react-icons/ai';
 import Like from '../../services/Like';
+import RemoveLike from '../../services/RemoveLike';
 
 
 function LikeButton(props) {
 
-    const { id, liked, setLiked, setDisliked,likes, setLikes } = props;
+    const { id, liked, setLiked, setDisliked,likes, setLikes, service } = props;
 
     const handleClick = () => {
         if (liked) {
-            Like(id, 0);
+            RemoveLike(id, service);
             setLikes(likes - 1);
             setLiked(false);
             setDisliked(false);
         } else {
-            Like(id, 1);
+            Like(id, 1, service);
             setLikes(likes + 1);
             setLiked(true);
             setDisliked(false);

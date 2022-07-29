@@ -14,16 +14,13 @@ function CreatePost(title, resBody, setTitle, setBody, updatePosts, setErrorPost
         }
     })
     .then((response) => {
-      console.log(response);
       setTitle("");
       setBody("");
       updatePosts();
       setSucessPost(true);
       setErrorPost(false);
-      console.log("Post criado com sucesso!");
     })
     .catch((error) => {
-      console.log(error);
       setErrorPost(true);
       setSucessPost(false);
     });

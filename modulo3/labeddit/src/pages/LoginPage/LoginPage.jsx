@@ -4,13 +4,11 @@ import Logo from "../../assets/img/Logo.svg";
 import { ButtonSign, ButtonSignUp, Separator, BoxErros } from "../../assets/style/GlobalStyles";
 import { Container, BoxInputs, BackGroundDeskTop } from "./styles";
 import Login from "../../services/Login";
-import ErrorLogin from "../../components/ErrorLogin/ErrorLogin";
 import InputPassword from "../../components/InputPassword/InputPassword";
 import InputEmail from "../../components/InputEmail/InputEmail";
 import RememberLogin from "../../components/RememberLogin/RememberLogin";
-import ErrorEmail from "../../components/ErrorEmail/ErrorEmail";
-import ErrorPassword from "../../components/ErrorPassword/ErrorPassword";
 import Loader from "../../components/Loader/Loader";
+import ErrorToast from "../../components/ErrorToast/ErrorToast";
 
 
 
@@ -58,9 +56,9 @@ function LoginPage() {
         <main>
           <form onSubmit={login}>
             <BoxErros>
-              <ErrorLogin open={error} setOpen={setError} />
-              <ErrorEmail open={invalidEmail} setOpen={setInvalidEmail} />
-              <ErrorPassword open={invalidPassword} setOpen={setInvalidPassword} />
+              <ErrorToast message="Email ou senha incorretos." open={error} setOpen={setError} />
+              <ErrorToast message="Digite um e-mail válido." open={invalidEmail} setOpen={setInvalidEmail} />
+              <ErrorToast message="Senha muito curta." open={invalidPassword} setOpen={setInvalidPassword} />
             </BoxErros>
             <BoxInputs>
               <InputEmail setEmail={setEmail} email={email} />

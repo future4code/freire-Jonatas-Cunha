@@ -1,5 +1,5 @@
 import { useLocation, useParams, useNavigate } from "react-router-dom";
-import { HeaderContainer } from "./styles";
+import { HeaderContainer, LogoImg } from "./styles";
 import LogoutButton  from "./LogoutButton/LogoutButton";
 import LogInButton from "./LogInButton/LogInButton";
 import ClosePostButton from "./ClosePostButton/ClosePostButton";
@@ -32,7 +32,7 @@ function Header() {
     </div>
 
     <div id="logo">
-        <img onClick={handleClick} src={Logo} alt="Logo" />
+        <LogoImg onClick={handleClick} src={Logo} alt="Logo" />
     </div>
 
     <div id="RightButtons">

@@ -9,9 +9,7 @@ import Checkbox from "@mui/material/Checkbox";
 import { ButtonSign, BoxErros } from "../../assets/style/GlobalStyles";
 import SignUp from "../../services/SignUp";
 
-import ErrorEmail from "../../components/ErrorEmail/ErrorEmail";
-import ErrorPassword from "../../components/ErrorPassword/ErrorPassword";
-import ErrorSignUp from "../../components/ErrorSignUp/ErrorSignUp";
+import ErrorToast from "../../components/ErrorToast/ErrorToast";
 import Loader from "../../components/Loader/Loader";
 
 import { ContainerPrimary, Main, Container, BoxInputs, BoxContracts, BoxButtons, Title, BoxCheckbox } from "./styles";
@@ -62,10 +60,10 @@ function SignUpPage() {
 
           <form onSubmit={signUp}>
             <BoxErros>
-              <ErrorSignUp errorMessage={"Nome muito curto"} open={invalidUsername} setOpen={setInvalidUsername} />
-              <ErrorSignUp errorMessage={error} open={error} setOpen={setError} />
-              <ErrorEmail open={invalidEmail} setOpen={setInvalidEmail} />
-              <ErrorPassword open={invalidPassword} setOpen={setInvalidPassword} />
+              <ErrorToast message="Nome muito curto" open={invalidUsername} setOpen={setInvalidUsername} />
+              <ErrorToast message={error} open={error} setOpen={setError} />
+              <ErrorToast message="Digite um e-mail válido." open={invalidEmail} setOpen={setInvalidEmail} />
+              <ErrorToast message="Senha muito curta." open={invalidPassword} setOpen={setInvalidPassword} />
             </BoxErros>
             <BoxInputs>
               <InputUsername username={username} setUsername={setUsername} />

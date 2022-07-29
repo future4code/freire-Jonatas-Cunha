@@ -1,4 +1,5 @@
 import { AiOutlineReload } from 'react-icons/ai';
+import { Container, Title, Button } from './style';
 
 function ErrorLoading({ updatePosts, setError }) {
 
@@ -8,10 +9,10 @@ function ErrorLoading({ updatePosts, setError }) {
     }
 
   return (
-    <div>
-        <h2>Erro, pane nos servidores.</h2>
-        <button onClick={handleClick}><AiOutlineReload/>Tentar novamente</button>
-    </div>
+    <Container>
+        <Title>Erro, pane nos servidores.</Title>
+        <Button onClick={handleClick}><AiOutlineReload/>Tentar novamente</Button>
+    </Container>
   );
 }
 

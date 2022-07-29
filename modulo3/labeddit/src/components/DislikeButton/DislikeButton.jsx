@@ -1,19 +1,21 @@
 import { AiFillDislike, AiOutlineDislike } from 'react-icons/ai';
 import Like from '../../services/Like';
+import RemoveLike from '../../services/RemoveLike';
+
 
 function DislikeButton(props) {
     
-    const { id, disliked, setDisliked, setLiked, likes, setLikes } = props;
+    const { id, disliked, setDisliked, setLiked, likes, setLikes, service } = props;
 
 
     const handleClick = () => {
         if (disliked) {
-            Like(id, 0);
+            RemoveLike(id, service);
             setLikes(likes + 1);
             setDisliked(false);
             setLiked(false);
         } else {
-            Like(id, -1);
+            Like(id, -1, service);
             setLikes(likes - 1);
             setDisliked(true);
             setLiked(false);

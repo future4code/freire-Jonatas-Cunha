@@ -5,7 +5,7 @@ import Collapse from "@mui/material/Collapse";
 import AlertTitle from "@mui/material/AlertTitle";
 import CloseIcon from "@mui/icons-material/Close";
 
-function ErrorEmail(props) {
+function ErrorToast(props) {
   return (
     props.open && (
     <Box sx={{ width: "100%", overflow: "hidden"}} fullWidth>
@@ -41,11 +41,11 @@ function ErrorEmail(props) {
           <AlertTitle>
             <strong>Error</strong>
           </AlertTitle>
-          Digite um e-mail válido.
+          {props.message}
         </Alert>
       </Collapse>
     </Box>
   ));
 }
 
-export default ErrorEmail;
+export default ErrorToast;
