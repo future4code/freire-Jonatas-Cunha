@@ -2,11 +2,10 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { BASE_URL } from "../constants/BASE_URL";
 
-export const usePostList = () => {
+export const usePostList = (page, size) => {
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-
 
     const getPosts = (page = 1, size = 20) => {
         const token = localStorage.getItem("token") || sessionStorage.getItem("token");
@@ -33,8 +32,8 @@ export const usePostList = () => {
     }
 
     useEffect(() => {
-      getPosts()
-    }, []);
+      getPosts(page, size);
+    }, [page, size]);
 
     return { posts, loading, error, updatePosts, setError };
 };

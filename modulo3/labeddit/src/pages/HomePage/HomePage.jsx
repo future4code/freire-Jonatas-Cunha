@@ -10,6 +10,8 @@ import ContentLoader from "../../components/ContentLoader/ContentLoader.jsx";
 import CreatePost from "../../services/CreatePost";
 import ErrorLoading from "../../components/ErrorLoading/ErrorLoading";
 import GenericToast from "../../components/GenericToast/GenericToast";
+import Pagination from "../../components/Pagination/Pagination";
+
 
 function HomePage() {
 
@@ -19,7 +21,7 @@ function HomePage() {
     const [sucessPost, setSucessPost] = useState(false);
     const [errorPost, setErrorPost] = useState(false);
 
-
+    
     const handleClick = (e) => {
         e.preventDefault();
         CreatePost(title, body, setTitle, setBody, updatePosts, setErrorPost, setSucessPost);
@@ -56,7 +58,7 @@ function HomePage() {
             )})
             ))}
     </Container>
-    
+              <Pagination changePage={updatePosts}/>
     </ContainerPrimary>
   );
 }

@@ -17,6 +17,7 @@ export const Container = styled.div`
     justify-content: center;
     flex-wrap: wrap;
     gap: 20px;
+    grid-gap: 20px;
     max-width: 1440px;
 
     @media (max-width: 767px) {

@@ -19,10 +19,7 @@ function PostPage() {
   const [comment, setComment] = useState("");
   const [sucessComment, setSucessComment] = useState(false);
   const [errorComment, setErrorComment] = useState(false);
-
   const post = usePostList(1, 9999999);
-
-  console.log(post.loading);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -32,10 +29,8 @@ function PostPage() {
   return (
     <ContainerPrimary>
       <Header />
-
       <Container>
-
-        {(post.loading && loading) ? <ContentLoader name="Post"/> : post.posts.filter(post => post.id === id).map(post => {
+        {post.error ? <ErrorLoading updatePosts={post.updatePosts} setError={post.setError} />: (post.loading && loading) ? <ContentLoader name="Post"/> : post.posts.filter(post => post.id === id).map(post => {
           return (
             <BoxPost key={post.id}>
               <Card 
@@ -52,7 +47,6 @@ function PostPage() {
             </BoxPost>
           );
         })}
-
         <BoxNewComment onSubmit={handleClick}>
           <GenericToast severity="error" message="Erro ao enviar o comentário, tente novamente." open={errorComment} close={setErrorComment} />
           <GenericToast severity="success" message="Sucesso ao enviar o comentário!" open={sucessComment} close={setSucessComment} />
@@ -60,8 +54,6 @@ function PostPage() {
           <PageButton type="submit">Postar</PageButton>
           <Separator />
         </BoxNewComment>
-
-
         {error ? <ErrorLoading updatePosts={updateComments} setError={setError}/> : ((loading && post.loading ) ? <ContentLoader name="Comentarios"/> : (
           comments.map(post => {
             return (
@@ -80,12 +72,7 @@ function PostPage() {
               </BoxCard>
             )})
             ))}
-
-
-
-        
       </Container>
-
     </ContainerPrimary>
   );
 }
