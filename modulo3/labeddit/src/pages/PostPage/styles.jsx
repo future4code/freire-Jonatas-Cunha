@@ -63,5 +63,5 @@ export const BoxNewComment = styled.form`
 `
 
 export const BoxNoComments = styled.div`
-
+    text-align: center;
 `

@@ -14,13 +14,12 @@ export const Grayout = styled.div`
     height: 100vh;
     background-color: #7979797e;
     backdrop-filter: blur(0.5em);
+`
 
-    h1 {
+export const Title = styled.h1`
         position: relative;
         top: -5px;
-        color: ${SecondaryTextColor};
-    }
-
+        color: ${SecondaryTextColor}; 
 `
 
 export const Box = styled.div`
@@ -29,7 +28,6 @@ export const Box = styled.div`
         height: 25%;
         margin-bottom: 25px;
     }
-
 
     display: flex;
     flex-direction: column;

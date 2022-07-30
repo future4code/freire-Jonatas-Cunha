@@ -1,10 +1,10 @@
-import { Grayout, Box } from "./styles";
+import { Grayout, Box, Title } from "./styles";
 
 function Loader(props) {
   return (
     <Grayout display={props.display}>
            <Box/>
-           <h1>Carregando...</h1>
+           <Title>Carregando...</Title>
     </Grayout>
   );
 }

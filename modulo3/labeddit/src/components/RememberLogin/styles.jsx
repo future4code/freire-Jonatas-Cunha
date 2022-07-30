@@ -4,8 +4,8 @@ export const Container = styled.div`
     display: flex;
     align-items: center;
     gap: 5px;
+`
 
-    label {
-        cursor: pointer;
-    }
+export const Label = styled.label`
+    cursor: pointer;
 `

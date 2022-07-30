@@ -15,14 +15,14 @@ function PaginationPoke(props) {
 
   return (
     <>
-        {error ? <p>Error ao Carregar</p> : loading ? null : (
+        {error ? <p>Erro ao Carregar</p> : loading ? null : (
             <Stack sx={{alignItems: "center", margin: "0 0 15px 0"}} spacing={6}>
                 <Pagination
                 count={Math.ceil(posts.length / 20)}
                 page={page}
                 onChange={handleChange}
                 color="primary"
-                size="large"
+                size="medium"
                 />
             </Stack>
         )}
