@@ -23,14 +23,17 @@
 - Página da Postagem. 
     -   Opção para realizar um novo comentário.
         -  Toasts: Error ao realizar o comentário e sucesso ao realizar o comentário.
+---
+- Compartilhar em outras redes. (FUNCIONA APENAS EM HTTPS)
+   - Web Share API
 
 ---
 ## O que não funciona
-- Compartilhar em outras redes sociais.
 - Buscar Postagem
 
 ### Link Surge 
-https://labeddits.surge.sh/ - API 2
+#### RECOMENDADO:  https://labeddits.surge.sh/ - API 2
+###### ALTERNATIVO:  https://labeddit-ap1.surge.sh/ - API 1 (DESATUALIZADO)
 
 ### Imagens
 
