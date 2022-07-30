@@ -4,6 +4,7 @@ import LikeButton from "../../components/LikeButton/LikeButton";
 import DislikeButton from "../DislikeButton/DislikeButton";
 import { useNavigate } from "react-router-dom";
 import { goToPost } from "../../router/Coordinatis";
+import ShareButton from "../../components/ShareButton/ShareButton";
 
 import {
   Container,
@@ -68,6 +69,11 @@ function Card(props) {
             <span>{comments}</span>
           </BoxLikesAndComments>
         )}
+
+        <BoxLikesAndComments>
+          <ShareButton id={id} title={title} body={body}/>
+        </BoxLikesAndComments>
+
       </BoxActions>
     </Container>
   );
