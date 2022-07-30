@@ -2,7 +2,7 @@ import { useState } from "react";
 import Header from "../../components/Header/Header";
 import Card from "../../components/Card/Card";
 import { useParams } from "react-router-dom";
-import { ContainerPrimary, Container, BoxPost, BoxNewComment, BoxCard } from "./styles";
+import { ContainerPrimary, Container, BoxPost, BoxNewComment, BoxCard, BoxNoComments } from "./styles";
 import { usePostComments } from "../../hooks/usePostComments";
 import { usePostList } from "../../hooks/usePostList";
 import ContentLoader  from "../../components/ContentLoader/ContentLoader";
@@ -55,6 +55,7 @@ function PostPage() {
           <Separator />
         </BoxNewComment>
         {error ? <ErrorLoading updatePosts={updateComments} setError={setError}/> : ((loading && post.loading ) ? <ContentLoader name="Comentarios"/> : (
+          comments.length === 0 ? <BoxNoComments>Nenhum comentário</BoxNoComments> : (
           comments.map(post => {
             return (
               <BoxCard key={post.id}>
@@ -70,7 +71,7 @@ function PostPage() {
                   page="comments"
                 />
               </BoxCard>
-            )})
+            )}))
             ))}
       </Container>
     </ContainerPrimary>

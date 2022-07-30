@@ -18,7 +18,7 @@ function PaginationPoke(props) {
         {error ? <p>Error ao Carregar</p> : loading ? null : (
             <Stack sx={{alignItems: "center", margin: "0 0 15px 0"}} spacing={6}>
                 <Pagination
-                count={parseInt(posts.length / 20)}
+                count={Math.ceil(posts.length / 20)}
                 page={page}
                 onChange={handleChange}
                 color="primary"

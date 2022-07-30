@@ -61,3 +61,7 @@ export const BoxNewComment = styled.form`
         padding: 30px;
     }
 `
+
+export const BoxNoComments = styled.div`
+
+`
