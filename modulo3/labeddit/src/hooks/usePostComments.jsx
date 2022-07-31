@@ -13,7 +13,7 @@ export const usePostComments = (postId) =>{
     setLoading(true);
     setError(null);
     axios
-      .get(`${BASE_URL}/posts/${postId}/comments`, {
+      .get(`${BASE_URL}/posts/${postId}/comments?page=1&size=99999`, {
         headers: {
             Authorization: token,
         }

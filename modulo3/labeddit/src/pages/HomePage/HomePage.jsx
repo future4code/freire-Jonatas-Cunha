@@ -52,6 +52,7 @@ function HomePage() {
                   userVote={post.userVote}
                   username={post.username}
                   showComments={true}
+                  showShare={true}
                   page="post"
                 />
               </BoxCard>

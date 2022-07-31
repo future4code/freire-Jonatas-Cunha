@@ -42,6 +42,7 @@ function PostPage() {
                  userVote={post.userVote}
                  username={post.username}
                  showComments={false}
+                 showShare={true}
                  page="post"
               />
             </BoxPost>
@@ -68,6 +69,7 @@ function PostPage() {
                   userVote={post.userVote}
                   username={post.username}
                   showComments={false}
+                  showShare={false}
                   page="comments"
                 />
               </BoxCard>

@@ -26,6 +26,7 @@ function Card(props) {
     userVote,
     username,
     showComments,
+    showShare,
     page,
   } = props;
   const [likes, setLikes] = useState(voteSum === null ? 0 : parseInt(voteSum));
@@ -70,9 +71,11 @@ function Card(props) {
           </BoxLikesAndComments>
         )}
 
+        {(showShare && navigator.share !== undefined) && (
         <BoxLikesAndComments>
           <ShareButton id={id} title={title} body={body}/>
         </BoxLikesAndComments>
+        )}
 
       </BoxActions>
     </Container>

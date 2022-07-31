@@ -14,7 +14,7 @@ function Header() {
 
 
     const handleClick = () => {
-      if (location.pathname === `/post/${params}`) {
+      if (location.pathname === `/post/${params}` || location.pathname === "/404") {
         goToFeed(navigate);
       }
 
@@ -28,7 +28,7 @@ function Header() {
   <HeaderContainer>
 
     <div id="LeftButtons">
-        {location.pathname === `/post/${params}` && <ClosePostButton />}
+        {(location.pathname === `/post/${params}` || location.pathname === "/404") && <ClosePostButton />}
     </div>
 
     <div id="logo">

@@ -1,9 +1,16 @@
+import Header from "../../components/Header/Header";
+import { ContainerPrimary, Container, Title, Information } from "./styles";
+
 function ErrorPage() {
-    return (
-      <div>
-        <h1>Error Page</h1>
-      </div>
-    );
-  }
-  
-  export default ErrorPage;
+  return (
+    <ContainerPrimary>
+      <Header />
+      <Container>
+        <Title>404</Title>
+        <Information>Page not found</Information>
+      </Container>
+    </ContainerPrimary>
+  );
+}
+
+export default ErrorPage;
