@@ -1,13 +1,12 @@
 function anagramas(palavra: string): number {
     
-    let palavraArray: string[] = palavra.split('');
-    let novaPalavra: boolean = [new Set(palavraArray)].length !== palavraArray.length
-
-    if (!novaPalavra) {
+    let repetidas: boolean = new Set(palavra).size !== palavra.length
+    
+    if (repetidas) {
         return (0)
     } else {
         let anagramas: number = 1
-        for (let i = palavraArray.length; i > 0; i--) {
+        for (let i = palavra.length; i > 0; i--) {
             anagramas = anagramas * i
         }
 
@@ -16,4 +15,5 @@ function anagramas(palavra: string): number {
 
 }
 
-console.log(anagramas("telhado"))
+console.log(anagramas("telhado")) // Sem repetição
+console.log(anagramas("abacate")) // Com repetição
