@@ -11,4 +11,4 @@ function converteRomano (numero: number): string {
     return romano
 }
 
-console.log(converteRomano(1235))
+console.log(converteRomano(1235)) // MCCXXXV

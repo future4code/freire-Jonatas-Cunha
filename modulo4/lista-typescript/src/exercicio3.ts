@@ -1,4 +1,4 @@
-enum GENERO {
+enum Genero {
 	ACAO="ação",
 	DRAMA="drama",
 	COMEDIA="comédia",
@@ -9,19 +9,14 @@ enum GENERO {
 type Filme = {
     nome: string,
     anoDeLancamento: number,
-    genero: GENERO
+    genero: Genero
     pontuacao?: number
 }
 
 
-function filme (nome: string, anoDeLancamento: number, genero: GENERO, pontuacao?: number): Filme {
-    return {
-        nome,
-        anoDeLancamento,
-        genero,
-        pontuacao
-    }
+function filme (nome: string, anoDeLancamento: number, genero: Genero, pontuacao?: number): Filme {
+    return pontuacao ? {nome, anoDeLancamento, genero, pontuacao} : {nome, anoDeLancamento, genero}
 }
 
-console.log(filme("Avengers", 2019, GENERO.ACAO))
-console.log(filme("Capitão América: O Primeiro Vingador", 2019, GENERO.ACAO, 9))
+console.log(filme("Avengers", 2019, Genero.ACAO))
+console.log(filme("Capitão América: O Primeiro Vingador", 2019, Genero.ACAO, 9))
