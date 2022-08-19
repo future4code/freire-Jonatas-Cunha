@@ -2,11 +2,19 @@ import express from 'express';
 import cors from 'cors';
 import { Extract, User, users } from './data';
 
+const port = process.env.PORT || 3003;
+const app = express();
+app.use(express.json());
+app.use(cors());
 
-const app = express()
-app.use(express.json())
-app.use(cors())
-
+// LISTAR TODOS OS USUÁRIOS
+app.get('/users', (req, res) => {
+    if (users.length > 0) {
+        res.status(200).send(users)
+    } else {
+        res.status(204).send()
+    }
+});
 
 // EXTRATO
 app.get('/users/balance', (req, res) => {
@@ -52,7 +60,7 @@ app.get('/users/balance', (req, res) => {
             message: error.message || 'Erro inesperado'
         })
     }
-})
+});
 
 // CRIAR USUÁRIO
 app.post('/users', (req, res) => {
@@ -129,7 +137,77 @@ app.post('/users', (req, res) => {
         })
     }
 
-})
+});
+
+// TRANSFERIR SALDO
+app.post('/users/transfer', (req, res) => {
+    let { name, cpf, value, cpfDestination, nameDestination } = req.body
+    let STATUS_CODE: number = 500
+
+    try {
+
+        if (!name || !cpf || !value || !cpfDestination || !nameDestination) {
+            STATUS_CODE = 422
+            throw new Error('Todos os dados são obrigatórios')
+        }
+
+        cpf = cpf.replace(/[^\d]/g, '')
+
+        if (isNaN(Number(cpf))) {
+            STATUS_CODE = 422
+            throw new Error('CPF inválido')
+        }
+
+        if (cpf.length !== 11) {
+            STATUS_CODE = 422
+            throw new Error('CPF inválido')
+        }
+        cpfDestination = cpfDestination.replace(/[^\d]/g, '')
+
+        if (isNaN(Number(cpfDestination))) {
+            STATUS_CODE = 422
+            throw new Error('CPF inválido')
+        }
+
+        if (cpfDestination.length !== 11) {
+            STATUS_CODE = 422
+            throw new Error('CPF inválido')
+        }
+        const user: User | undefined = users.find(user => user.cpf === Number(cpf) && user.name === name)
+
+        if (!user) {
+            STATUS_CODE = 404
+            throw new Error('Usuário não encontrado')
+        }
+
+        value = value.replace(",", ".")
+
+        if(isNaN(Number(value))) {
+            STATUS_CODE = 422
+            throw new Error('Valor inválido')
+        }
+
+        if (value < 0) {
+            STATUS_CODE = 422
+            throw new Error('Valor inválido')
+        }
+        if (value > user.balance) {
+            STATUS_CODE = 422
+            throw new Error('Saldo insuficiente')
+        }
+
+        const userDestination: User | undefined = users.find(user => user.cpf === Number(cpfDestination) && user.name === nameDestination)
+
+        if (!userDestination) {
+            STATUS_CODE = 404
+            throw new Error('Usuário não encontrado')
+
+}} catch (error: any) {
+        res.status(STATUS_CODE).send({
+            message: error.message || 'Erro inesperado'
+        })
+    }
+});
 
 // ADICIONAR SALDO
 app.put('/users/balance', (req, res) => {
@@ -162,7 +240,9 @@ app.put('/users/balance', (req, res) => {
             throw new Error('Usuário não encontrado')
         }
 
-        value = value.replace(",", ".")
+        if(isNaN(value)) {
+            value = value.replace(",", ".")
+        }
 
         if(isNaN(Number(value))) {
             STATUS_CODE = 422
@@ -178,9 +258,16 @@ app.put('/users/balance', (req, res) => {
 
         const balance: number = user.balance
         user.balance += Number(value)
+        user.extract.push({
+            id: user.extract.length + 1,
+            value: Number(value),
+            date: new Date().toLocaleDateString(),
+            description:"Depósito de dinheiro"
+        })
         STATUS_CODE = 200
         res.status(STATUS_CODE).send({
             name: user.name,
+            message: 'Saldo adicionado com sucesso',
             oldBalance: balance,
             newBalance: +user.balance
         })
@@ -189,7 +276,7 @@ app.put('/users/balance', (req, res) => {
             message: error.message || 'Erro inesperado'
         })
     }
-})
+});
 
 // PAGAR CONTAS
 app.put('/users/extract', (req, res) => {
@@ -270,11 +357,9 @@ app.put('/users/extract', (req, res) => {
             message: error.message || 'Erro inesperado'
         })
     }
-})
+});
 
-
-
-
-app.listen(3003, () => {
-    console.log("RODANDO NA PORTA 3003")
-})
+// RODAR SERVIDOR
+app.listen(port, () => {
+    console.log(`RODANDO NA PORTA ${port}`);
+});
