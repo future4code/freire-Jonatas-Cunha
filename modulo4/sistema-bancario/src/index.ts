@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import moment from 'moment';
 import { Extract, User, users } from './data';
 
 const port = process.env.PORT || 3003;
@@ -100,7 +101,8 @@ app.post('/users', (req, res) => {
             throw new Error('CPF já cadastrado')
         }
 
-        if (birthDate.length !== 10) {
+
+        if(!moment(birthDate, 'DD/MM/YYYY', true).isValid()) { // VALIDAÇÃO DE DATA BIBLIOTECA MOMENT
             STATUS_CODE = 422
             throw new Error('Data de nascimento inválida')
         }
@@ -109,6 +111,8 @@ app.post('/users', (req, res) => {
         const newDateBirth: number = new Date(Number(informedBirth[2]), Number(informedBirth[1]) - 1, Number(informedBirth[0])).getTime()
         const currentDate: number = new Date().getTime()
         const age: number = Math.floor((currentDate - newDateBirth) / 1000 / 60 / 60 / 24 / 365)
+
+
 
         if (age < 18) {
             STATUS_CODE = 422
@@ -161,38 +165,38 @@ app.post('/users/transfer', (req, res) => {
 
         if (isNaN(Number(cpf))) {
             STATUS_CODE = 422
-            throw new Error('CPF inválido')
+            throw new Error('CPF do remetente é inválido')
         }
 
         if (cpf.length !== 11) {
             STATUS_CODE = 422
-            throw new Error('CPF inválido')
+            throw new Error('CPF do remetente é inválido')
         }
 
         const user: User | undefined = users.find(user => user.cpf === Number(cpf) && user.name === name)
 
         if (!user) {
             STATUS_CODE = 404
-            throw new Error('Usuário não encontrado')
+            throw new Error('Remetente não encontrado')
         }
 
         /// VALIDAÇÃO CPF DO DESTINATÁRIO
 
         if (isNaN(Number(cpfDestination))) {
             STATUS_CODE = 422
-            throw new Error('CPF inválido')
+            throw new Error('CPF do destinatário é inválido')
         }
 
         if (cpfDestination.length !== 11) {
             STATUS_CODE = 422
-            throw new Error('CPF inválido')
+            throw new Error('CPF do destinatário é inválido')
         }
 
         const userDestination: User | undefined = users.find(user => user.cpf === Number(cpfDestination) && user.name === nameDestination)
 
         if (!userDestination) {
             STATUS_CODE = 404
-            throw new Error('Usuário não encontrado')
+            throw new Error('Destinatário não encontrado')
         }
 
 
@@ -216,6 +220,9 @@ app.post('/users/transfer', (req, res) => {
 
 
         // TRANSFERÊNCIA
+        const oldBalance: number = user.balance
+        const newBalance: number = oldBalance - Number(value)
+
         user.balance -= Number(value)
         userDestination.balance += Number(value)
         const date: string = new Date().toLocaleDateString()
@@ -235,8 +242,8 @@ app.post('/users/transfer', (req, res) => {
         STATUS_CODE = 200
         res.status(STATUS_CODE).send({
             message: 'Transferência realizada com sucesso',
-            user: user,
-            userDestination: userDestination
+            oldBalance,
+            newBalance,
         })
 
     } catch (error: any) {
@@ -357,7 +364,7 @@ app.put('/users/extract', (req, res) => {
         }
 
         if (data) {
-            if (data.length !== 10) {
+            if(!moment(data, 'DD/MM/YYYY', true).isValid()) { // VALIDAÇÃO DE DATA BIBLIOTECA MOMENT
                 STATUS_CODE = 422
                 throw new Error('Data inválida')
             }
