@@ -329,7 +329,7 @@ app.put('/users/extract', (req, res) => {
 
     try {
 
-        if (!name || !cpf || !value || !description) {
+        if (!name || !cpf || !value) {
             STATUS_CODE = 400
             throw new Error('Todos os dados são obrigatórios')
         }
@@ -352,6 +352,11 @@ app.put('/users/extract', (req, res) => {
             STATUS_CODE = 404
             throw new Error('Usuário não encontrado')
         }
+        
+        
+        if (isNaN(value)) {
+            value = value.replace(",", ".")
+        }
 
         if (value < 0) {
             STATUS_CODE = 422
@@ -367,13 +372,14 @@ app.put('/users/extract', (req, res) => {
             if(!moment(data, 'DD/MM/YYYY', true).isValid()) { // VALIDAÇÃO DE DATA BIBLIOTECA MOMENT
                 STATUS_CODE = 422
                 throw new Error('Data inválida')
+                console.log("validação 1")
             }
 
 
-            let newDate = new Date(data.split('/').reverse().join('/'))
-            if (newDate < new Date()) {
+            let newDate = new Date(data.split('/').reverse().join('/')).setHours(0, 0, 0, 0)
+            if (newDate < new Date().setHours(0, 0, 0, 0)) {
                 STATUS_CODE = 422
-                throw new Error('Data inválida')
+                throw new Error('A data não pode ser menor que a data atual')
             }
         }
 
@@ -386,7 +392,7 @@ app.put('/users/extract', (req, res) => {
             id: user.extract.length + 1,
             value: Number(value),
             date: newDate,
-            description: 'Pagamento de conta'
+            description: description || 'Pagamento de conta'
         }
         user.extract.push(newExtract)
         STATUS_CODE = 200
