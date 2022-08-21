@@ -7,12 +7,15 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// LISTAR TODOS OS USUÁRIOS
 app.get('/users', (req, res) => {
+
+    try {
     if (users.length > 0) {
         res.status(200).send(users)
     } else {
         res.status(204).send()
+    }} catch (error) {
+        res.status(500).send({ error: 'Erro ao buscar usuários' })
     }
 });
 
@@ -24,7 +27,7 @@ app.get('/users/balance', (req, res) => {
     try {
 
         if (!name || !cpf) {
-            STATUS_CODE = 422
+            STATUS_CODE = 400
             throw new Error('Todos os dados são obrigatórios')
         }
 
@@ -71,7 +74,7 @@ app.post('/users', (req, res) => {
     try {
 
         if (!name || !cpf || !birthDate) {
-            STATUS_CODE = 422
+            STATUS_CODE = 400
             throw new Error('Todos os dados são obrigatórios')
         }
 
@@ -93,7 +96,7 @@ app.post('/users', (req, res) => {
         }
 
         if (users.find(user => user.cpf === Number(cpf))) {
-            STATUS_CODE = 422
+            STATUS_CODE = 409
             throw new Error('CPF já cadastrado')
         }
 
@@ -147,11 +150,14 @@ app.post('/users/transfer', (req, res) => {
     try {
 
         if (!name || !cpf || !value || !cpfDestination || !nameDestination) {
-            STATUS_CODE = 422
+            STATUS_CODE = 400
             throw new Error('Todos os dados são obrigatórios')
         }
 
         cpf = cpf.replace(/[^\d]/g, '')
+        cpfDestination = cpfDestination.replace(/[^\d]/g, '')
+
+        // VALIDAÇÃO CPF DO REMETENTE
 
         if (isNaN(Number(cpf))) {
             STATUS_CODE = 422
@@ -162,7 +168,15 @@ app.post('/users/transfer', (req, res) => {
             STATUS_CODE = 422
             throw new Error('CPF inválido')
         }
-        cpfDestination = cpfDestination.replace(/[^\d]/g, '')
+
+        const user: User | undefined = users.find(user => user.cpf === Number(cpf) && user.name === name)
+
+        if (!user) {
+            STATUS_CODE = 404
+            throw new Error('Usuário não encontrado')
+        }
+
+        /// VALIDAÇÃO CPF DO DESTINATÁRIO
 
         if (isNaN(Number(cpfDestination))) {
             STATUS_CODE = 422
@@ -173,16 +187,20 @@ app.post('/users/transfer', (req, res) => {
             STATUS_CODE = 422
             throw new Error('CPF inválido')
         }
-        const user: User | undefined = users.find(user => user.cpf === Number(cpf) && user.name === name)
 
-        if (!user) {
+        const userDestination: User | undefined = users.find(user => user.cpf === Number(cpfDestination) && user.name === nameDestination)
+
+        if (!userDestination) {
             STATUS_CODE = 404
             throw new Error('Usuário não encontrado')
         }
 
+
+        // VALIDAÇÃO VALOR
+
         value = value.replace(",", ".")
 
-        if(isNaN(Number(value))) {
+        if (isNaN(Number(value))) {
             STATUS_CODE = 422
             throw new Error('Valor inválido')
         }
@@ -196,13 +214,32 @@ app.post('/users/transfer', (req, res) => {
             throw new Error('Saldo insuficiente')
         }
 
-        const userDestination: User | undefined = users.find(user => user.cpf === Number(cpfDestination) && user.name === nameDestination)
 
-        if (!userDestination) {
-            STATUS_CODE = 404
-            throw new Error('Usuário não encontrado')
+        // TRANSFERÊNCIA
+        user.balance -= Number(value)
+        userDestination.balance += Number(value)
+        const date: string = new Date().toLocaleDateString()
+        user.extract.push({
+            id: user.extract.length + 1,
+            description: 'Transferência para ' + userDestination.name,
+            date,
+            value: Number(value)
+        } as Extract)
+        userDestination.extract.push({
+            id: userDestination.extract.length + 1,
+            description: 'Transferência de ' + user.name,
+            date,
+            value: Number(value)
+        } as Extract)
 
-}} catch (error: any) {
+        STATUS_CODE = 200
+        res.status(STATUS_CODE).send({
+            message: 'Transferência realizada com sucesso',
+            user: user,
+            userDestination: userDestination
+        })
+
+    } catch (error: any) {
         res.status(STATUS_CODE).send({
             message: error.message || 'Erro inesperado'
         })
@@ -217,7 +254,7 @@ app.put('/users/balance', (req, res) => {
     try {
 
         if (!name || !cpf || !value) {
-            STATUS_CODE = 422
+            STATUS_CODE = 400
             throw new Error('Todos os dados são obrigatórios')
         }
 
@@ -240,11 +277,11 @@ app.put('/users/balance', (req, res) => {
             throw new Error('Usuário não encontrado')
         }
 
-        if(isNaN(value)) {
+        if (isNaN(value)) {
             value = value.replace(",", ".")
         }
 
-        if(isNaN(Number(value))) {
+        if (isNaN(Number(value))) {
             STATUS_CODE = 422
             throw new Error('Valor inválido')
         }
@@ -262,7 +299,7 @@ app.put('/users/balance', (req, res) => {
             id: user.extract.length + 1,
             value: Number(value),
             date: new Date().toLocaleDateString(),
-            description:"Depósito de dinheiro"
+            description: "Depósito de dinheiro"
         })
         STATUS_CODE = 200
         res.status(STATUS_CODE).send({
@@ -286,7 +323,7 @@ app.put('/users/extract', (req, res) => {
     try {
 
         if (!name || !cpf || !value || !description) {
-            STATUS_CODE = 422
+            STATUS_CODE = 400
             throw new Error('Todos os dados são obrigatórios')
         }
 
@@ -319,18 +356,18 @@ app.put('/users/extract', (req, res) => {
             throw new Error('Saldo insuficiente')
         }
 
-        if(data){
-            if(data.length !== 10){
+        if (data) {
+            if (data.length !== 10) {
                 STATUS_CODE = 422
                 throw new Error('Data inválida')
             }
 
 
-           let newDate = new Date(data.split('/').reverse().join('/'))
-              if(newDate < new Date()){
-                  STATUS_CODE = 422
-                  throw new Error('Data inválida')
-              }
+            let newDate = new Date(data.split('/').reverse().join('/'))
+            if (newDate < new Date()) {
+                STATUS_CODE = 422
+                throw new Error('Data inválida')
+            }
         }
 
         const newDate = data ? data : new Date().toLocaleDateString().split('/').join('/')
