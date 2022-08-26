@@ -1,26 +1,22 @@
 import { Request, Response } from 'express';
-import connection from '../data/connection';
+import selectWhereNickname from '../data/selectWhereNickname';
 
 export default async function getSearchUser(req: Request, res: Response) {
-    const query = req.query.query;
+    const query = req.query.query as string;
     let statusCode = 500;
 
     try {
 
-        await connection('tdUsers').select("id", "nickname")
-        .where("nickname", "like", `%${query}%`)
-        .then((users) => {
-            if (users.length > 0) {
-                statusCode = 200;
-                res.status(statusCode).send({
-                    length: users.length,
-                    users
-                });
-            } else {
-                statusCode = 204;
-                res.status(statusCode).end();
-            }
-        })
+        const result = await selectWhereNickname(query);
+        console.log(result.length);
+
+        if (result.length > 0) {
+            statusCode = 200;
+            res.status(statusCode).send({length: result.length, users: result});
+        } else {
+            statusCode = 404;
+            res.status(statusCode).send({message: "Nehum resultado corresponde ao termo pesquisado."}).end();
+        }
 
     } catch (error: any) {
         statusCode = 500;

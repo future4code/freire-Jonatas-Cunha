@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
-import connection from "../data/connection";
+import * as EmailValidator from "email-validator";
+import updateUsers from "../data/updateUser";
 
 export default async function putUser (req: Request, res: Response): Promise<void> {
     const id: string = req.params.id;
     const { name, email, nickname } = req.body;
-    const emailValid = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/; 
     let statusCode: number = 500;
 
     try {
@@ -25,26 +25,21 @@ export default async function putUser (req: Request, res: Response): Promise<voi
         }
 
         if(email){
-            if(!emailValid.test(email)){
+            if(!EmailValidator.validate(email)){
                 statusCode = 400;
                 throw new Error('Email inválido!');
             }
         }
 
-        await connection("tdUsers").where("id", id).update({
-            name: req.body.name,
-            nickname: req.body.nickname,
-            email: req.body.email,
-        }).then((result: any) => {
+        await updateUsers(id, name, nickname, email).then(() => {
+            statusCode = 200;
+            res.status(statusCode).send({message: "Usuário atualizado com sucesso!"});
+        }).catch((error) => {
+            statusCode = 500;
+            res.status(statusCode).send({error: error.message}).end();
+        })
 
-            if (result > 0) {
-                statusCode = 200;
-                res.status(statusCode).send({message: "Usuario atualizado com sucesso!"});
-            } else {
-                statusCode = 404;
-                throw new Error("Usuario não encontrado!");
-            }
-        });
+
     } catch (error: any) {
         res.status(statusCode).send( {error: error.sqlMessage || error.message} );
     }

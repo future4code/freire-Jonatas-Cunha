@@ -1,8 +1,7 @@
 import { Request, Response } from "express";
-import connection from "../data/connection";
-import moment from "moment";
+import selectTaskById from "../data/selectTaskById";
 
-export default function getTaskById(req: Request, res: Response): void {
+export default async function getTaskById(req: Request, res: Response): Promise<void> {
 
     let statusCode: number = 500;
     const id = req.params.id;
@@ -14,25 +13,15 @@ export default function getTaskById(req: Request, res: Response): void {
             throw new Error('id é obrigatório');
         }
 
-        connection("tdTasks").where("tdTasks.id", id).join("tdUsers", "tdTasks.creator_user_id", "tdUsers.id")
-        .select(
-            "tdTasks.id AS taskId",
-            "tdTasks.title",
-            "tdTasks.description",
-            "tdTasks.limit_date as limitDate",
-            "tdTasks.status",
-            "tdUsers.id AS creatorUserId",
-            "tdUsers.nickname AS creatorUserNickname",
-        ).then((task: any) => {
-            if (task.length > 0) {
-                statusCode = 200;
-                task[0].limitDate = moment(task[0].limitDate).format("DD/MM/YYYY");
-                res.status(statusCode).json(task[0]);
-            } else {
-                statusCode = 404;
-                res.status(statusCode).json({ error: "Task não encontrada!" }).end();
-            }
-        })
+        const result = await selectTaskById(id);
+
+        if (result) {
+            statusCode = 200;
+            res.status(statusCode).send(result);
+        } else {
+            statusCode = 404;
+            res.status(statusCode).send({ message: "Nenhum resultado corresponde ao id pesquisado." }).end();
+        }
 
     }catch (error: any) {
         res.status(statusCode).send({ error: error.sqlMessage || error.message });

@@ -1,13 +1,12 @@
 import { Request, Response } from "express";
-import connection from "../data/connection";
-import { v4 as uuidv4 } from "uuid";
+import insertUser from "../data/insertUser";
+import * as EmailValidator from 'email-validator';
 
 export default async function postUser(req: Request, res: Response): Promise<void> {
 
     const name: string = req.body.name as string;
     const nickname: string = req.body.nickname as string;
     const email: string = req.body.email as string;
-    const emailValid = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/; 
     let statusCode: number = 500;
 
     try {
@@ -17,22 +16,17 @@ export default async function postUser(req: Request, res: Response): Promise<voi
             throw new Error('name, nickname e email são obrigatórios');
         }
 
-        if(!emailValid.test(email)){
+        if(!EmailValidator.validate(email)){
             statusCode = 422;
-            throw new Error('Email inválido!');
+            res.status(statusCode).send({error: "Email inválido"}).end();
         }
 
-        await connection("tdUsers").insert({
-            id: uuidv4(),
-            name: name,
-            nickname: nickname,
-            email: email
-        }).then(() => {
+        await insertUser(name, nickname, email).then(() => {
             statusCode = 201;
-            res.status(statusCode).send({message: "Usuario criado com sucesso!"});
-        }).catch(() => {
+            res.status(statusCode).send();
+        }).catch((error) => {
             statusCode = 500;
-            res.status(statusCode).send({message: "Erro ao criar usuario!"});
+            res.status(statusCode).send({error: error.message}).end();
         })
 
 

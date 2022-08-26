@@ -1,15 +1,8 @@
 import { Request, Response } from 'express';
-import { v4 as uuidv4 } from 'uuid';
-import connection from '../data/connection';
+import insertTask from '../data/insertTask';
 import moment from 'moment'
 
-enum Status {
-    TODO = "to_do",
-    DOING = "doing",
-    DONE = "done"
-}
-
-export default function postTask (req: Request, res: Response): void {
+export default async function postTask (req: Request, res: Response): Promise<void> {
 
     let statusCode: number = 500;
     const { title, description, limiteDate, creatorUserId } = req.body;
@@ -21,26 +14,19 @@ export default function postTask (req: Request, res: Response): void {
             throw new Error('title, description, limiteDate e creatorUserId são obrigatórios');
         }
 
-        if(!moment(limiteDate, "DD MM YYYY").isValid()){
+        if(!moment(limiteDate, "DD MM YYYY").isValid() || limiteDate.length !== 10){
             statusCode = 422;
             throw new Error('limiteDate deve ser uma data válida');
         }
 
-
-        connection("tdTasks").insert({
-            id: uuidv4(),
-            title: title,
-            description: description,
-            status: Status.TODO,
-            limit_date: moment(limiteDate, "DD MM YYYY").format("YYYY-MM-DD"),
-            creator_user_id: creatorUserId
-        }).then(() => {
+       await insertTask(title, description, limiteDate, creatorUserId).then(() => {
             statusCode = 201;
-            res.status(statusCode).send({message: "Tarefa criada com sucesso!"});
-        }).catch(error => {
+            res.status(statusCode).send();
+        }).catch((error: any) => {
             statusCode = 500;
-            res.status(statusCode).send({error: error.sqlMessage});
-        })
+            res.status(statusCode).send(error.message);
+        });
+
 
     } catch (error: any) {
         res.status(statusCode).send( {error: error.sqlMessage || error.message});

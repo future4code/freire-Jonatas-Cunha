@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import connection from "../data/connection";
+import selectUserById from "../data/selectUserById";
 
 export default async function getUserById(req: Request, res: Response): Promise<void> {
-    const id: string = req.params.id;
+    const id: string = req.params.id as string;
     let statusCode: number = 500;
 
     try {
@@ -12,18 +12,17 @@ export default async function getUserById(req: Request, res: Response): Promise<
             throw new Error('Id é obrigatório!');
         }
 
-        await connection("tdUsers").where("id", id).select("id", "nickname").then((result: any) => {
+        const result = await selectUserById(id);
 
-            if (result.length > 0) {
-                statusCode = 200;
-                res.status(statusCode).send(result[0]);
-            } else {
-                statusCode = 404;
-                res.status(statusCode).send({message: "Usuario não encontrado!"});
-            }
-        });
+        if (result) {
+            statusCode = 200;
+            res.status(statusCode).send(result);
+        } else {
+            statusCode = 404;
+            throw new Error(`Usuário com id ${id} não encontrado!`);
+        }
 
     } catch (error: any) {
-        res.status(statusCode).send( error.sqlMessage || error.message );
+        res.status(statusCode).send( {error: error.sqlMessage || error.message} );
     }
 }

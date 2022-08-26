@@ -1,4 +1,4 @@
-
+-- Active: 1661428809584@@35.226.146.116@3306@freire-jonatas-cunha
 
 INSERT INTO tdUsers (id, name, nickname, email) 
     VALUES  ('990ebc6d-7596-4f13-9e49-3f65fe76839c', 'Jonatas Freire', 'jonatasfreire', 'jon@labenu.com'),
