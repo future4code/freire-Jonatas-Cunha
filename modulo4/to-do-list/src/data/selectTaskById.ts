@@ -1,12 +1,12 @@
 import connection from "./connection";
 import moment from "moment";
 
-export default async function selectTaskById (id: string) {
+export default async function selectTaskById(id: string) {
 
     const result = await connection("tdTasks")
-    .where("tdTasks.id", id)
-    .join("tdUsers", "tdTasks.creator_user_id", "tdUsers.id")
-    .select(
+        .where("tdTasks.id", id)
+        .join("tdUsers", "tdTasks.creator_user_id", "tdUsers.id")
+        .select(
             "tdTasks.id AS taskId",
             "tdTasks.title",
             "tdTasks.description",
@@ -14,12 +14,22 @@ export default async function selectTaskById (id: string) {
             "tdTasks.status",
             "tdUsers.id AS creatorUserId",
             "tdUsers.nickname AS creatorUserNickname"
-        );
+        )
 
-        if(result.length > 0) {
-            result[0].limitDate = moment(result[0].limitDate).format("DD/MM/YYYY");
-            return result[0];
-        } else {
-            return null;
-        }
+    const result2 = await connection("tdTaskUsers")
+        .where("tdTaskUsers.task_id", id)
+        .join("tdUsers", "tdTaskUsers.responsible_user_id", "tdUsers.id")
+        .select(
+            "tdUsers.id AS responsibleUserId",
+            "tdUsers.nickname AS responsibleUserNickname"
+        )
+
+
+    if (result.length > 0) {
+        result[0].limitDate = moment(result[0].limitDate).format("DD/MM/YYYY");
+        result[0].responsibleUser = result2;
+        return result[0];
+    } else {
+        return null;
+    }
 }

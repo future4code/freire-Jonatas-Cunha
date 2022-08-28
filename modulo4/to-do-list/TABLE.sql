@@ -1,4 +1,3 @@
--- Active: 1661428809584@@35.226.146.116@3306@freire-jonatas-cunha
 
 CREATE TABLE tdUsers (
     id VARCHAR(255) PRIMARY KEY,
@@ -17,5 +16,9 @@ CREATE TABLE tdTasks (
     FOREIGN KEY (creator_user_id) REFERENCES tdUsers(id)
 );
 
-
-SELECT * FROM `tdUsers`;
+CREATE TABLE tdTaskUsers (
+    task_id VARCHAR(255) NOT NULL,
+    responsible_user_id VARCHAR(255) NOT NULL,
+    FOREIGN KEY (task_id) REFERENCES tdTasks(id),
+    FOREIGN KEY (responsible_user_id) REFERENCES tdUsers(id)
+);
