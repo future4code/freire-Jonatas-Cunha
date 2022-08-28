@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import insertTask from '../data/insertTask';
 import moment from 'moment'
-
+import { Task } from '../types';
 export default async function postTask (req: Request, res: Response): Promise<void> {
 
     let statusCode: number = 500;
@@ -19,7 +19,14 @@ export default async function postTask (req: Request, res: Response): Promise<vo
             throw new Error('limiteDate deve ser uma data válida');
         }
 
-       await insertTask(title, description, limiteDate, creatorUserId).then(() => {
+        const task: Task = {
+            title,
+            description,
+            limiteDate: moment(limiteDate, "DD MM YYYY").format("YYYY-MM-DD"),
+            creatorUserId
+        }
+
+       await insertTask(task).then(() => {
             statusCode = 201;
             res.status(statusCode).send();
         }).catch((error: any) => {

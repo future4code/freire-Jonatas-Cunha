@@ -15,9 +15,10 @@ INSERT INTO tdTasks (id, title, description, limit_date, creator_user_id)
             ("b9d00a41-58d3-40b9-b93a-7adafbf9fd8e", "Comprar pão", "Ir a padaria e compra 5 reais de pão.", "2023-05-01", "990ebc6d-7596-4f13-9e49-3f65fe76839c");
 
 INSERT INTO tdTaskUsers (task_id, responsible_user_id)
-    VALUES ("b9d00a41-58d3-40b9-b97a-7adafbf9fd8e", "990ebc6d-7596-4f13-9e49-3f65fe76839c"),
+    VALUES ("b9d00a41-58d3-40b9-b97a-7adafbf9fd8e", "990ebasd-7596-4bg3-9e49-3f65fe76839c"),
             ("b9d00a41-58d3-40b9-b98a-7adafbf9fd8e", "990ebc6d-7596-4f13-9e49-3f65fe76839c"),
             ("b9d00a41-58d3-40b9-b96a-7adafbf9fd8e", "990ebc6d-7596-4f13-9e49-3f65fe76839c"),
             ("b9d00a41-58d3-40b9-b95a-7adafbf9fd8e", "990ebc6d-7596-4f13-9e49-3f65fe76839c"),
             ("b9d00a41-58d3-40b9-b94a-7adafbf9fd8e", "990ebc6d-7596-4f13-9e49-3f65fe76839c"),
             ("b9d00a41-58d3-40b9-b93a-7adafbf9fd8e", "990ebc6d-7596-4f13-9e49-3f65fe76839c");
+

@@ -6,14 +6,22 @@ export default async function postTaskResponsible(req: Request, res: Response): 
     let statusCode: number = 500;
     try {
 
-        const { taskId, userId } = req.body as { taskId: string, userId: string };
+        const { taskId, userId } = req.body;
 
-        if (!taskId || !userId || taskId === "" || userId === "") {
+        if (!taskId || taskId === "" || userId.length === 0 || typeof userId !== "object") {
             statusCode = 422;
             throw new Error('taskId e userId são obrigatórios');
         }
 
-        await insertTaskUser(taskId, userId).then(() => {
+
+        const responsible = userId.map( (id: string, ) => (
+            {
+                responsible_user_id: id,
+                task_id : taskId
+            }
+        ))
+
+        await insertTaskUser(responsible).then(() => {
             statusCode = 201;
             res.status(statusCode).send({ mensagem: "Atribuição realizada com sucesso!" });
         }).catch((error: any) => {

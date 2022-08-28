@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import insertUser from "../data/insertUser";
 import * as EmailValidator from 'email-validator';
+import { User } from "../types";
 
 export default async function postUser(req: Request, res: Response): Promise<void> {
 
@@ -21,7 +22,13 @@ export default async function postUser(req: Request, res: Response): Promise<voi
             res.status(statusCode).send({error: "Email inválido"}).end();
         }
 
-        await insertUser(name, nickname, email).then(() => {
+        const user: User = {
+            name,
+            nickname,
+            email
+        }
+
+        await insertUser(user).then(() => {
             statusCode = 201;
             res.status(statusCode).send();
         }).catch((error) => {

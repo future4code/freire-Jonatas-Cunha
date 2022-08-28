@@ -15,7 +15,10 @@ import postTaskResponsible from './controllers/postTaskResponsible';
 import getTaskResponsible from './controllers/getTaskResponsible';
 import putTaskStatus from './controllers/putTaskStatus';
 import getTaskByStatus from './controllers/getTaskByStatus';
-
+import getLateTasks from './controllers/getLateTasks';
+import deleteResponsibleUserForTask from './controllers/deleteResponsibleUserForTask';
+import getSearchTask from './controllers/getSearchTask';
+import deleteTaskById from './controllers/deleteTaskById';
 
 const port = process.env.PORT || 3003;
 const app = express();
@@ -29,14 +32,18 @@ app.get('/user/:id', getUserById);
 app.post('/user', postUser);
 app.put('/user/:id', putUser);
 
-app.get('/task', getTaskByStatus);
+
+app.get('/task/search', getSearchTask);
+app.get('/task/status', getTaskByStatus);
 app.get('/task', getTasksCreatedByAUser);
+app.get('/task/delayed', getLateTasks)
 app.get('/task/:id', getTaskById);
 app.get('/task/:id/responsible', getTaskResponsible);
 app.post('/task', postTask);
 app.post('/task/responsible', postTaskResponsible)
 app.put('/task/status/:id/', putTaskStatus);
-
+app.delete('/task/:taskId/responsible/:responsibleUserId', deleteResponsibleUserForTask)
+app.delete('/task/:id', deleteTaskById);
 
 const server = app.listen (port, () => {
     if (server){
