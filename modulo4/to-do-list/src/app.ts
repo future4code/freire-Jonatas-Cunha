@@ -36,20 +36,20 @@ app.put('/user/:id', putUser);
 app.get('/task/search', getSearchTask);
 app.get('/task/status', getTaskByStatus);
 app.get('/task', getTasksCreatedByAUser);
-app.get('/task/delayed', getLateTasks)
+app.get('/task/delayed', getLateTasks);
 app.get('/task/:id', getTaskById);
 app.get('/task/:id/responsible', getTaskResponsible);
 app.post('/task', postTask);
-app.post('/task/responsible', postTaskResponsible)
+app.post('/task/responsible', postTaskResponsible);
 app.put('/task/status/:id/', putTaskStatus);
-app.delete('/task/:taskId/responsible/:responsibleUserId', deleteResponsibleUserForTask)
+app.delete('/task/:taskId/responsible/:responsibleUserId', deleteResponsibleUserForTask);
 app.delete('/task/:id', deleteTaskById);
 
 const server = app.listen (port, () => {
     if (server){
         const address = server.address() as AddressInfo;
-        console.log(`Server is running in http://localhost:${address.port}`)
+        console.log(`Server is running in http://localhost:${address.port}`);
     }else{
-        console.error(`Failure upon starting server.`)
-    }
-})
+        console.error(`Failure upon starting server.`);
+    };
+});

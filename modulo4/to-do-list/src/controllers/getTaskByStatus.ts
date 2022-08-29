@@ -3,7 +3,7 @@ import selectTaskByStatus from '../data/selectTaskByStatus';
 import { Status } from '../types';
 
 export default async function getTaskByStatus(req: Request, res: Response) {
-    const search = req.query.status as string;
+    const search = req.query.query as string;
     let statusCode = 500;
         try {
 
@@ -21,6 +21,6 @@ export default async function getTaskByStatus(req: Request, res: Response) {
                     }
                 })
         } catch (error: any) {
-            res.status(400).send(error.message || error.sqlMessage);
+            res.status(400).send({message: error.message || error.sqlMessage});
         }
 }
