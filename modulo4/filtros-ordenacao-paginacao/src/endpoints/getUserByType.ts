@@ -4,7 +4,7 @@ import { connection } from "../data/connection"
 
 export default async function getUserByType(req: Request, res: Response): Promise<any> {
 
-    const type: string = req.query.filter as string;
+    const type: string = req.params.type as string;
     let statusCode: number = 500;
 
     try {

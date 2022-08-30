@@ -5,7 +5,7 @@ import { connection } from "../data/connection"
 export default async function getUsersWithFilters(req: Request, res: Response): Promise<any> {
 
     let filterName: string = req.query.filterName as string;
-    let filterType: string = req.query.filterType as string;
+    let type: string = req.params.type as string;
     let order: string = req.query.order as string;
     let element: string = req.query.element as string;
     const page: number = Number(req.query.page) || 1;
@@ -28,8 +28,8 @@ export default async function getUsersWithFilters(req: Request, res: Response): 
             element = "name"
         }
 
-        if (!filterType) {
-            filterType = ""
+        if (!type || (type !== "admin" && type !== "user")) {
+            type = ""
         }
 
         if (!filterName) {
@@ -39,7 +39,7 @@ export default async function getUsersWithFilters(req: Request, res: Response): 
         const result = await connection('Users_atv')
             .select('id', 'name', 'email', 'type')
             .where(`name`, 'LIKE', `%${filterName}%`)
-            .where(`type`, 'LIKE', `%${filterType}%`)
+            .where(`type`, 'LIKE', `%${type}%`)
             .orderBy(element, order)
             .limit(5)
             .offset(offset)

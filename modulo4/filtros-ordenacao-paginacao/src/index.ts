@@ -12,10 +12,10 @@ app.use(express.json())
 app.use(cors())
 
 
-app.get("/users/type", getUserByType)
+app.get("/users/:type", getUserByType)
 app.get("/users/name", getUserByName)
 app.get("/users/pagination", getAllUsersWithPagination)
-app.get("/users/allSerivices", getUsersWithFilters)
+app.get("/users/:type/allSerivices", getUsersWithFilters)
 
 
 
