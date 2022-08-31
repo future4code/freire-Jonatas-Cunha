@@ -9,7 +9,13 @@ export default async function getUserByType(req: Request, res: Response): Promis
 
     try {
         if (!type) {
-            throw new Error("Filter is required")
+            statusCode = 400;
+            throw new Error("Type is required")
+        }
+
+        if (type && (type !== "admin" && type !== "user")) {
+            statusCode = 400;
+            throw new Error("Type must be admin or user")
         }
 
         const result = await connection('Users_atv')

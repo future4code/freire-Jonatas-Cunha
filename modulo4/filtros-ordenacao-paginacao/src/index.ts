@@ -5,6 +5,7 @@ import { AddressInfo } from "net"
 import getAllUsersWithPagination from "./endpoints/getAllUsersWithPagination"
 import getUserByType from "./endpoints/getUserByType"
 import getUsersWithFilters from "./endpoints/getUsersWithFilters"
+import getAllUsersOrdered from "./endpoints/getAllUsersOrdered"
 
 export const app = express()
 
@@ -12,10 +13,11 @@ app.use(express.json())
 app.use(cors())
 
 
-app.get("/users/:type", getUserByType)
-app.get("/users/name", getUserByName)
 app.get("/users/pagination", getAllUsersWithPagination)
-app.get("/users/:type/allSerivices", getUsersWithFilters)
+app.get("/users/ordered", getAllUsersOrdered)
+app.get("/users/:type", getUserByType)
+app.get("/users", getUserByName)
+app.get("/users/:type/filters", getUsersWithFilters)
 
 
 

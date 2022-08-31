@@ -2,11 +2,12 @@ import { Request, Response } from "express"
 import { connection } from "../data/connection"
 
 
-export default async function getUserByType(req: Request, res: Response): Promise<any> {
+export default async function getAllUsersOrdered(req: Request, res: Response): Promise<any> {
 
     const order: string = req.query.order as string;
     let element: string = req.query.element as string;
     let statusCode: number = 500;
+    console.log(order, element)
 
     try {
         if (order && (order !== "asc" && order !== "desc")) {
@@ -21,7 +22,7 @@ export default async function getUserByType(req: Request, res: Response): Promis
             element = "name"
         }
 
-        const result = await connection('users')
+        const result = await connection('Users_atv')
             .select('id', 'name', 'email', 'type')
             .orderBy(element, order)
 

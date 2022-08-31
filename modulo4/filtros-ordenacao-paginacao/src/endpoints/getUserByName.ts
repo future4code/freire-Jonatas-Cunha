@@ -4,12 +4,13 @@ import { connection } from "../data/connection"
 
 export default async function getUserByName(req: Request, res: Response): Promise<any> {
 
-    const name: string = req.query.filter as string;
+    const name: string = req.query.name as string;
     let statusCode: number = 500;
 
     try {
         if (!name) {
-            throw new Error("Filter is required")
+            statusCode = 400;
+            throw new Error("Name is required")
         }
 
         const result = await connection('Users_atv')

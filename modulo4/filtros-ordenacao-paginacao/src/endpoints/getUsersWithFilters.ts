@@ -4,7 +4,7 @@ import { connection } from "../data/connection"
 
 export default async function getUsersWithFilters(req: Request, res: Response): Promise<any> {
 
-    let filterName: string = req.query.filterName as string;
+    let name: string = req.query.name as string;
     let type: string = req.params.type as string;
     let order: string = req.query.order as string;
     let element: string = req.query.element as string;
@@ -32,13 +32,13 @@ export default async function getUsersWithFilters(req: Request, res: Response): 
             type = ""
         }
 
-        if (!filterName) {
-            filterName = ""
+        if (!name) {
+            name = ""
         }
 
         const result = await connection('Users_atv')
             .select('id', 'name', 'email', 'type')
-            .where(`name`, 'LIKE', `%${filterName}%`)
+            .where(`name`, 'LIKE', `%${name}%`)
             .where(`type`, 'LIKE', `%${type}%`)
             .orderBy(element, order)
             .limit(5)
