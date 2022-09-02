@@ -1,3 +1,5 @@
+import { PurchaseAllInfo } from "./Purchase";
+
 export type User = {
     name: string,
     email: string,
@@ -7,5 +9,6 @@ export type User = {
 export type UserData = {
     id: string,
     name: string,
-    email: string
+    email: string,
+    purchases: PurchaseAllInfo[]
 };

@@ -1,9 +1,16 @@
 import { connection } from "./connection";
 import { ProductWithId } from "../types/Product";
 
-export const selectAllProducts = async (): Promise<ProductWithId[]> => {
+export const selectAllProducts = async (order: string, search: string): Promise<ProductWithId[] | undefined> => {
+
     const result = await connection("labecommerce_products")
-        .select("*");
+        .select("*")
+        .where("name", "LIKE", `%${search}%`)
+        .orderBy("price", order)
+
+    if (result.length === 0) {
+        return undefined;
+    }
 
     return result.map((product: any) => {
         return {

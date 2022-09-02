@@ -1,14 +1,15 @@
 import { Request, Response } from "express";
 import { selectAllUsers } from "../data/selectAllUsers";
+import { UserData } from "../types/User";
 
-export const getAllUsers = async (req: Request, res: Response) => {
+export const getAllUsers = async (req: Request, res: Response): Promise<void> => {
 
     let statusCode: number = 500;
 
     try {
-        const users = await selectAllUsers();
+        const users: UserData[] | undefined = await selectAllUsers();
 
-        if (!users.length) {
+        if (!users) {
             res.statusCode = 404;
             throw new Error("No users found");
         }
@@ -16,8 +17,8 @@ export const getAllUsers = async (req: Request, res: Response) => {
         statusCode = 200;
         res.status(statusCode).send(users);
 
-    } catch (error: any) {
-        error.sqlMessage ? res.status(500).send({ message: error.sqlMessage })
+    } catch (error) {
+        error.sqlMessage ? res.status(statusCode).send({ message: error.sqlMessage })
             : res.status(statusCode).send({ message: error.message });
     }
 };

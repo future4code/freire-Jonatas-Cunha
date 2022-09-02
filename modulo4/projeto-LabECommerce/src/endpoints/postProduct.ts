@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { Product } from "../types/Product";
 import { insertProduct } from "../data/insertProduct";
 
-export const postProduct = async (req: Request, res: Response) => {
+export const postProduct = async (req: Request, res: Response): Promise<void> => {
 
     let { name, price, imageUrl }: Product = req.body as Product;
     let statusCode: number = 500;
@@ -40,8 +40,8 @@ export const postProduct = async (req: Request, res: Response) => {
         statusCode = 201;
         res.status(statusCode).send({ message: "Product created successfully" });
 
-    } catch (error: any) {
-        error.sqlMessage ? res.status(500).send({ message: error.sqlMessage })
+    } catch (error) {
+        error.sqlMessage ? res.status(statusCode).send({ message: error.sqlMessage })
             : res.status(statusCode).send({ message: error.message });
     }
 };

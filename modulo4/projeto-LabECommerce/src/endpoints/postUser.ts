@@ -3,9 +3,9 @@ import { User } from '../types/User';
 import * as EmailValidator from 'email-validator';
 import { insertUser } from '../data/insertUser';
 
-export const postUser = async (req: Request, res: Response) => {
+export const postUser = async (req: Request, res: Response): Promise<void> => {
 
-    const { name, email, password }: User = req.body as User;
+    const { name, email, password }: User = req.body;
     let statusCode: number = 500;
 
     try {
@@ -39,8 +39,8 @@ export const postUser = async (req: Request, res: Response) => {
         statusCode = 201;
         res.status(statusCode).send({ message: "User created successfully!" });
     }
-    catch (error: any) { 
-        error.sqlMessage ? res.status(500).send({ message: error.sqlMessage }) 
+    catch (error) { 
+       error.sqlMessage ? res.status(statusCode).send({ message: error.sqlMessage }) 
             : res.status(statusCode).send({ message: error.message });
     }
 };

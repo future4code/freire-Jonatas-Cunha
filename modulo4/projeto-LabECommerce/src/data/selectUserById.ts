@@ -1,7 +1,7 @@
 import { UserData } from "../types/User";
 import { connection } from "./connection";
 
-export const getUserById = async (id: string): Promise<UserData> => {
+export const selectUserById = async (id: string): Promise<UserData> => {
     let result = await connection("labecommerce_users")
         .select("id", "name", "email")
         .where({ id });
