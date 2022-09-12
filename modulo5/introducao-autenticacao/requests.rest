@@ -1,0 +1,23 @@
+POST http://localhost:3003/user/register
+Content-Type: application/json
+
+{
+    "email": "frederico@gmail.com", 
+    "password":"3201"
+}
+
+###
+POST http://localhost:3003/user/login
+Content-Type: application/json
+
+{
+    "email": "frederico@gmail.com",
+    "password":"3201"
+}
+
+###
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImlkIjoiYzhhNjNhNDMtMDJhMC00N2Y3LWJiMGEtNjc3MTg2YWNhMGQ5In0sImlhdCI6MTY2MzAwNTA4NywiZXhwIjoxNjYzMDA1MTQ3fQ.Sp4i7Y5Dly1CgTx2UOyrE_p98GRWQEBsxxqY84gebwo
+
+GET http://localhost:3003/user/profile
+Content-Type: application/json
+Authorization: {{token}}
