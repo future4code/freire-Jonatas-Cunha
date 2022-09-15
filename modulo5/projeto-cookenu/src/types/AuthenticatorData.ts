@@ -3,7 +3,7 @@ export enum UserRoles {
     USER = 'user',
 }
 
-export type AuthenticatorData = {
+export interface AuthenticatorData {
     id: string
     role: UserRoles
  }

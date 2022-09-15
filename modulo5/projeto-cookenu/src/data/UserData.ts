@@ -31,6 +31,7 @@ class UserData extends BaseDataBase {
 
             return user[0] && User.toUserModel(user[0]);
     }
+
 }
 
 export default UserData;
