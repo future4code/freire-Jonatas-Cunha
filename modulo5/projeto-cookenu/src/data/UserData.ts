@@ -4,6 +4,22 @@ import BaseDataBase from "./BaseDataBase";
 
 class UserData extends BaseDataBase {
 
+    public async deleteAccount(id: string): Promise<void> {  
+        await BaseDataBase.getConnection().into("cookenu_follow")
+            .delete()
+            .where({ follower_id: id })
+            .orWhere({ followed_id: id });
+
+        await BaseDataBase.getConnection().into("cookenu_recipes")
+            .delete()
+            .where({ user_id: id });
+            
+        await BaseDataBase.getConnection().into("cookenu_user")
+            .delete()
+            .where({ id });
+    }
+
+
     public async insertUser(user: User): Promise<void> {
         await BaseDataBase.getConnection().into("cookenu_user")
             .insert({

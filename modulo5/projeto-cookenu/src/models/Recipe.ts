@@ -26,7 +26,7 @@ class Recipes {
             data.title, 
             data.description, 
             data.preparation_mode, 
-            moment(data.creationDate).format("DD/MM/YYYY"),
+            moment(data.creation_date).format("DD/MM/YYYY"),
             data.user_id,
             data.name ? data.name : undefined
         );
