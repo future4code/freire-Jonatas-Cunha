@@ -1,0 +1,526 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "Login System Ficr",
+        "version": "1.0.0",
+        "description": "Api criada para o sistema de login da disciplina de Programação para Web "
+    },
+    "basePath": "/",
+    "components": {
+        "schemas": {
+            "error": {
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "type": "string"
+                    }
+                }
+            },
+            "access": {
+                "type": "object",
+                "properties": {
+                    "token": {
+                        "type": "string"
+                    }
+                }
+            },
+
+            "profile": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "ApiKeyAuth": {
+                "description": "Token de autenticação",
+                "type": "apiKey",
+                "in": "header",
+                "name": "Authorization"
+            }
+        }
+    },
+    
+    "paths": {
+        "/users/profile": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Perfil",
+                "description": "Retorna o perfil do usuário, com base no token informado",
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Perfil do usuário",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/profile"
+                                },
+                                "example": {
+                                    "id": "b2d548b1-feca-435b-932b-211161715de6",
+                                    "name": "Fulano",
+                                    "email": "fulano@gmail.com"
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Token inválido.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "example": {
+                                    "error": "Invalid token"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "User not found.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "example": {
+                                    "error": "User not found"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Token não informado.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "example": {
+                                    "error": "token are required"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users/signup": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Cadastrar",
+                "description": "Cria um novo usuário",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "name": "Fulano",
+                                    "email": "fulano@gmail.com",
+                                    "password": "qwerty00"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Usuário criado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/access"
+                                },
+                                "example": {
+                                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImIyZDU0OGIxLWZlY2EtNDM1Yi05MzJiLTIxMTE2MTcxNWRlNiIsImlhdCI6MTY2MzY4NDcxNCwiZXhwIjoxNjYzNzcxMTE0fQ.0NJ9rZGbZ3vA6vkoEf1xn4VIw948LaA9b5euJSK1Tos"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Parâmetro inválido.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "email": {
+                                        "value": {
+                                            "error": "Invalid email"
+                                        }
+                                    },
+                                    "password": {
+                                        "value": {
+                                            "error": "Password must have at least 6 characters"
+                                        }
+                                    },
+                                    "name": {
+                                        "value": {
+                                            "error": "Name must have at least 3 characters"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Parâmetros não informados.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "example": {
+                                    "error": "name, email and password are required"
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Email já cadastrado.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "example": {
+                                    "error": "Email already registered"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users/login": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Logar",
+                "description": "Realiza o login do usuário",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "email": "fulano@gmail.com",
+                                    "password": "qwerty00"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Login realizado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/access"
+                                },
+                                "example": {
+                                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImIyZDU0OGIxLWZlY2EtNDM1Yi05MzJiLTIxMTE2MTcxNWRlNiIsImlhdCI6MTY2MzY4NDcxNCwiZXhwIjoxNjYzNzcxMTE0fQ.0NJ9rZGbZ3vA6vkoEf1xn4VIw948LaA9b5euJSK1Tos"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Parâmetros não informados.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "example": {
+                                    "error": "email and password are required"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Parâmetro inválido.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "email": {
+                                        "value": {
+                                            "error": "Invalid email"
+                                        }
+                                    },
+                                    "password": {
+                                        "value": {
+                                            "error": "Password must have at least 6 characters"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Email não registrado.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "example": {
+                                    "error": "Email not registered"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Senha incorreta.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "example": {
+                                    "error": "Incorrect password"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users/changePassword": {
+            "put": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Alterar senha",
+                "description": "Altera a senha do usuário, com base no token informado",
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "oldPassword": {
+                                        "type": "string"
+                                    },
+                                    "newPassword": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "oldPassword": "qwerty00",
+                                    "newPassword": "qwerty01"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Senha alterada com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/access"
+                                },
+                                "example": {
+                                    "message": "Password changed successfully"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Parâmetros não informados.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "example": {
+                                    "error": "token, oldPassword and newPassword are required"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Parâmetro inválido.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "example": {
+                                    "error": "Password must have at least 6 characters"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Não Autorizado.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "examples": {
+                                    "Senha Incorreta": {
+                                        "value": {
+                                            "error": "Invalid oldPassword"
+                                        }
+                                    },
+                                    "Token Inválido": {
+                                        "value": {
+                                            "error": "Invalid token"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users/deleteAccount": {
+            "delete": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Deletar conta",
+                "description": "Deleta a conta do usuário, com base no token informado",
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "password": "qwerty00"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Conta deletada com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/access"
+                                },
+                                "example": {
+                                    "message": "User deleted successfully"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Usuário não encontrado.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "example": {
+                                    "error": "User not found"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Não Autorizado.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "example": {
+                                    "error": "Invalid token"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Token não informado.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/error"
+                                },
+                                "example": {
+                                    "error": "token and password are required"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

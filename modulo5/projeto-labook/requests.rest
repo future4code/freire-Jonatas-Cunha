@@ -1,0 +1,38 @@
+###
+@ApiLink = http://localhost:3003
+
+### Endpoint de teste
+GET {{ApiLink}}/
+
+### Endpoint de cadastro de usuário
+POST {{ApiLink}}/users/signup
+Content-Type: application/json
+
+{
+    "name": "Beltrano",
+    "email": "beltrano@gmail.com",
+    "password": "abc123"
+}
+
+### Endpoint de login
+POST {{ApiLink}}/users/login
+Content-Type: application/json
+
+{
+    "email": "beltrano@gmail.com",
+    "password": "abc123"
+}
+
+### Endpoint de pegar perfil do usuário
+GET {{ApiLink}}/users/profile
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImYwMzAxN2JiLTJjMDgtNGNkYy1iYjYzLTdmYmQ3Y2ViZTAxZiIsImlhdCI6MTY2MzY5MzU5OSwiZXhwIjoxNjYzNzc5OTk5fQ.kjVd5xjACz43UOdvDJJDCiINfSQ3XTivICbgErurXp4
+
+### Endpoint de alterar senha
+PUT {{ApiLink}}/users/changePassword
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImZkZGU1M2I4LTAwNTctNDk4Ny05OWE3LWI2MGQ5YjBmYTRkMSIsImlhdCI6MTY2MzY0MTI5MywiZXhwIjoxNjYzNzI3NjkzfQ.rVnifWyJ1bOOS-1QlS8PRTePum5z-tD-fcy_FfNJrE0
+Content-Type: application/json
+
+{
+    "oldPassword": "abc1234",
+    "newPassword": "abc123"
+}
