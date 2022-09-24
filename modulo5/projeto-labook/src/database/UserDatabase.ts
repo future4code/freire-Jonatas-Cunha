@@ -1,7 +1,7 @@
 import BaseDatabase from "./BaseDatabase"
 import { User } from "../models/User"
 
-class UserDatabase extends BaseDatabase {
+export class UserDatabase extends BaseDatabase {
 
     public static TABLE_USER = "labook_users"
 
@@ -36,5 +36,3 @@ class UserDatabase extends BaseDatabase {
     }
 
 }
-
-export default UserDatabase;

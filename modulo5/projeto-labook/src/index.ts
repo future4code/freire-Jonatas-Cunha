@@ -4,6 +4,7 @@ import dotenv from "dotenv"
 import { userRouter } from './router/userRouter'
 import swaggerUi from 'swagger-ui-express'
 import swaggerFile from './swagger.json'
+import { postRouter } from './router/postRouter'
 
 dotenv.config()
 
@@ -18,3 +19,5 @@ app.listen(process.env.PORT || 3003, () => {
 app.get('/', (req, res) => res.send("API rodando!"))
 app.use("/users", userRouter)
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile))
+
+app.use('/posts', postRouter)
