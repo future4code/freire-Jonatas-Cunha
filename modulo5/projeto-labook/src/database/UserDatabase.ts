@@ -3,7 +3,7 @@ import { User } from "../models/User"
 
 export class UserDatabase extends BaseDatabase {
 
-    public static TABLE_USER = "labook_users"
+    public static TABLE_USER: string = "labook_users"
 
     public insertUser = async (user: User) => {
         await BaseDatabase.getConnection()

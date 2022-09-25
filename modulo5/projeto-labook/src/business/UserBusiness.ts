@@ -1,10 +1,10 @@
-import UserDatabase from "../database/UserDatabase";
+import { UserDatabase } from "../database/UserDatabase";
 import { Authenticator } from "../services/Authenticator";
 import { HashManager } from "../services/HashManager";
 import { IdGenerator } from "../services/IdGenerator";
 
-import EmailValidator from "../services/EmailValidator";
 import { ILoginInputDTO, ISignUpInputDTO, Role, User } from "../models/User";
+import EmailValidator from "../services/EmailValidator";
 import MissingParameters from "../error/MissingParameters";
 import BadRequest from "../error/BadRequest";
 import Conflict from "../error/Conflict";

@@ -18,5 +18,6 @@ const postController = new PostController(
     )
 )
 
+postRouter.get('/', postController.getFeed)
 postRouter.post('/create', postController.create)
-
+postRouter.delete('/delete/:id', postController.delete)
