@@ -1,17 +1,10 @@
 import BaseDatabase  from "../BaseDatabase"
-import UserDatabase from "../UserDatabase"
-import { users } from "./data"
 
 class Migrations extends BaseDatabase {
     execute = async () => {
         try {
 
             await this.createTables()
-            console.log("Tables created successfully.")
-
-            // await this.insertData()
-            // console.log("Tables populated successfully.")
-
             console.log("Migrations completed.")
 
         } catch (error) {
@@ -47,12 +40,6 @@ class Migrations extends BaseDatabase {
             FOREIGN KEY (post_id) REFERENCES labook_posts(id)
         );
         `)
-    }
-
-    insertData = async () => {
-        await BaseDatabase
-            .getConnection()(UserDatabase.TABLE_NAME)
-            .insert(users)
     }
 }
 
