@@ -36,5 +36,11 @@ export class LikeDataBase extends BaseDataBase {
         return result;
     }
 
+    public deleteAllLikes = async (postId: string): Promise<void> => {
+        await BaseDataBase.getConnection()
+            .delete()
+            .from(LikeDataBase.TABLE_LIKE)
+            .where({ post_id: postId });
+    }
 
 }

@@ -5,6 +5,7 @@ import { PostDatabase } from '../database/PostDatabase'
 import { PostController } from '../controller/PostController'
 import { PostBusiness } from '../business/PostBusiness'
 import { UserDatabase } from '../database/UserDatabase'
+import { LikeDataBase } from '../database/LikeDatabase'
 
 
 export const postRouter = Router()
@@ -14,7 +15,8 @@ const postController = new PostController(
         new Authenticator(),
         new IdGenerator(),
         new PostDatabase(),
-        new UserDatabase
+        new UserDatabase,
+        new LikeDataBase
     )
 )
 

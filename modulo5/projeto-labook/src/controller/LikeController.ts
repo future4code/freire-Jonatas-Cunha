@@ -15,12 +15,12 @@ export class LikeController {
 
            const input: ILikeInputDTO = {
                 token: req.headers.authorization as string,
-                postId: req.body.postId
+                postId: req.params.postId
            }
 
              const result = await this.likeBusiness.likePost(input);
 
-            res.status(200).send({ message: "Post liked successfully", likes: result });
+            res.status(200).send({ message: "Post liked successfully", likes: result, userIsLiked: true });
         } catch (err) {
             res.status(err.statusCode || 500).send({message: err.message || err.sqlMessage});
         }
@@ -31,11 +31,11 @@ export class LikeController {
             
             const input: ILikeInputDTO = {
                 token: req.headers.authorization as string,
-                postId: req.body.postId
+                postId: req.params.postId
             }
 
             const result = await this.likeBusiness.unlikePost(input);
-            res.status(200).send({message: "Post unliked successfully", likes: result});
+            res.status(200).send({message: "Post unliked successfully", likes: result, userIsLiked: false});
 
         } catch (err) {
             res.status(err.statusCode || 500).send({message: err.message || err.sqlMessage});

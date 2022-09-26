@@ -20,7 +20,7 @@ export class PostController {
             res.status(201).send({ message: "Post created successfully" })
 
         } catch (err) {
-            res.status(err.statusCode || 400).send({ message: err.message || err.sqlMessage })
+            res.status(err.statusCode || 500).send({ message: err.message || err.sqlMessage })
         }
     }
 
@@ -33,7 +33,7 @@ export class PostController {
             res.status(200).send(feed)
 
         } catch (err) {
-            res.status(err.statusCode || 400).send({ message: err.message || err.sqlMessage })
+            res.status(err.statusCode || 500).send({ message: err.message || err.sqlMessage })
         }
     }
 
@@ -48,7 +48,7 @@ export class PostController {
             res.status(200).send({ message: "Post deleted successfully" })
 
         } catch (err) {
-            res.status(err.statusCode || 400).send({ message: err.message || err.sqlMessage })
+            res.status(err.statusCode || 500).send({ message: err.message || err.sqlMessage })
         }
     }
 

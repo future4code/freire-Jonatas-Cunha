@@ -6,14 +6,17 @@ import MissingParameters from "../error/MissingParameters";
 import BadRequest from "../error/BadRequest";
 import { UserDatabase } from "../database/UserDatabase";
 import Unauthorized from "../error/Unauthorized";
+import NotFound from "../error/NotFound";
+import { LikeDataBase } from "../database/LikeDatabase";
 
 export class PostBusiness {
     constructor(
         private authenticator: Authenticator,
         private idGenerator: IdGenerator,
         private postDatabase: PostDatabase,
-        private userDatabase: UserDatabase
-    ) { }
+        private userDatabase: UserDatabase,
+        private likeDatabase: LikeDataBase
+    ) { };
 
 
     public create = async (input: IPostInputDTO) => {
@@ -65,6 +68,10 @@ export class PostBusiness {
 
         const response = await this.postDatabase.selec()
 
+        if(!response.length){
+            throw new NotFound("No posts found")
+        }
+
         const publicFeed: PublicPost[] = response.map((post: any) => {
             return PublicPost.toPublicPostModel(post)
         })
@@ -94,13 +101,14 @@ export class PostBusiness {
         const post = await this.postDatabase.selectById(id)
 
         if(!post.length){
-            throw new BadRequest("Post not found")
+            throw new NotFound("Post not found")
         }
 
         if(post[0].user_id !== tokenData.id && tokenData.role !== "ADMIN"){
             throw new Unauthorized("You can only delete your own posts")
         }
 
+        await this.likeDatabase.deleteAllLikes(id)
         await this.postDatabase.delete(id)
     }
 

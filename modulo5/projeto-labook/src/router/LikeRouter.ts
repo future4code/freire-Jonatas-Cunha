@@ -22,6 +22,6 @@ const likeController = new LikeController(
 )
 
 likeRouter.get('/:postId', likeController.getPostLikes)
-likeRouter.post('/', likeController.likePost)
-likeRouter.delete('/', likeController.unlikePost)
+likeRouter.post('/newLike/:postId', likeController.likePost)
+likeRouter.delete('/removeLike/:postId', likeController.unlikePost)
 

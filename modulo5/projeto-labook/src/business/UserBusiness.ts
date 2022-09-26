@@ -43,7 +43,7 @@ export class UserBusiness {
         const emailIsAlreadyInUse = await this.userDatabese.selectUserByEmail(email);
 
         if (emailIsAlreadyInUse.length) {
-            throw new Conflict("email already in use");
+            throw new Conflict("Email already in use");
         }
 
         const id = this.idGenerator.generate();
