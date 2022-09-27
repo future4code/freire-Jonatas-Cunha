@@ -1,0 +1,1022 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "Projeto Labook",
+        "version": "1.0.0",
+        "description": "O Labook é uma rede social com o objetivo de promover a conexão e interação entre seus mais diversos usuários. As pessoas poderão criar e curtir publicações."
+    },
+    "basePath": "/",
+    "components": {
+        "schemas": {
+            "SignUp": {
+                "type": "object",
+                "tags": [
+                    "User"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "name",
+                    "email",
+                    "password"
+                ]
+            },
+            "Login": {
+                "type": "object",
+                "tags": [
+                    "User"
+                ],
+                "properties": {
+                    "email": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "email",
+                    "password"
+                ]
+            },
+            "Token": {
+                "type": "object",
+                "tags": [
+                    "User"
+                ],
+                "properties": {
+                    "token": {
+                        "type": "string"
+                    }
+                }
+            },
+            "CreatePost": {
+                "type": "object",
+                "tags": [
+                    "Post"
+                ],
+                "properties": {
+                    "authorization": {
+                        "type": "string"
+                    },
+                    "content": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "authorization",
+                    "content"
+                ]
+            },
+            "GetFeed": {
+                "type": "object",
+                "tags": [
+                    "Post"
+                ],
+                "properties": {
+                    "authorization": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "authorization"
+                ]
+            },
+            "DeletePost": {
+                "type": "object",
+                "tags": [
+                    "Post"
+                ],
+                "properties": {
+                    "authorization": {
+                        "type": "string"
+                    },
+                    "postId": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "authorization",
+                    "postId"
+                ]
+            },
+            "Post": {
+                "type": "object",
+                "tags": [
+                    "Post"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "content": {
+                        "type": "string"
+                    },
+                    "userId": {
+                        "type": "string"
+                    },
+                    "userName": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Like": {
+                "type": "object",
+                "tags": [
+                    "Like"
+                ],
+                "properties": {
+                    "postId": {
+                        "type": "string"
+                    },
+                    "likes": {
+                        "type": "number"
+                    },
+                    "userIsLiked": {
+                        "type": "boolean"
+                    }
+                }
+            },
+            "Error": {
+                "type": "object",
+                "tags": [
+                    "Error"
+                ],
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "ApiKeyAuth": {
+                "description": "Token de autenticação",
+                "type": "apiKey",
+                "in": "header",
+                "name": "Authorization"
+            }
+        }
+    },
+    "paths": {
+        "/users/signup": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Cadastrar usuário",
+                "description": "Cadastrar usuário",
+                "operationId": "signup",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SignUp"
+                            },
+                            "example": {
+                                "name": "João",
+                                "email": "joao@gmail.com",
+                                "password": "123456"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Usuário cadastrado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Token"
+                                },
+                                "example": {
+                                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOTE3NzUyLTUwYWItNGM1Zi1iZGIyLWJmNDExZTRkMmM1NyIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjQxMTAwMzgsImV4cCI6MTY2NDE5NjQzOH0.urrgI6iu7sTLviab6gYd2o4c13C1G2uvz2Hwfq6Ial0"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Erro ao cadastrar usuário",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                },
+                                "examples": {
+                                    "name": {
+                                        "value": {
+                                            "message": "name must have at least 3 characters"
+                                        }
+                                    },
+                                    "email": {
+                                        "value": {
+                                            "message": "Invalid email"
+                                        }
+                                    },
+                                    "password": {
+                                        "value": {
+                                            "message": "password must have at least 6 characters"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Erro ao cadastrar usuário",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                },
+                                "example": {
+                                    "message": "Email already in use"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Parâmetros Ausentes",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                },
+                                "example": {
+                                    "message": "name, email and password are required"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users/login": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Logar usuário",
+                "description": "Logar usuário",
+                "operationId": "login",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Login"
+                            },
+                            "example": {
+                                "email": "joao@gmail.com",
+                                "password": "123456"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Usuário logado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Token"
+                                },
+                                "example": {
+                                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOTE3NzUyLTUwYWItNGM1Zi1iZGIyLWJmNDExZTRkMmM1NyIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjQxMTAwMzgsImV4cCI6MTY2NDE5NjQzOH0.urrgI6iu7sTLviab6gYd2o4c13C1G2uvz2Hwfq6Ial0"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Erro ao logar usuário",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                },
+                                "examples": {
+                                    "email": {
+                                        "value": {
+                                            "message": "Invalid email"
+                                        }
+                                    },
+                                    "password": {
+                                        "value": {
+                                            "message": "password must have at least 6 characters"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Senha incorreta",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                },
+                                "example": {
+                                    "message": "Invalid password"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Usuário não encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                },
+                                "example": {
+                                    "message": "Email not registered"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Parâmetros Ausentes",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                },
+                                "example": {
+                                    "message": "email and password are required"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/posts": {
+            "get": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Listar todos os posts",
+                "description": "Retorna todos os posts",
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de posts",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Post"
+                                    }
+                                },
+                                "example": [
+                                    {
+                                        "id": "0f9bb45c-5669-4aad-a2a9-e8b779a39f91",
+                                        "content": "Conteúdo do post de teste 8",
+                                        "userId": "61917752-50ab-4c5f-bdb2-bf411e4d2c57",
+                                        "userName": "Beltrano"
+                                    },
+                                    {
+                                        "id": "69282056-f3e1-43b5-a5cd-0cd2ec320125",
+                                        "content": "Conteúdo do post de teste 6",
+                                        "userId": "61917752-50ab-4c5f-bdb2-bf411e4d2c57",
+                                        "userName": "Beltrano"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Token inválido",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                },
+                                "examples": {
+                                    "invalid token": {
+                                        "value": {
+                                            "message": "Invalid token"
+                                        }
+                                    },
+                                    "user not found": {
+                                        "value": {
+                                            "message": "User not found"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Nenhum post encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                },
+                                "example": {
+                                    "message": "No posts found"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Token ausente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                },
+                                "example": {
+                                    "message": "Token is required"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/posts/create": {
+            "post": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Criar um post",
+                "description": "Cria um post",
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Post"
+                            },
+                            "example": {
+                                "content": "Conteúdo do post de teste 20"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Post criado",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Post created successfully"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Content precisar ter no mínimo 1 caractere",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                },
+                                "example": {
+                                    "message": "Content must have at least 1 character"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Token inválido",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                },
+                                "examples": {
+                                    "invalid token": {
+                                        "value": {
+                                            "message": "Invalid token"
+                                        }
+                                    },
+                                    "user not found": {
+                                        "value": {
+                                            "message": "User not found"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Parâmetros Ausentes",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                },
+                                "example": {
+                                    "message": "token and content are required"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/posts/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Deletar um post",
+                "description": "Deleta um post",
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do post",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Post deletado",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Post deleted successfully"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Não autorizado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                },
+                                "examples": {
+                                    "invalid token": {
+                                        "value": {
+                                            "message": "Invalid token"
+                                        }
+                                    },
+                                    "user not found": {
+                                        "value": {
+                                            "message": "User not found"
+                                        }
+                                    },
+                                    "you are not the author of this post": {
+                                        "value": {
+                                            "message": "You can only delete your own posts"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Post não encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                },
+                                "example": {
+                                    "message": "Post not found"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Parâmetros Ausentes",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                },
+                                "example": {
+                                    "message": "token and id are required"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/likes/{postId}": {
+            "get": {
+                "tags": [
+                    "Like"
+                ],
+                "summary": "Listar likes de um post",
+                "description": "Lista os likes de um post",
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "postId",
+                        "in": "path",
+                        "description": "ID do post",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Likes listados",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Like"
+                                    }
+                                },
+                                "example": {
+                                    "message": "Post liked successfully",
+                                    "likes": 1,
+                                    "userIsLiked": true
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Não autorizado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                },
+                                "examples": {
+                                    "invalid token": {
+                                        "value": {
+                                            "message": "Invalid token"
+                                        }
+                                    },
+                                    "user not found": {
+                                        "value": {
+                                            "message": "User not found"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Post não encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                },
+                                "example": {
+                                    "message": "Post not found"
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Post já curtido",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                },
+                                "example": {
+                                    "message": "Post already liked"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Parâmetros Ausentes",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                },
+                                "example": {
+                                    "message": "token and postId are required"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/likes/newLike/{postId}": {
+            "post": {
+                "tags": [
+                    "Like"
+                ],
+                "summary": "Curtir um post",
+                "description": "Curtir um post",
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "postId",
+                        "in": "path",
+                        "description": "ID do post",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Post curtido",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Like"
+                                },
+                                "example": {
+                                    "message": "Post liked successfully",
+                                    "likes": 1,
+                                    "userIsLiked": true
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Não autorizado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                },
+                                "examples": {
+                                    "invalid token": {
+                                        "value": {
+                                            "message": "Invalid token"
+                                        }
+                                    },
+                                    "user not found": {
+                                        "value": {
+                                            "message": "User not found"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Post não encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                },
+                                "example": {
+                                    "message": "Post not found"
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Post já curtido",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                },
+                                "example": {
+                                    "message": "Post already liked"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Parâmetros Ausentes",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                },
+                                "example": {
+                                    "message": "token and postId are required"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/likes/removeLike/{postId}": {
+            "delete": {
+                "tags": [
+                    "Like"
+                ],
+                "summary": "Descurtir um post",
+                "description": "Descurtir um post",
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "postId",
+                        "in": "path",
+                        "description": "ID do post",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Post descurtido",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Like"
+                                },
+                                "example": {
+                                    "message": "Post unliked successfully",
+                                    "likes": 0,
+                                    "userIsLiked": false
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Não autorizado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                },
+                                "examples": {
+                                    "invalid token": {
+                                        "value": {
+                                            "message": "Invalid token"
+                                        }
+                                    },
+                                    "user not found": {
+                                        "value": {
+                                            "message": "User not found"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Post não encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                },
+                                "example": {
+                                    "message": "Post not found"
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Post não curtido",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                },
+                                "example": {
+                                    "message": "Post not liked"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Parâmetros Ausentes",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                },
+                                "example": {
+                                    "message": "token and postId are required"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,98 @@
+###
+@ApiLink = http://localhost:3003
+
+@Token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOTE3NzUyLTUwYWItNGM1Zi1iZGIyLWJmNDExZTRkMmM1NyIsInJvbGUiOiJOT1JNQUwiLCJpYXQiOjE2NjQxMTAwMzgsImV4cCI6MTY2NDE5NjQzOH0.urrgI6iu7sTLviab6gYd2o4c13C1G2uvz2Hwfq6Ial0
+
+### Endpoint de teste
+GET {{ApiLink}}/
+
+### Endpoint de cadastro de usuário
+POST {{ApiLink}}/users/signup
+Content-Type: application/json
+
+{
+    "name": "Beltrano",
+    "email": "beltrano@gmail.com",
+    "password": "abc123"
+}
+
+###
+POST {{ApiLink}}/users/signup
+Content-Type: application/json
+
+{
+    "name": "Ciclano",
+    "email": "ciclano@gmail.com",
+    "password": "abc123"
+}
+
+
+### Endpoint de login
+POST {{ApiLink}}/users/login
+Content-Type: application/json
+
+{
+    "email": "beltrano@gmail.com",
+    "password": "abc123"
+}
+
+###
+POST {{ApiLink}}/users/login
+Content-Type: application/json
+
+{
+    "email": "ciclano@gmail.com",
+    "password": "abc123"
+}
+
+###
+POST {{ApiLink}}/users/login
+Content-Type: application/json
+
+{
+    "email": "admin@admin.com",
+    "password": "abc123"
+}
+
+### Endpoint de criação de post
+
+POST {{ApiLink}}/posts/create
+Authorization: {{Token}}
+Content-Type: application/json
+
+{
+    "content": "Conteúdo do post de teste Ciclano"
+}
+
+### Endpoint de listagem de posts
+GET {{ApiLink}}/posts
+Authorization: {{Token}}
+
+###
+DELETE {{ApiLink}}/posts/delete/407e9e28-c062-4659-8442-632384461af8
+Authorization: {{Token}}
+
+### Endpoint de dar like em um post
+POST {{ApiLink}}/likes
+Authorization: {{Token}}
+Content-Type: application/json
+
+{
+    "postId": "f0672814-c1a5-4059-b0a6-96d65947a8bd"
+}
+
+
+### Endpoint de dar dislike em um post
+DELETE {{ApiLink}}/likes
+Authorization: {{Token}}
+Content-Type: application/json
+
+{
+    "postId": "f0672814-c1a5-4059-b0a6-96d65947a8bd"
+}
+
+
+### Endpoint de pegar likes de um post
+GET {{ApiLink}}/likes/f0672814-c1a5-4059-b0a6-96d65947a8bd
+Authorization: {{Token}}
+
