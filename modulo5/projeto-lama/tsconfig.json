@@ -9,7 +9,7 @@
         "noImplicitAny": true,
         "esModuleInterop": true
     },
-    "exclude": [
-        "./tests/*"
-    ]
+    // "exclude": [
+    //     "./tests/*"
+    // ]
 }

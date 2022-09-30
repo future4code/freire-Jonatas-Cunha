@@ -4,10 +4,26 @@ export interface IShowDB {
     starts_at: Date
 }
 
+export interface IShowInputDTO {
+    token: string,
+    band: string,
+    startAt: Date
+}
+
 export interface ITicketDB {
     id: string,
     show_id: string,
     user_id: string
+}
+
+export interface IBuyTicketInputDTO {
+    token: string,
+    showId: string
+}
+
+export interface IUserAlreadyBoughtTicket {
+    userId: string,
+    showId: string,
 }
 
 export class Show {
@@ -33,6 +49,6 @@ export class Show {
 
     // Static methods - convert to model
     public static toShowModel = (show: any): Show => {
-        return new Show(show.id, show.band, show.starts_at, show.tickets)
+        return new Show(show.id, show.band, show.starts_at)
     }
 }
