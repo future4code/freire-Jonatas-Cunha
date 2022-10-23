@@ -12,10 +12,15 @@ export const Container = styled.div`
     justify-content: space-between;
 
     width: 250px;
-    height: 250px;
+    height: 350px;
 
     position: relative;
 
+`
+
+export const Image = styled.img`
+    width: 100px;
+    height: 100px;
 `
 
 export const Title = styled.h1`

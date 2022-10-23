@@ -13,6 +13,7 @@ export interface ISelectPrductDTO {
 }
 
 export interface IInputProducList {
+    token?: string
     productName: string,
     page: number,
     quantity: number,
@@ -41,9 +42,8 @@ export class Product {
         public name: string,
         public price: number,
         public quantityStock: number,
-    ) {}
-
-
+        public image: string
+    ) { }
 
     public static toProductModel(product: any): Product {
         return new Product(
@@ -51,6 +51,7 @@ export class Product {
             product.name,
             product.price,
             product.qty_stock,
+            product.image
         )
     }
 }
