@@ -1,0 +1,38 @@
+### Endpoint de teste
+GET http://localhost:3003/ping
+
+### Endpoint de cadastro de usuário
+POST http://localhost:3003/products
+Content-Type: application/json
+
+{
+  "products": [
+        {
+            "id": 8371,
+            "name": "VESTIDO TRICOT CHEVRON",
+            "tags": ["balada", "neutro", "delicado", "festa"]
+        },
+        {
+            "id": 8367,
+            "name": "VESTIDO MOLETOM COM CAPUZ MESCLA",
+            "tags": ["casual", "metal", "metal"]
+        },
+        {
+            "id": 8363,
+            "name": "VESTIDO CURTO MANGA LONGA LUREX",
+            "tags": ["colorido", "metal", "delicado", "estampas", "passeio"]
+        }
+    ]
+}
+
+### Endpoint de busca de produtos
+GET http://localhost:3003/products
+
+### Endpoint de busca de produtos por tag
+GET http://localhost:3003/products?tag=casual
+
+### Endpoid de busca de produtos por nome
+GET http://localhost:3003/products?name=vestido
+
+### Endpoint de busca de produtos por id
+GET http://localhost:3003/products/8363
